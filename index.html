@@ -101,6 +101,30 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;height:58px;display:flex;ali
 .org-arrow{font-size:18px;color:var(--m);transition:color .2s;flex-shrink:0;}
 .org-block:hover .org-arrow{color:var(--w);}
 
+/* ── KPI DASHBOARD ── */
+.kpi-section{margin-bottom:32px;}
+.kpi-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px;padding-bottom:10px;border-bottom:0.5px solid var(--b);}
+.kpi-platform{font-family:'Instrument Serif',serif;font-size:20px;color:var(--w);letter-spacing:-.01em;}
+.kpi-period{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-spacing:.07em;}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1px;background:var(--b);border:0.5px solid var(--b);}
+.kpi-card{background:var(--bg);padding:18px 16px;}
+.kpi-card.kpi-primary{background:var(--bg2);}
+.kpi-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--m);margin-bottom:8px;line-height:1.4;}
+.kpi-num{font-family:'DM Mono',monospace;font-size:22px;font-weight:300;color:var(--w);letter-spacing:-.02em;margin-bottom:4px;}
+.kpi-sub{font-size:10px;color:var(--m2);font-family:'DM Mono',monospace;letter-spacing:.03em;}
+
+/* ── TOP POSTS ── */
+.top-posts{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;background:var(--b);border:0.5px solid var(--b);margin-bottom:44px;}
+.top-post{background:var(--bg);padding:20px 18px;display:flex;flex-direction:column;gap:8px;}
+.tp-meta{display:flex;align-items:baseline;justify-content:space-between;}
+.tp-views{font-family:'DM Mono',monospace;font-size:16px;color:var(--w);font-weight:300;letter-spacing:-.01em;}
+.tp-date{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-spacing:.04em;}
+.tp-desc{font-size:12px;color:var(--w2);line-height:1.5;flex:1;}
+.tp-stats{display:flex;gap:10px;flex-wrap:wrap;}
+.tp-stats span{font-family:'DM Mono',monospace;font-size:10px;color:var(--m);letter-spacing:.03em;}
+.tp-link{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);text-decoration:none;letter-spacing:.07em;text-transform:uppercase;transition:color .2s;align-self:flex-start;}
+.tp-link:hover{color:var(--w);}
+
 /* ── SNS PLACEHOLDER LIST ── */
 .sns-ph{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
 .sns-ph-tag{font-family:'DM Mono',monospace;font-size:10px;padding:5px 13px;border:0.5px solid var(--b);color:var(--m);letter-spacing:.05em;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:5px;}
@@ -257,6 +281,14 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;height:58px;display:flex;ali
 .ls-dot{width:6px;height:6px;border-radius:50%;background:var(--w2);animation:pulse 2s infinite;}
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
+/* ── KPI CTA BUTTON ── */
+.kpi-cta{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;padding:11px 24px;border:0.5px solid rgba(240,237,232,.22);color:var(--w2);background:transparent;cursor:pointer;transition:all .2s;}
+.kpi-cta:hover{background:var(--w);color:var(--bg);}
+.kpi-delta{font-family:'DM Mono',monospace;font-size:11px;font-weight:400;letter-spacing:.03em;min-height:16px;margin-bottom:2px;}
+.kpi-delta.up{color:#7ecba1;}
+.kpi-delta.down{color:#e07070;}
+.kpi-delta.flat{color:var(--m);}
+
 /* ── FOOTER ── */
 footer{border-top:0.5px solid var(--b);padding:18px 36px;display:flex;align-items:center;justify-content:space-between;}
 footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-spacing:.07em;}
@@ -265,22 +297,38 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
 @keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
 .fi{opacity:0;}
 
-/* ── RESPONSIVE ── */
+/* ── RESPONSIVE / MOBILE ── */
 @media(max-width:820px){
-  nav{padding:0 18px;}
-  .nav-links{gap:14px;}
-  .nav-links a{font-size:10px;}
+  nav{padding:0 16px;height:52px;}
+  .nav-links{gap:10px;}
+  .nav-links a{font-size:9px;letter-spacing:.05em;}
   .assist-pill{display:none;}
-  .page{padding:78px 20px 60px;}
-  .hero{padding:0 20px;}
+  .page{padding:70px 16px 56px;}
+  .hero{padding:0 16px;}
+  .hero-h1{font-size:clamp(40px,12vw,68px);}
+  .hero-foot{position:static;text-align:left;margin-top:28px;opacity:1;animation:none;}
   .about-grid{grid-template-columns:1fr;}
-  .about-photo{width:160px;aspect-ratio:1;}
+  .about-photo{width:110px;aspect-ratio:1;}
   .tl-cols{grid-template-columns:1fr;}
   .sup-grid{grid-template-columns:1fr;}
   .con-grid{grid-template-columns:1fr;}
   .specs-grid{grid-template-columns:1fr;}
   .specs-grid .spec-row:nth-child(odd){border-right:none;}
-  .ev-left{flex-direction:column;align-items:flex-start;gap:6px;}
+  .c-hero{flex-direction:column;gap:14px;}
+  .c-av{width:60px;height:60px;}
+  .c-name{font-size:30px;}
+  .kpi-grid{grid-template-columns:repeat(2,1fr);}
+  .top-posts{grid-template-columns:1fr;}
+  .roster-grid{grid-template-columns:repeat(2,1fr);}
+  .org-inner{flex-direction:column;gap:10px;align-items:flex-start;}
+  .roles-grid{grid-template-columns:1fr 1fr;}
+  .ev-left{flex-direction:column;align-items:flex-start;gap:4px;}
+  .live-stats{flex-wrap:wrap;}
+  .ls-cell{min-width:90px;}
+  .sh-title{font-size:clamp(26px,8vw,40px);}
+  footer{flex-direction:column;gap:6px;align-items:flex-start;padding:16px;}
+  .events-list .ev-row-item{flex-direction:column;align-items:flex-start;gap:10px;}
+  .sup-grid{grid-template-columns:1fr;}
 }
 </style>
 </head>
@@ -311,14 +359,14 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
   <div class="hero">
     <p class="hero-eye" data-en="Video Editor · Translator · OW Community" data-jp="動画編集者 · 翻訳 · OWコミュニティ">Video Editor · Translator · OW Community</p>
     <h1 class="hero-h1">edittto<br><em>the editor.</em></h1>
-    <p class="hero-p" data-en="Self-taught editor based in Japan. Started editing as a challenge — something new, something I actually love. It turned into a real side career in the OW community." data-jp="日本を拠点とする独学の動画編集者。新しい挑戦として編集を始め、本当に好きなことに気づきました。OWコミュニティでの副業として成長しています。">Self-taught editor based in Japan. Started editing as a challenge — something new, something I actually love. It turned into a real side career in the OW community.</p>
+    <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--m);letter-spacing:.06em;margin-bottom:20px;opacity:0;animation:fu .7s forwards .3s;">Adobe Premiere Pro · Photoshop</div>
+    <p class="hero-p" data-en="Self-taught editor based in Japan. Started editing as a challenge — something new, something I actually love. It turned into a real side career in the OW community." data-jp="日本を拠点とする独学の動画編集者新しい挑戦として編集を始め、本当に好きなことに気づきましたOWコミュニティでの副業として成長しています">Self-taught editor based in Japan. Started editing as a challenge — something new, something I actually love. It turned into a real side career in the OW community.</p>
     <div class="hero-cta">
       <button class="btn btn-w" onclick="go('roster')" data-en="See my clients" data-jp="クライアントを見る">See my clients</button>
       <button class="btn btn-o" onclick="go('contact')" data-en="Get in touch" data-jp="連絡する">Get in touch</button>
     </div>
     <div class="hero-foot">
       <div class="hero-foot-line" data-en="EN ↔ JP Translation" data-jp="英日翻訳">EN ↔ JP Translation</div>
-      <div class="hero-foot-line">Adobe Premiere · Photoshop</div>
     </div>
   </div>
 </div>
@@ -327,7 +375,7 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
 <div class="page" id="pg-about">
   <div class="sh fi">
     <p class="sh-eye" data-en="About me" data-jp="自己紹介">About me</p>
-    <h2 class="sh-title" data-en="Climbing the<br><em>editing rank.</em>" data-jp="編集の<br><em>ランクを上げ中。</em>">Climbing the<br><em>editing rank.</em></h2>
+    <h2 class="sh-title" data-en="Climbing the<br><em>editing rank.</em>" data-jp="編集の<br><em>ランクを上げ中</em>">Climbing the<br><em>editing rank.</em></h2>
   </div>
   <div class="about-grid fi">
     <div>
@@ -339,13 +387,13 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
     <div>
       <div class="about-name">edittto</div>
       <div class="about-handle">@edittto</div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--m);letter-spacing:.06em;margin-bottom:16px;">Adobe Premiere Pro · Photoshop</div>
       <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:22px;">
-        <li style="font-size:13px;color:var(--m);display:flex;gap:10px;line-height:1.5;"><span style="color:var(--m2);font-family:'DM Mono',monospace;font-size:10px;margin-top:2px;flex-shrink:0;">—</span><span data-en="Self-taught video editor based in Japan — started as a personal challenge, grew into a side career." data-jp="日本在住の独学動画編集者。個人的な挑戦として始め、副業に成長しました。">Self-taught video editor based in Japan — started as a personal challenge, grew into a side career.</span></li>
-        <li style="font-size:13px;color:var(--m);display:flex;gap:10px;line-height:1.5;"><span style="color:var(--m2);font-family:'DM Mono',monospace;font-size:10px;margin-top:2px;flex-shrink:0;">—</span><span data-en="Staff at <strong style='color:var(--w2);font-weight:400;cursor:pointer;' onclick='go(&quot;divine&quot;)'>99Divine</strong> — OW organization. Content Team Lead, Editor, Graphic Designer, X Manager." data-jp="<strong style='color:var(--w2);font-weight:400;cursor:pointer;' onclick='go(&quot;divine&quot;)'>99Divine</strong> スタッフ — OWチーム。コンテンツリード・編集・グラフィックデザイン・X運用を担当。">Staff at <strong style="color:var(--w2);font-weight:400;cursor:pointer;" onclick="go('divine')">99Divine</strong> — OW organization. Content Team Lead, Editor, Graphic Designer, X Manager.</span></li>
-        <li style="font-size:13px;color:var(--m);display:flex;gap:10px;line-height:1.5;"><span style="color:var(--m2);font-family:'DM Mono',monospace;font-size:10px;margin-top:2px;flex-shrink:0;">—</span><span data-en="Family first, the rest comes second." data-jp="家族最優先、あとは全部その次。"><strong style="color:var(--w2);font-weight:400;">Family first, the rest comes second.</strong></span></li>
-        <li style="font-size:13px;color:var(--m);display:flex;gap:10px;line-height:1.5;"><span style="color:var(--m2);font-family:'DM Mono',monospace;font-size:10px;margin-top:2px;flex-shrink:0;">—</span><span data-en="EN ↔ JP translation across all work — subtitles, captions, channel localisation." data-jp="全業務で英日翻訳を担当 — 字幕、キャプション、チャンネルのローカライズ。">EN ↔ JP translation across all work — subtitles, captions, channel localisation.</span></li>
-        <li style="font-size:13px;color:var(--m);display:flex;gap:10px;line-height:1.5;"><span style="color:var(--m2);font-family:'DM Mono',monospace;font-size:10px;margin-top:2px;flex-shrink:0;">—</span><span data-en="Specialised in Overwatch content — streaming and competitive." data-jp="ストリーミング・競技両方のOWコンテンツを専門としています。">Specialised in Overwatch content — streaming and competitive.</span></li>
-        <li style="font-size:13px;color:var(--m);display:flex;gap:10px;line-height:1.5;"><span style="color:var(--m2);font-family:'DM Mono',monospace;font-size:10px;margin-top:2px;flex-shrink:0;">—</span><span>Adobe Premiere Pro · Adobe Photoshop</span></li>
+        <li style="font-size:13px;color:var(--m);display:flex;gap:10px;line-height:1.5;"><span style="color:var(--m2);font-family:'DM Mono',monospace;font-size:10px;margin-top:2px;flex-shrink:0;">—</span><span data-en="Self-taught video editor based in Japan — started as a personal challenge, grew into a side career." data-jp="日本在住の独学動画編集者個人的な挑戦として始め、副業に成長しました">Self-taught video editor based in Japan — started as a personal challenge, grew into a side career.</span></li>
+        <li style="font-size:13px;color:var(--m);display:flex;gap:10px;line-height:1.5;"><span style="color:var(--m2);font-family:'DM Mono',monospace;font-size:10px;margin-top:2px;flex-shrink:0;">—</span><span data-en="Staff at <strong style='color:var(--w2);font-weight:400;cursor:pointer;' onclick='go(&quot;divine&quot;)'>99Divine</strong> — OW organization. Content Team Lead, Editor, Graphic Designer, X Manager." data-jp="<strong style='color:var(--w2);font-weight:400;cursor:pointer;' onclick='go(&quot;divine&quot;)'>99Divine</strong> スタッフ — OWチームコンテンツリード・編集・グラフィックデザイン・X運用を担当">Staff at <strong style="color:var(--w2);font-weight:400;cursor:pointer;" onclick="go('divine')">99Divine</strong> — OW organization. Content Team Lead, Editor, Graphic Designer, X Manager.</span></li>
+        <li style="font-size:13px;color:var(--m);display:flex;gap:10px;line-height:1.5;"><span style="color:var(--m2);font-family:'DM Mono',monospace;font-size:10px;margin-top:2px;flex-shrink:0;">—</span><span data-en="Family first, the rest comes second." data-jp="家族最優先、あとは全部その次"><strong style="color:var(--w2);font-weight:400;">Family first, the rest comes second.</strong></span></li>
+        <li style="font-size:13px;color:var(--m);display:flex;gap:10px;line-height:1.5;"><span style="color:var(--m2);font-family:'DM Mono',monospace;font-size:10px;margin-top:2px;flex-shrink:0;">—</span><span data-en="EN ↔ JP translation across all work — subtitles, captions, channel localisation." data-jp="全業務で英日翻訳を担当 — 字幕、キャプション、チャンネルのローカライズ">EN ↔ JP translation across all work — subtitles, captions, channel localisation.</span></li>
+        <li style="font-size:13px;color:var(--m);display:flex;gap:10px;line-height:1.5;"><span style="color:var(--m2);font-family:'DM Mono',monospace;font-size:10px;margin-top:2px;flex-shrink:0;">—</span><span data-en="Specialised in Overwatch content — streaming and competitive." data-jp="ストリーミング・競技両方のOWコンテンツを専門としています">Specialised in Overwatch content — streaming and competitive.</span></li>
       </ul>
       <div class="skill-wrap">
         <span class="sk" data-en="Video Editing" data-jp="動画編集">Video Editing</span>
@@ -408,12 +456,27 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
 <div class="page" id="pg-roster">
   <div class="sh fi">
     <p class="sh-eye" data-en="Clients" data-jp="クライアント">Clients</p>
-    <h2 class="sh-title" data-en="The<br><em>roster.</em>" data-jp="クライアント<br><em>一覧。</em>">The<br><em>roster.</em></h2>
+    <h2 class="sh-title" data-en="The<br><em>roster.</em>" data-jp="クライアント<br><em>一覧</em>">The<br><em>roster.</em></h2>
   </div>
 
   <!-- 99Divine org block moved to About page -->
 
-  <p class="roster-intro fi" style="margin-top:0;" data-en="Creators I work with — current and past. Click any card to see the work." data-jp="現在と過去のクライアント。カードをクリックして制作物を見てください。">Creators I work with — current and past. Click any card to see the work.</p>
+  <!-- 99Divine also shown here — my org, not a client -->
+  <div class="org-block fi" onclick="goClient('divine')" style="cursor:pointer;margin-bottom:36px;">
+    <div class="org-inner">
+      <div class="org-left">
+        <div class="org-av"><img src="https://unavatar.io/youtube/99DIVINE-z2c6t" alt="99Divine" onerror="this.parentElement.style.background='var(--bg3)'"></div>
+        <div>
+          <div class="org-label" data-en="My organization — I work here" data-jp="所属先 — ここで働いています">My organization — I work here</div>
+          <div class="org-name">99Divine</div>
+          <div class="org-role" data-en="Staff — Content Team Lead · Editor · Graphic Designer · X Manager" data-jp="スタッフ — コンテンツリード · 編集 · グラフィックデザイン · X運用">Staff — Content Team Lead · Editor · Graphic Designer · X Manager</div>
+        </div>
+      </div>
+      <div class="org-arrow">↗</div>
+    </div>
+  </div>
+
+  <p class="roster-intro fi" style="margin-top:0;" data-en="Creators I work with — current and past. Click any card to see the work." data-jp="現在と過去のクライアントカードをクリックして制作物を見てください">Creators I work with — current and past. Click any card to see the work.</p>
 
   <p class="blk-eye fi" style="margin-bottom:14px;" data-en="Current" data-jp="現在">Current</p>
   <div class="roster-grid fi" style="margin-bottom:36px;">
@@ -471,27 +534,27 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
         <span class="c-role" data-en="EN↔JP Translator" data-jp="英日翻訳">EN↔JP Translator</span>
         <span class="c-role soft">OW</span><span class="c-role soft">JP Channel</span>
       </div>
-      <p class="c-desc" data-en="SneakyKirby is a Twitch Partner and competitive OW player who launched a Japanese-language YouTube channel for her JP fanbase. I handle all editing, subtitles, and channel management. The milestones below are hers — I just help make the content possible." data-jp="SneakyKirbyはTwitchパートナーで競技OWプレイヤー。日本のファン向けに日本語チャンネルを立ち上げました。編集・字幕・チャンネル管理を担当しています。以下の数字は彼女のもの — 私はコンテンツ制作をサポートしているだけです。">SneakyKirby is a Twitch Partner and competitive OW player who launched a Japanese-language YouTube channel for her JP fanbase. I handle all editing, subtitles, and channel management. The milestones below are hers — I just help make the content possible.</p>
+      <p class="c-desc" data-en="SneakyKirby is a Twitch Partner and competitive OW player who launched a Japanese-language YouTube channel for her JP fanbase. I handle all editing, subtitles, and channel management. The milestones below are hers — I just help make the content possible." data-jp="SneakyKirbyはTwitchパートナーで競技OWプレイヤー日本のファン向けに日本語チャンネルを立ち上げました編集・字幕・チャンネル管理を担当しています以下の数字は彼女のもの — 私はコンテンツ制作をサポートしているだけです">SneakyKirby is a Twitch Partner and competitive OW player who launched a Japanese-language YouTube channel for her JP fanbase. I handle all editing, subtitles, and channel management. The milestones below are hers — I just help make the content possible.</p>
       <button class="help-btn" onclick="go('contact')" data-en="Want to help with SneakyKirby's content? →" data-jp="SneakyKirbyのコンテンツを手伝いたい？ →">Want to help with SneakyKirby's content? →</button>
     </div>
   </div>
   <!-- LIVE STATS BAR -->
   <div class="live-stats fi" id="sneaky-stats">
     <div class="ls-cell">
-      <div class="ls-label" data-en="SUBSCRIBERS" data-jp="登録者数">SUBSCRIBERS</div>
+      <div class="ls-label" data-en="YT SUBSCRIBERS" data-jp="YT登録者数">YT SUBSCRIBERS</div>
       <div class="ls-num" id="stat-subs">—</div>
     </div>
     <div class="ls-cell">
-      <div class="ls-label" data-en="TOTAL VIEWS" data-jp="総再生数">TOTAL VIEWS</div>
+      <div class="ls-label" data-en="YT TOTAL VIEWS" data-jp="YT総再生数">YT TOTAL VIEWS</div>
       <div class="ls-num" id="stat-views">—</div>
     </div>
     <div class="ls-cell">
-      <div class="ls-label" data-en="VIDEOS" data-jp="動画数">VIDEOS</div>
+      <div class="ls-label" data-en="YT VIDEOS" data-jp="YT動画数">YT VIDEOS</div>
       <div class="ls-num" id="stat-videos">—</div>
     </div>
-    <div class="ls-live">
-      <span class="ls-dot"></span>
-      <span data-en="live" data-jp="リアルタイム">live</span>
+    <div class="ls-cell" style="border-right:none;">
+      <div class="ls-label">TWITCH</div>
+      <div class="ls-num" style="font-size:13px;"><a href="https://twitch.tv/sneakykirby" target="_blank" style="color:var(--w2);text-decoration:none;display:flex;align-items:center;gap:6px;"><span style="width:7px;height:7px;border-radius:50%;background:#a970ff;display:inline-block;flex-shrink:0;"></span>Live on Twitch</a></div>
     </div>
   </div>
 
@@ -513,8 +576,6 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
         <div class="tl-row"><span class="tl-g" data-en="1,000 hrs" data-jp="1,000時間">1,000 hrs</span><span class="tl-d">2024/5/13</span></div>
         <div class="tl-row"><span class="tl-g" data-en="2,000 hrs" data-jp="2,000時間">2,000 hrs</span><span class="tl-d">2024/5/31</span></div>
         <div class="tl-row"><span class="tl-g" data-en="4,000 hrs" data-jp="4,000時間">4,000 hrs</span><span class="tl-d">2024/6/1</span></div>
-        <div class="tl-row"><span class="tl-g" data-en="Monetized ✓" data-jp="収益化 ✓">Monetized ✓</span><span class="tl-d">2024/8/30</span></div>
-        <div class="tl-row"><span class="tl-g" data-en="First payout" data-jp="初回収益">First payout</span><span class="tl-d">2024/10/21</span></div>
       </div>
       <div>
         <p class="tl-col-title" data-en="Total Views" data-jp="総再生数">Total Views</p>
@@ -526,22 +587,20 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
       </div>
     </div>
   </div>
+
+  <!-- LONG VIDEOS — auto-fetched -->
   <div class="vid-section fi">
-    <p class="vid-eye" data-en="Selected edits" data-jp="編集サンプル">Selected edits</p>
-    <div class="vid-grid">
-      <div class="vid-feat">
-        <div class="vid-wrap"><iframe src="https://www.youtube.com/embed/DNAOv2EaGi4" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div>
-        <p class="vid-lbl" data-en="Featured" data-jp="注目">Featured</p>
-      </div>
-      <!-- PLACEHOLDER: replace cKUTNnTbDQY and I1Xi2qhhmVA with actual video IDs -->
-      <div>
-        <div class="vid-wrap"><iframe src="https://www.youtube.com/embed/cKUTNnTbDQY" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div>
-        <p class="vid-lbl">02</p>
-      </div>
-      <div>
-        <div class="vid-wrap"><iframe src="https://www.youtube.com/embed/I1Xi2qhhmVA" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div>
-        <p class="vid-lbl">03</p>
-      </div>
+    <p class="vid-eye" data-en="Long videos — top 3 by views" data-jp="長尺動画 — 再生数トップ3">Long videos — top 3 by views</p>
+    <div id="sneaky-long-vids" class="vid-grid">
+      <div class="vid-ph" style="aspect-ratio:16/9;grid-column:1/-1"><span data-en="Loading..." data-jp="読み込み中...">Loading...</span></div>
+    </div>
+  </div>
+
+  <!-- SHORTS — auto-fetched -->
+  <div class="vid-section fi">
+    <p class="vid-eye" data-en="Shorts — top 3 by views" data-jp="ショート — 再生数トップ3">Shorts — top 3 by views</p>
+    <div id="sneaky-short-vids" class="vid-grid">
+      <div class="vid-ph" style="aspect-ratio:16/9;grid-column:1/-1"><span data-en="Loading..." data-jp="読み込み中...">Loading...</span></div>
     </div>
   </div>
 </div>
@@ -550,24 +609,31 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
 <div class="page" id="pg-supreme">
   <button class="back-btn" onclick="go('roster')">← <span data-en="Roster" data-jp="ロスター">Roster</span></button>
   <div class="c-hero fi">
-    <div class="c-av"><img src="https://unavatar.io/twitter/Supreme_ow" alt="Supreme_ow" onerror="this.parentElement.style.background='var(--bg3)'"></div>
+    <div class="c-av"><img src="https://unavatar.io/twitter/supreme__ow" alt="Supreme_ow" onerror="this.parentElement.style.background='var(--bg3)'"></div>
     <div>
       <h1 class="c-name">Supreme_ow</h1>
-      <p class="c-handle">aka SupuOjisan · OW</p>
+      <p class="c-handle">@supreme__ow · aka SupuOjisan · OW · 99Divine</p>
       <div class="c-link-row">
-        <!-- PLACEHOLDER: add Supreme's YouTube, X, Twitch links -->
+        <a class="c-ext" href="https://x.com/supreme__ow" target="_blank">𝕏 X</a>
+        <a class="c-ext" href="https://twitch.tv/supreme_ow" target="_blank">↗ Twitch</a>
+        <!-- PLACEHOLDER: add Supreme's YouTube link when confirmed -->
         <a class="c-ext" href="#" target="_blank" style="opacity:.45;">↗ YouTube (add link)</a>
-        <a class="c-ext" href="#" target="_blank" style="opacity:.45;">𝕏 X (add link)</a>
-        <a class="c-ext" href="#" target="_blank" style="opacity:.45;">↗ Twitch (add link)</a>
       </div>
       <div class="c-roles">
         <span class="c-role" data-en="Video Editor" data-jp="動画編集">Video Editor</span>
         <span class="c-role" data-en="EN↔JP Translator" data-jp="英日翻訳">EN↔JP Translator</span>
         <span class="c-role soft">OW</span>
+        <span class="c-role soft">99Divine</span>
       </div>
-      <p class="c-desc" data-en="Editing for Supreme_ow's OW content. I also handle EN ↔ JP translation for subtitles and captions." data-jp="Supreme_owのOWコンテンツを編集。字幕・キャプションの英日翻訳も担当しています。">Editing for Supreme_ow's OW content. I also handle EN ↔ JP translation for subtitles and captions.</p>
+      <p class="c-desc" data-en="Editing for Supreme_ow's OW content. Supreme is also the Founder & CEO of 99Divine — my organization. I handle EN ↔ JP translation for subtitles and captions." data-jp="Supreme_owのOWコンテンツを編集SupremeはまたSupremeは99Divineの創設者兼CEO — 私の所属先です字幕・キャプションの英日翻訳も担当しています">Editing for Supreme_ow's OW content. Supreme is also the Founder & CEO of 99Divine — my organization. I handle EN ↔ JP translation for subtitles and captions.</p>
       <button class="help-btn" onclick="go('contact')" data-en="Want to help with Supreme's content? →" data-jp="Supremeのコンテンツを手伝いたい？ →">Want to help with Supreme's content? →</button>
     </div>
+  </div>
+  <!-- LIVE STATS -->
+  <div class="live-stats fi" id="supreme-stats">
+    <div class="ls-cell"><div class="ls-label">FOLLOWERS</div><div class="ls-num" id="supreme-stat-followers">—</div></div>
+    <div class="ls-cell"><div class="ls-label">TWITCH</div><div class="ls-num" id="supreme-stat-twitch">twitch.tv/supreme_ow</div></div>
+    <div class="ls-live"><span class="ls-dot"></span><span>links</span></div>
   </div>
   <div class="vid-section fi">
     <p class="vid-eye" data-en="Selected edits" data-jp="編集サンプル">Selected edits</p>
@@ -587,8 +653,7 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
       <p class="c-handle">@99DIVINE · OW Org</p>
       <div class="c-link-row">
         <a class="c-ext" href="https://www.youtube.com/@99DIVINE-z2c6t" target="_blank">↗ YouTube</a>
-        <!-- PLACEHOLDER: add 99Divine X, other SNS links -->
-        <a class="c-ext" href="#" target="_blank" style="opacity:.45;">𝕏 X (add link)</a>
+        <a class="c-ext" href="https://x.com/99DIVINE_" target="_blank">𝕏 X</a>
       </div>
       <div class="c-roles">
         <span class="c-role" style="border-color:rgba(240,237,232,.3);" data-en="Staff Member" data-jp="スタッフ">Staff Member</span>
@@ -598,38 +663,214 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
         <span class="c-role" data-en="X Manager" data-jp="X運用">X Manager</span>
         <span class="c-role soft">OW</span>
       </div>
-      <p class="c-desc" style="margin-top:14px;" data-en="99Divine is my organization — not a client. I'm part of the team, leading content operations end-to-end: editing, graphic design, X management, and content planning." data-jp="99Divineは私の所属先です。クライアントではありません。コンテンツ制作全体をリードするスタッフとして、編集・グラフィックデザイン・X運用・コンテンツ計画を担当しています。">99Divine is my organization — not a client. I'm part of the team, leading content operations end-to-end: editing, graphic design, X management, and content planning.</p>
+      <p class="c-desc" style="margin-top:14px;" data-en="Leading content operations end-to-end: editing, graphic design, X management, and content planning, etc." data-jp="コンテンツ制作全体をエンドツーエンドでリード：編集・グラフィックデザイン・X運用・コンテンツ計画など">Leading content operations end-to-end: editing, graphic design, X management, and content planning, etc.</p>
       <button class="help-btn" onclick="go('contact')" data-en="Want to join the 99Divine content team? →" data-jp="99Divineのコンテンツチームに参加したい？ →">Want to join the 99Divine content team? →</button>
     </div>
   </div>
+  <!-- YOUTUBE LIVE STATS -->
+  <div class="live-stats fi" id="divine-stats">
+    <div class="ls-cell"><div class="ls-label" data-en="YT SUBSCRIBERS" data-jp="YT登録者数">YT SUBSCRIBERS</div><div class="ls-num" id="divine-stat-subs">—</div></div>
+    <div class="ls-cell"><div class="ls-label" data-en="YT TOTAL VIEWS" data-jp="YT総再生数">YT TOTAL VIEWS</div><div class="ls-num" id="divine-stat-views">—</div></div>
+    <div class="ls-cell"><div class="ls-label" data-en="YT VIDEOS" data-jp="YT動画数">YT VIDEOS</div><div class="ls-num" id="divine-stat-videos">—</div></div>
+    <div class="ls-live"><span class="ls-dot"></span><span data-en="live" data-jp="リアルタイム">live</span></div>
+  </div>
+
+  <!-- SOCIAL PERFORMANCE BUTTON -->
+  <div class="fi" style="margin-bottom:44px;">
+    <button class="kpi-cta" onclick="go('kpi')" data-en="Social Performance & KPI →" data-jp="ソーシャルパフォーマンス & KPI →">Social Performance & KPI →</button>
+    <p style="font-size:11px;color:var(--m);font-family:'DM Mono',monospace;letter-spacing:.04em;margin-top:8px;" data-en="Reach, engagement, competitive record — for sponsors & investors" data-jp="リーチ・エンゲージメント・競技成績 — スポンサー・投資家向け">Reach, engagement, competitive record — for sponsors & investors</p>
+  </div>
+
+  <!-- WHAT I DO -->
   <div class="fi" style="margin-bottom:14px;"><p class="tl-eye" data-en="What I do" data-jp="担当業務">What I do</p></div>
   <div class="roles-grid fi">
     <div class="role-card">
       <div class="role-ico">✂</div>
       <div class="role-name" data-en="Video Editing" data-jp="動画編集">Video Editing</div>
-      <div class="role-desc" data-en="Full production from raw footage to final cut." data-jp="素材から完成動画まで、フル制作を担当。">Full production from raw footage to final cut.</div>
+      <div class="role-desc" data-en="Full production from raw footage to final cut." data-jp="素材から完成動画まで、フル制作を担当">Full production from raw footage to final cut.</div>
     </div>
     <div class="role-card">
       <div class="role-ico">🎨</div>
       <div class="role-name" data-en="Graphic Design" data-jp="グラフィックデザイン">Graphic Design</div>
-      <div class="role-desc" data-en="Game day, win/loss, roster, birthday, welcome, new roster, thank you visuals." data-jp="ゲームデー、勝敗、ロスター、誕生日、ウェルカム、感謝など全ビジュアル。">Game day, win/loss, roster, birthday, welcome, new roster, thank you visuals.</div>
+      <div class="role-desc" data-en="Game day, win/loss, roster, birthday, welcome, new roster, thank you visuals." data-jp="ゲームデー、勝敗、ロスター、誕生日、ウェルカム、感謝など全ビジュアル">Game day, win/loss, roster, birthday, welcome, new roster, thank you visuals.</div>
     </div>
     <div class="role-card">
       <div class="role-ico">𝕏</div>
       <div class="role-name" data-en="X Management" data-jp="X運用">X Management</div>
-      <div class="role-desc" data-en="Daily posting, scheduling, and account management." data-jp="日々の投稿・スケジューリング・アカウント管理。">Daily posting, scheduling, and account management.</div>
+      <div class="role-desc" data-en="Daily posting, scheduling, and account management." data-jp="日々の投稿・スケジューリング・アカウント管理">Daily posting, scheduling, and account management.</div>
     </div>
     <div class="role-card">
       <div class="role-ico">📋</div>
       <div class="role-name" data-en="Content Planning" data-jp="コンテンツ計画">Content Planning</div>
-      <div class="role-desc" data-en="YouTube strategy, planning, and publishing." data-jp="YouTubeの戦略立案・計画・公開。">YouTube strategy, planning, and publishing.</div>
+      <div class="role-desc" data-en="YouTube strategy, planning, and publishing." data-jp="YouTubeの戦略立案・計画・公開">YouTube strategy, planning, and publishing.</div>
     </div>
   </div>
   <div class="vid-section fi">
     <p class="vid-eye" data-en="Selected work" data-jp="制作サンプル">Selected work</p>
-    <!-- PLACEHOLDER: replace with actual YouTube embeds and/or images -->
     <div class="vid-ph"><span data-en="Videos & visuals coming soon" data-jp="動画・ビジュアル準備中">Videos & visuals coming soon</span><small data-en="Replace with YouTube embed IDs and image files" data-jp="YouTubeのIDと画像ファイルを追加">Replace with YouTube embed IDs and image files</small></div>
   </div>
+</div>
+
+<!-- ═══════════════ KPI PAGE ═══════════════ -->
+<div class="page" id="pg-kpi">
+  <button class="back-btn" onclick="go('divine')">← <span data-en="99Divine" data-jp="99Divine">99Divine</span></button>
+  <div class="sh fi">
+    <p class="sh-eye" data-en="Social Performance & KPI" data-jp="ソーシャルパフォーマンス & KPI">Social Performance & KPI</p>
+    <h2 class="sh-title" data-en="99Divine<br><em>by the numbers.</em>" data-jp="99Divine<br><em>数字で見る</em>">99Divine<br><em>by the numbers.</em></h2>
+  </div>
+
+  <!-- X KPI -->
+  <div class="kpi-section fi">
+    <div class="kpi-header">
+      <span class="kpi-platform">𝕏 X (Twitter)</span>
+      <span class="kpi-period" id="kpi-updated-label">3-month period · updated 2026/05</span>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi-card kpi-primary">
+        <div class="kpi-label" data-en="Impressions" data-jp="インプレッション">Impressions</div>
+        <div class="kpi-num" id="kv-impressions">1.3M</div>
+        <div class="kpi-delta" id="kd-impressions"></div>
+        <div class="kpi-sub" data-en="3-month total" data-jp="3ヶ月合計">3-month total</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" data-en="Followers" data-jp="フォロワー">Followers</div>
+        <div class="kpi-num" id="kv-followers">3,324</div>
+        <div class="kpi-delta" id="kd-followers"></div>
+        <div class="kpi-sub">@99divine_</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" data-en="Follower Growth" data-jp="フォロワー増加">Follower Growth</div>
+        <div class="kpi-num" id="kv-growth">+266</div>
+        <div class="kpi-delta" id="kd-growth"></div>
+        <div class="kpi-sub" data-en="in 3 months" data-jp="3ヶ月で">in 3 months</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" data-en="Engagement Rate" data-jp="エンゲージメント率">Engagement Rate</div>
+        <div class="kpi-num" id="kv-engrate">0.8%</div>
+        <div class="kpi-delta" id="kd-engrate"></div>
+        <div class="kpi-sub" data-en="above avg for esports" data-jp="eスポーツ平均以上">above avg for esports</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" data-en="Total Engagements" data-jp="総エンゲージメント">Total Engagements</div>
+        <div class="kpi-num" id="kv-engagements">11K</div>
+        <div class="kpi-delta" id="kd-engagements"></div>
+        <div class="kpi-sub" data-en="3-month total" data-jp="3ヶ月合計">3-month total</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" data-en="Profile Visits" data-jp="プロフィール訪問">Profile Visits</div>
+        <div class="kpi-num" id="kv-profile">4.5K</div>
+        <div class="kpi-delta" id="kd-profile"></div>
+        <div class="kpi-sub" data-en="3-month total" data-jp="3ヶ月合計">3-month total</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" data-en="Likes" data-jp="いいね">Likes</div>
+        <div class="kpi-num" id="kv-likes">4.6K</div>
+        <div class="kpi-delta" id="kd-likes"></div>
+        <div class="kpi-sub" data-en="3-month total" data-jp="3ヶ月合計">3-month total</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" data-en="Reposts" data-jp="リポスト">Reposts</div>
+        <div class="kpi-num" id="kv-reposts">1.5K</div>
+        <div class="kpi-delta" id="kd-reposts"></div>
+        <div class="kpi-sub" data-en="3-month total" data-jp="3ヶ月合計">3-month total</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" data-en="Bookmarks" data-jp="ブックマーク">Bookmarks</div>
+        <div class="kpi-num" id="kv-bookmarks">184</div>
+        <div class="kpi-delta" id="kd-bookmarks"></div>
+        <div class="kpi-sub" data-en="3-month total" data-jp="3ヶ月合計">3-month total</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" data-en="Shares" data-jp="シェア">Shares</div>
+        <div class="kpi-num" id="kv-shares">96</div>
+        <div class="kpi-delta" id="kd-shares"></div>
+        <div class="kpi-sub" data-en="3-month total" data-jp="3ヶ月合計">3-month total</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPETITIVE -->
+  <div class="kpi-section fi">
+    <div class="kpi-header">
+      <span class="kpi-platform">⚔ Competitive</span>
+      <span class="kpi-period" data-en="via Liquipedia" data-jp="Liquipedia参照">via Liquipedia</span>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi-card kpi-primary">
+        <div class="kpi-label" data-en="Founded" data-jp="設立">Founded</div>
+        <div class="kpi-num">2024</div>
+        <div class="kpi-sub">July 15, 2024</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" data-en="Region" data-jp="地域">Region</div>
+        <div class="kpi-num" style="font-size:16px;">Asia</div>
+        <div class="kpi-sub">OWCS Japan</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">OWCS 2026 Stage 1</div>
+        <div class="kpi-num" style="font-size:20px;">4th</div>
+        <div class="kpi-sub">Japan</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">OWCS 2025 Stage 3</div>
+        <div class="kpi-num" style="font-size:20px;">4th</div>
+        <div class="kpi-sub">Japan</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP POSTS -->
+  <div class="fi" style="margin:44px 0 14px;">
+    <p class="tl-eye" data-en="Top performing posts" data-jp="トップパフォーマンス投稿">Top performing posts</p>
+  </div>
+  <div class="top-posts fi">
+    <div class="top-post">
+      <div class="tp-meta">
+        <span class="tp-views">300K <span data-en="views" data-jp="表示">views</span></span>
+        <span class="tp-date">2026/05/25</span>
+      </div>
+      <div class="tp-desc" data-en="2026 OWCS Stage 2 Roster announcement" data-jp="2026 OWCS Stage 2 ロスター発表">2026 OWCS Stage 2 Roster announcement</div>
+      <div class="tp-stats">
+        <span>♥ 1,229</span><span>↺ 396</span><span>🔖 39</span><span>💬 7</span>
+      </div>
+      <a class="tp-link" href="https://x.com/99divine_/status/2049790516947238967" target="_blank">View post ↗</a>
+    </div>
+    <div class="top-post">
+      <div class="tp-meta">
+        <span class="tp-views">150K <span data-en="views" data-jp="表示">views</span></span>
+        <span class="tp-date">2026/05/17</span>
+      </div>
+      <div class="tp-desc" data-en="Season end thank you" data-jp="シーズン終了感謝">Season end thank you</div>
+      <div class="tp-stats">
+        <span>♥ 276</span><span>↺ 48</span><span>🔖 4</span>
+      </div>
+      <a class="tp-link" href="https://x.com/99divine_/status/2050411708464984421" target="_blank">View post ↗</a>
+    </div>
+    <div class="top-post">
+      <div class="tp-meta">
+        <span class="tp-views">23K <span data-en="views" data-jp="表示">views</span></span>
+        <span class="tp-date">2026/05/02</span>
+      </div>
+      <div class="tp-desc" data-en="New Content Creator member announcement" data-jp="新コンテンツクリエイター加入発表">New Content Creator member announcement</div>
+      <div class="tp-stats">
+        <span>♥ 154</span><span>↺ 25</span><span>🔖 6</span><span>💬 2</span>
+      </div>
+      <a class="tp-link" href="https://x.com/99divine_/status/2055884378644111831" target="_blank">View post ↗</a>
+    </div>
+    <div class="top-post">
+      <div class="tp-meta">
+        <span class="tp-views">17K <span data-en="views" data-jp="表示">views</span></span>
+        <span class="tp-date">2026/04/30</span>
+      </div>
+      <div class="tp-desc" data-en="Crowd Funding supporters Logo" data-jp="クラウドファンディングサポーターロゴ">Crowd Funding supporters Logo</div>
+      <div class="tp-stats">
+        <span>♥ 29</span><span>↺ 6</span><span>🔖 1</span>
+      </div>
+      <a class="tp-link" href="https://x.com/99divine_/status/2058835471221035280" target="_blank">View post ↗</a>
+    </div>
+  </div>
+
+  <p style="font-size:10px;color:var(--m2);font-family:'DM Mono',monospace;letter-spacing:.04em;padding:14px 0;border-top:0.5px solid var(--b2);" data-en="X analytics updated manually. API access requires X Enterprise subscription. Delta (±) shows change from previous update stored in your browser." data-jp="Xのアナリティクスは手動で更新されますAPIアクセスにはXエンタープライズが必要です差分(±)はブラウザに保存された前回更新からの変化を示します">X analytics updated manually. API access requires X Enterprise subscription. Delta (±) shows change from previous update stored in your browser.</p>
 </div>
 
 <!-- ═══════════════ CLIENT: ROMANI ═══════════════ -->
@@ -642,9 +883,8 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
       <p class="c-handle">@romani_ow · OW</p>
       <div class="c-link-row">
         <a class="c-ext" href="https://www.youtube.com/@romani_ow" target="_blank">↗ YouTube</a>
-        <!-- PLACEHOLDER: add Romani's X, Twitch links -->
-        <a class="c-ext" href="#" target="_blank" style="opacity:.45;">𝕏 X (add link)</a>
-        <a class="c-ext" href="#" target="_blank" style="opacity:.45;">↗ Twitch (add link)</a>
+        <a class="c-ext" href="https://x.com/imp_romani" target="_blank">𝕏 X</a>
+        <a class="c-ext" href="https://twitch.tv/romani_ow" target="_blank">↗ Twitch</a>
       </div>
       <div class="c-roles">
         <span class="c-role" data-en="Video Editor" data-jp="動画編集">Video Editor</span>
@@ -652,8 +892,15 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
         <span class="c-role soft">OW</span>
         <span class="c-role soft" data-en="Past Client" data-jp="過去のクライアント">Past Client</span>
       </div>
-      <p class="c-desc" data-en="Edited a selection of videos for Romani's OW channel, including EN ↔ JP translation for subtitles." data-jp="RomaniのOWチャンネル向けに複数の動画を編集。字幕の英日翻訳も担当しました。">Edited a selection of videos for Romani's OW channel, including EN ↔ JP translation for subtitles.</p>
+      <p class="c-desc" data-en="Edited a selection of videos for Romani's OW channel, including EN ↔ JP translation for subtitles." data-jp="RomaniのOWチャンネル向けに複数の動画を編集字幕の英日翻訳も担当しました">Edited a selection of videos for Romani's OW channel, including EN ↔ JP translation for subtitles.</p>
     </div>
+  </div>
+  <!-- LIVE STATS -->
+  <div class="live-stats fi" id="romani-stats">
+    <div class="ls-cell"><div class="ls-label" data-en="SUBSCRIBERS" data-jp="登録者数">SUBSCRIBERS</div><div class="ls-num" id="romani-stat-subs">—</div></div>
+    <div class="ls-cell"><div class="ls-label" data-en="TOTAL VIEWS" data-jp="総再生数">TOTAL VIEWS</div><div class="ls-num" id="romani-stat-views">—</div></div>
+    <div class="ls-cell"><div class="ls-label" data-en="VIDEOS" data-jp="動画数">VIDEOS</div><div class="ls-num" id="romani-stat-videos">—</div></div>
+    <div class="ls-live"><span class="ls-dot"></span><span data-en="live" data-jp="リアルタイム">live</span></div>
   </div>
   <div class="vid-section fi">
     <p class="vid-eye" data-en="Selected edits" data-jp="編集サンプル">Selected edits</p>
@@ -672,9 +919,9 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
       <p class="c-handle">@Hry_ow · OW</p>
       <div class="c-link-row">
         <a class="c-ext" href="https://www.youtube.com/@Hry_ow" target="_blank">↗ YouTube</a>
-        <!-- PLACEHOLDER: add Hry's X, Twitch links -->
-        <a class="c-ext" href="#" target="_blank" style="opacity:.45;">𝕏 X (add link)</a>
-        <a class="c-ext" href="#" target="_blank" style="opacity:.45;">↗ Twitch (add link)</a>
+        <a class="c-ext" href="https://x.com/HRY_ow" target="_blank">𝕏 X</a>
+        <!-- PLACEHOLDER: add Hry's Twitch if he has one -->
+        <a class="c-ext" href="#" target="_blank" style="opacity:.45;">↗ Twitch (add if exists)</a>
       </div>
       <div class="c-roles">
         <span class="c-role" data-en="Video Editor" data-jp="動画編集">Video Editor</span>
@@ -682,8 +929,15 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
         <span class="c-role soft">OW</span>
         <span class="c-role soft" data-en="Past Client" data-jp="過去のクライアント">Past Client</span>
       </div>
-      <p class="c-desc" data-en="Edited a selection of videos for Hry's OW channel, including EN ↔ JP translation for subtitles." data-jp="HryのOWチャンネル向けに複数の動画を編集。字幕の英日翻訳も担当しました。">Edited a selection of videos for Hry's OW channel, including EN ↔ JP translation for subtitles.</p>
+      <p class="c-desc" data-en="Edited a selection of videos for Hry's OW channel, including EN ↔ JP translation for subtitles." data-jp="HryのOWチャンネル向けに複数の動画を編集字幕の英日翻訳も担当しました">Edited a selection of videos for Hry's OW channel, including EN ↔ JP translation for subtitles.</p>
     </div>
+  </div>
+  <!-- LIVE STATS -->
+  <div class="live-stats fi" id="hry-stats">
+    <div class="ls-cell"><div class="ls-label" data-en="SUBSCRIBERS" data-jp="登録者数">SUBSCRIBERS</div><div class="ls-num" id="hry-stat-subs">—</div></div>
+    <div class="ls-cell"><div class="ls-label" data-en="TOTAL VIEWS" data-jp="総再生数">TOTAL VIEWS</div><div class="ls-num" id="hry-stat-views">—</div></div>
+    <div class="ls-cell"><div class="ls-label" data-en="VIDEOS" data-jp="動画数">VIDEOS</div><div class="ls-num" id="hry-stat-videos">—</div></div>
+    <div class="ls-live"><span class="ls-dot"></span><span data-en="live" data-jp="リアルタイム">live</span></div>
   </div>
   <div class="vid-section fi">
     <p class="vid-eye" data-en="Selected edits" data-jp="編集サンプル">Selected edits</p>
@@ -696,7 +950,7 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
 <div class="page" id="pg-events">
   <div class="sh fi">
     <p class="sh-eye" data-en="Community Events" data-jp="コミュニティイベント">Community Events</p>
-    <h2 class="sh-title" data-en="Event<br><em>work.</em>" data-jp="イベント<br><em>制作。</em>">Event<br><em>work.</em></h2>
+    <h2 class="sh-title" data-en="Event<br><em>work.</em>" data-jp="イベント<br><em>制作</em>">Event<br><em>work.</em></h2>
   </div>
   <div class="events-list fi">
     <div class="ev-row-item" onclick="goEvent('sawadi2')">
@@ -761,7 +1015,7 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
       <div class="ev-meta-cell"><div class="ev-meta-k" data-en="My role" data-jp="担当">My role</div><div class="ev-meta-v" data-en="Visual Design & Branding" data-jp="ビジュアルデザイン・ブランディング">Visual Design & Branding</div></div>
       <div class="ev-meta-cell"><div class="ev-meta-k" data-en="Thumbnail" data-jp="サムネイル">Thumbnail</div><div class="ev-meta-v" data-en="Made by me" data-jp="私が制作">Made by me</div></div>
     </div>
-    <p class="ev-desc" data-en="OW community tournament. Handled all visual assets including the event thumbnail and branding materials." data-jp="OWコミュニティトーナメント。イベントサムネイルとブランディング素材を含む全ビジュアルを担当しました。">OW community tournament. Handled all visual assets including the event thumbnail and branding materials.</p>
+    <p class="ev-desc" data-en="OW community tournament. Handled all visual assets including the event thumbnail and branding materials." data-jp="OWコミュニティトーナメントイベントサムネイルとブランディング素材を含む全ビジュアルを担当しました">OW community tournament. Handled all visual assets including the event thumbnail and branding materials.</p>
   </div>
   <div class="ev-thumbnail-wrap fi">
     <p class="ev-thumb-eye" data-en="Event thumbnail — made by me" data-jp="イベントサムネイル（私が制作）">Event thumbnail — made by me</p>
@@ -787,7 +1041,7 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
       <div class="ev-meta-cell"><div class="ev-meta-k" data-en="My role" data-jp="担当">My role</div><div class="ev-meta-v" data-en="Visual Design & Branding" data-jp="ビジュアルデザイン・ブランディング">Visual Design & Branding</div></div>
       <div class="ev-meta-cell"><div class="ev-meta-k" data-en="Status" data-jp="状況">Status</div><div class="ev-meta-v" data-en="In production" data-jp="制作中">In production</div></div>
     </div>
-    <p class="ev-desc" data-en="Third edition of the OW community tournament. Currently producing all visual assets and branding." data-jp="OWコミュニティトーナメントの第3回。現在全ビジュアルとブランディングを制作中です。">Third edition of the OW community tournament. Currently producing all visual assets and branding.</p>
+    <p class="ev-desc" data-en="Third edition of the OW community tournament. Currently producing all visual assets and branding." data-jp="OWコミュニティトーナメントの第3回現在全ビジュアルとブランディングを制作中です">Third edition of the OW community tournament. Currently producing all visual assets and branding.</p>
   </div>
   <div class="ev-thumbnail-wrap fi">
     <p class="ev-thumb-eye" data-en="Event thumbnail — made by me" data-jp="イベントサムネイル（私が制作）">Event thumbnail — made by me</p>
@@ -810,9 +1064,8 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
       <div class="ev-meta-cell"><div class="ev-meta-k" data-en="Host" data-jp="主催">Host</div><div class="ev-meta-v"><a href="https://www.youtube.com/@99DIVINE-z2c6t" target="_blank">99Divine ↗</a></div></div>
       <div class="ev-meta-cell"><div class="ev-meta-k" data-en="Game" data-jp="ゲーム">Game</div><div class="ev-meta-v">Overwatch</div></div>
       <div class="ev-meta-cell"><div class="ev-meta-k" data-en="My role" data-jp="担当">My role</div><div class="ev-meta-v" data-en="Opening Movie · Tutorial Videos" data-jp="オープニング映像・チュートリアル動画">Opening Movie · Tutorial Videos</div></div>
-      <div class="ev-meta-cell"><div class="ev-meta-k" data-en="Thumbnail" data-jp="サムネイル">Thumbnail</div><div class="ev-meta-v" data-en="Not by me" data-jp="私の制作ではない">Not by me</div></div>
     </div>
-    <p class="ev-desc" data-en="OW community tournament hosted by 99Divine. I produced the opening movie and mini-game tutorial videos for the event." data-jp="99Divine主催のOWコミュニティトーナメント。オープニング映像とミニゲームのチュートリアル動画を制作しました。">OW community tournament hosted by 99Divine. I produced the opening movie and mini-game tutorial videos for the event.</p>
+    <p class="ev-desc" data-en="OW community tournament hosted by 99Divine. I produced the opening movie and mini-game tutorial videos for the event." data-jp="99Divine主催のOWコミュニティトーナメントオープニング映像とミニゲームのチュートリアル動画を制作しました">OW community tournament hosted by 99Divine. I produced the opening movie and mini-game tutorial videos for the event.</p>
   </div>
   <div class="vid-section fi">
     <p class="vid-eye" data-en="Opening movie" data-jp="オープニング映像">Opening movie</p>
@@ -830,9 +1083,9 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
 <div class="page" id="pg-support">
   <div class="sh fi">
     <p class="sh-eye" data-en="Support me" data-jp="サポートする">Support me</p>
-    <h2 class="sh-title" data-en="Keep editing<br><em>alive.</em>" data-jp="編集を<br><em>続けるために。</em>">Keep editing<br><em>alive.</em></h2>
+    <h2 class="sh-title" data-en="Keep editing<br><em>alive.</em>" data-jp="編集を<br><em>続けるために</em>">Keep editing<br><em>alive.</em></h2>
   </div>
-  <p class="sup-intro fi" data-en="Editing is a passion project on top of a full life — family, work, and Overwatch. If you've enjoyed any of the content I've helped create, any support means a lot and goes directly toward keeping this going." data-jp="編集は、家族・仕事・オーバーウォッチでいっぱいの生活の中での情熱プロジェクトです。関わったコンテンツを楽しんでいただけたなら、どんなサポートも活動継続の励みになります。">Editing is a passion project on top of a full life — family, work, and Overwatch. If you've enjoyed any of the content I've helped create, any support means a lot and goes directly toward keeping this going.</p>
+  <p class="sup-intro fi" data-en="Editing is a passion project on top of a full life — family, work, and Overwatch. If you've enjoyed any of the content I've helped create, any support means a lot and goes directly toward keeping this going." data-jp="編集は、家族・仕事・オーバーウォッチでいっぱいの生活の中での情熱プロジェクトです関わったコンテンツを楽しんでいただけたなら、どんなサポートも活動継続の励みになります">Editing is a passion project on top of a full life — family, work, and Overwatch. If you've enjoyed any of the content I've helped create, any support means a lot and goes directly toward keeping this going.</p>
   <div class="sup-grid fi">
     <div class="sup-card">
       <div class="sup-tier" data-en="One-time" data-jp="単発">One-time</div>
@@ -871,16 +1124,16 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
       <button class="sup-btn" onclick="window.open('#','_blank')" data-en="Support on Ko-fi →" data-jp="Ko-fiでサポート →">Support on Ko-fi →</button>
     </div>
   </div>
-  <p class="kofi-note fi" data-en="Platform: Ko-fi — 0% fees on donations. Once your Ko-fi page is live, replace the # in the three buttons above with your actual Ko-fi URL." data-jp="プラットフォーム：Ko-fi — 寄付手数料0%。Ko-fiページが完成したら、上の3つのボタンの # をあなたのKo-fi URLに置き換えてください。">Platform: Ko-fi — 0% fees on donations. Once your Ko-fi page is live, replace the # in the three buttons above with your actual Ko-fi URL.</p>
+  <p class="kofi-note fi" data-en="Platform: Ko-fi — 0% fees on donations. Once your Ko-fi page is live, replace the # in the three buttons above with your actual Ko-fi URL." data-jp="プラットフォーム：Ko-fi — 寄付手数料0%Ko-fiページが完成したら、上の3つのボタンの # をあなたのKo-fi URLに置き換えてください">Platform: Ko-fi — 0% fees on donations. Once your Ko-fi page is live, replace the # in the three buttons above with your actual Ko-fi URL.</p>
 </div>
 
 <!-- ═══════════════ CONTACT ═══════════════ -->
 <div class="page" id="pg-contact">
   <div class="sh fi">
     <p class="sh-eye" data-en="Get in touch" data-jp="連絡する">Get in touch</p>
-    <h2 class="sh-title" data-en="Contact me<br><em>for anything.</em>" data-jp="何でも<br><em>連絡してください。</em>">Contact me<br><em>for anything.</em></h2>
+    <h2 class="sh-title" data-en="Contact me<br><em>for anything.</em>" data-jp="何でも<br><em>連絡してください</em>">Contact me<br><em>for anything.</em></h2>
   </div>
-  <p class="con-intro fi" data-en="Creator looking for an editor, want to help with my work, have a question, or just want to talk — DMs are open. I try to reply within 24 hours." data-jp="編集者を探しているクリエイター、活動を手伝いたい方、質問がある方、ただ話したい方 — DMオープンです。24時間以内に返信するよう心がけています。">Creator looking for an editor, want to help with my work, have a question, or just want to talk — DMs are open. I try to reply within 24 hours.</p>
+  <p class="con-intro fi" data-en="Creator looking for an editor, want to help with my work, have a question, or just want to talk — DMs are open. I try to reply within 24 hours." data-jp="編集者を探しているクリエイター、活動を手伝いたい方、質問がある方、ただ話したい方 — DMオープンです24時間以内に返信するよう心がけています">Creator looking for an editor, want to help with my work, have a question, or just want to talk — DMs are open. I try to reply within 24 hours.</p>
   <div class="con-grid fi">
     <a class="con-card" href="https://x.com/edittto" target="_blank">
       <div class="con-ico">𝕏</div>
@@ -893,20 +1146,19 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
       <div class="con-val">edittto.editor@gmail.com</div>
     </a>
   </div>
-  <p class="con-note fi" data-en="X DM is fastest. For email, mention what you're reaching out about in the subject line." data-jp="X DMが一番早いです。メールの場合は件名に用件を書いてください。">X DM is fastest. For email, mention what you're reaching out about in the subject line.</p>
+  <p class="con-note fi" data-en="X DM is fastest. For email, mention what you're reaching out about in the subject line." data-jp="X DMが一番早いですメールの場合は件名に用件を書いてください">X DM is fastest. For email, mention what you're reaching out about in the subject line.</p>
 </div>
 
 <!-- ═══════════════ FOOTER ═══════════════ -->
 <footer>
-  <span>© 2025 edittto</span>
-  <span data-en="OW · Japan · Self-taught" data-jp="OW · 日本 · 独学">OW · Japan · Self-taught</span>
+  <span>© 2026 edittto</span>
 </footer>
 
 <!-- ═══════════════ ASSISTANT MODAL ═══════════════ -->
 <div class="overlay" id="modal">
   <div class="modal">
     <h2 data-en="Looking for an assistant" data-jp="アシスタント募集">Looking for an assistant</h2>
-    <p class="modal-sub" data-en="Looking for someone with genuine passion for OW — not a professional, just someone who cares and won't disappear in two days." data-jp="OWへの本物の情熱を持つ人を探しています。プロでなくていい、本当に気にかけてくれる人を。">Looking for someone with genuine passion for OW — not a professional, just someone who cares and won't disappear in two days.</p>
+    <p class="modal-sub" data-en="Looking for someone with genuine passion for OW — not a professional, just someone who cares and won't disappear in two days." data-jp="OWへの本物の情熱を持つ人を探していますプロでなくていい、本当に気にかけてくれる人を">Looking for someone with genuine passion for OW — not a professional, just someone who cares and won't disappear in two days.</p>
     <p class="modal-lbl" data-en="What kind of help?" data-jp="どんな手伝いが必要？">What kind of help?</p>
     <div class="modal-opts">
       <span class="m-opt" data-en="General (edittto)" data-jp="全般（edittto）">General (edittto)</span>
@@ -936,14 +1188,19 @@ function go(id) {
   if (pg) pg.classList.add('active');
   const navMap = {
     sneaky:'roster', supreme:'roster', divine:'roster', romani:'roster', hry:'roster',
-    sawadi2:'events', sawadi3:'events', divinecup:'events'
+    sawadi2:'events', sawadi3:'events', divinecup:'events',
+    kpi:'roster'
   };
   const navTarget = navMap[id] || id;
   const navEl = document.getElementById('nl-' + navTarget);
   if (navEl) navEl.classList.add('active');
   window.scrollTo(0,0);
   animate('pg-' + id);
-  if (id === 'sneaky') fetchSneakyStats();
+  if (id === 'sneaky') { fetchYTStats('UCLpvuIawEixyHxASIHDF8rQ','stat-subs','stat-views','stat-videos'); fetchSneakyTopVideos(); }
+  if (id === 'divine') fetchYTStats('UCQtjmPpRtmSMhBBSSoMtMnQ','divine-stat-subs','divine-stat-views','divine-stat-videos');
+  if (id === 'romani') fetchYTStats('UCB_nX6nq4k0QH1BuJFEzDmQ','romani-stat-subs','romani-stat-views','romani-stat-videos');
+  if (id === 'hry')    fetchYTStats('UCW3pC7bBmvMEXCMB0KCQQXQ','hry-stat-subs','hry-stat-views','hry-stat-videos');
+  if (id === 'kpi')    setTimeout(renderKPIDeltas, 50);
   return false;
 }
 
@@ -982,25 +1239,111 @@ document.querySelectorAll('.m-opt').forEach(o => o.addEventListener('click', fun
 animate('pg-home');
 
 /* ── YOUTUBE LIVE STATS ── */
-async function fetchSneakyStats() {
-  const API_KEY    = 'AIzaSyDn8GgPaMPzmJgjebHAeqjLnD5w1oSm_Uo';
-  const CHANNEL_ID = 'UCLpvuIawEixyHxASIHDF8rQ';
+const YT_API_KEY = 'AIzaSyDn8GgPaMPzmJgjebHAeqjLnD5w1oSm_Uo';
+
+async function fetchYTStats(channelId, subId, viewId, videoId) {
   try {
-    const res  = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${CHANNEL_ID}&key=${API_KEY}`);
+    const res  = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${YT_API_KEY}`);
     const data = await res.json();
     const s    = data.items[0].statistics;
     const fmt  = n => Number(n).toLocaleString();
-    document.getElementById('stat-subs').textContent   = fmt(s.subscriberCount);
-    document.getElementById('stat-views').textContent  = fmt(s.viewCount);
-    document.getElementById('stat-videos').textContent = fmt(s.videoCount);
+    if(subId)   document.getElementById(subId).textContent   = fmt(s.subscriberCount);
+    if(viewId)  document.getElementById(viewId).textContent  = fmt(s.viewCount);
+    if(videoId) document.getElementById(videoId).textContent = fmt(s.videoCount);
   } catch(e) {
-    ['stat-subs','stat-views','stat-videos'].forEach(id => {
-      document.getElementById(id).textContent = '—';
+    [subId, viewId, videoId].filter(Boolean).forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.textContent = '—';
     });
   }
 }
 
-fetchSneakyStats();
+async function fetchSneakyTopVideos() {
+  const CHANNEL = 'UCLpvuIawEixyHxASIHDF8rQ';
+  const fmt = n => Number(n).toLocaleString();
+  try {
+    // fetch up to 50 most popular videos
+    const searchRes = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${CHANNEL}&maxResults=50&order=viewCount&type=video&key=${YT_API_KEY}`);
+    const searchData = await searchRes.json();
+    if (!searchData.items) return;
+    const ids = searchData.items.map(i => i.id.videoId).join(',');
+    // get full stats for each
+    const statsRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails,snippet&id=${ids}&key=${YT_API_KEY}`);
+    const statsData = await statsRes.json();
+    if (!statsData.items) return;
+    // split long vs shorts by duration (shorts < 65 seconds)
+    const parseDuration = d => {
+      const m = d.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+      return (parseInt(m[1]||0)*3600)+(parseInt(m[2]||0)*60)+(parseInt(m[3]||0));
+    };
+    const sorted = statsData.items.sort((a,b) => parseInt(b.statistics.viewCount||0) - parseInt(a.statistics.viewCount||0));
+    const longs  = sorted.filter(v => parseDuration(v.contentDetails.duration) >= 65).slice(0,3);
+    const shorts = sorted.filter(v => parseDuration(v.contentDetails.duration) < 65).slice(0,3);
+    const makeCard = (v, featured) => {
+      const vid = v.id;
+      const views = fmt(v.statistics.viewCount||0);
+      const likes = fmt(v.statistics.likeCount||0);
+      const title = v.snippet.title.length > 48 ? v.snippet.title.slice(0,48)+'…' : v.snippet.title;
+      return `<div${featured?' class="vid-feat"':''}>
+        <div class="vid-wrap"><iframe src="https://www.youtube.com/embed/${vid}" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div>
+        <p class="vid-lbl" style="line-height:1.5">${title}<br><span style="color:var(--m)">▶ ${views} views · ♥ ${likes}</span></p>
+      </div>`;
+    };
+    const longEl  = document.getElementById('sneaky-long-vids');
+    const shortEl = document.getElementById('sneaky-short-vids');
+    if (longEl)  longEl.innerHTML  = longs.length  ? longs.map((v,i)  => makeCard(v, i===0)).join('') : '<div class="vid-ph"><span>No long videos found</span></div>';
+    if (shortEl) shortEl.innerHTML = shorts.length ? shorts.map((v,i) => makeCard(v, i===0)).join('') : '<div class="vid-ph"><span>No shorts found</span></div>';
+  } catch(e) {
+    ['sneaky-long-vids','sneaky-short-vids'].forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.innerHTML = '<div class="vid-ph"><span>Could not load videos</span></div>';
+    });
+  }
+}
+
+// fetch SneakyKirby on load since she's most prominent
+fetchYTStats('UCLpvuIawEixyHxASIHDF8rQ','stat-subs','stat-views','stat-videos');
+
+/* ── KPI DELTA (localStorage) ── */
+// KPI values stored as raw numbers for comparison
+// Keys match the kv-* element IDs
+const KPI_VALS = {
+  'impressions': 1300000,
+  'followers':   3324,
+  'growth':      266,
+  'engrate':     0.8,
+  'engagements': 11000,
+  'profile':     4500,
+  'likes':       4600,
+  'reposts':     1500,
+  'bookmarks':   184,
+  'shares':      96
+};
+
+function renderKPIDeltas() {
+  const prev = JSON.parse(localStorage.getItem('kpi_prev') || '{}');
+  const curr = KPI_VALS;
+  // save current as previous for next update
+  localStorage.setItem('kpi_prev', JSON.stringify(curr));
+  Object.keys(curr).forEach(key => {
+    const el = document.getElementById('kd-' + key);
+    if (!el) return;
+    if (!prev[key]) { el.textContent = ''; return; }
+    const diff = curr[key] - prev[key];
+    if (diff === 0) {
+      el.textContent = '±0'; el.className = 'kpi-delta flat';
+    } else if (diff > 0) {
+      el.textContent = '+' + diff.toLocaleString(); el.className = 'kpi-delta up';
+    } else {
+      el.textContent = diff.toLocaleString(); el.className = 'kpi-delta down';
+    }
+  });
+}
+
+// run deltas when KPI page opens — hooked directly into go() below
+function renderKPIOnNav(id) {
+  if (id === 'kpi') renderKPIDeltas();
+}
 </script>
 </body>
 </html>
