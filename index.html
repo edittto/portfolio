@@ -588,7 +588,7 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
   <!-- LONG VIDEOS — auto-fetched -->
   <div class="vid-section fi">
     <p class="vid-eye" data-en="Long videos — top 3 by views" data-jp="長尺動画 — 再生数トップ3">Long videos — top 3 by views</p>
-    <div id="sneaky-long-vids" class="vid-grid">
+    <div id="sneaky-long-vids" class="vid-grid" style="grid-template-columns:repeat(3,1fr);">
       <div class="vid-ph" style="aspect-ratio:16/9;grid-column:1/-1"><span data-en="Loading..." data-jp="読み込み中...">Loading...</span></div>
     </div>
   </div>
@@ -596,7 +596,7 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
   <!-- SHORTS — auto-fetched -->
   <div class="vid-section fi">
     <p class="vid-eye" data-en="Shorts — top 3 by views" data-jp="ショート — 再生数トップ3">Shorts — top 3 by views</p>
-    <div id="sneaky-short-vids" class="vid-grid">
+    <div id="sneaky-short-vids" class="vid-grid" style="grid-template-columns:repeat(3,1fr);">
       <div class="vid-ph" style="aspect-ratio:16/9;grid-column:1/-1"><span data-en="Loading..." data-jp="読み込み中...">Loading...</span></div>
     </div>
   </div>
@@ -614,7 +614,7 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
         <a class="c-ext" href="https://x.com/supreme__ow" target="_blank">𝕏 X</a>
         <a class="c-ext" href="https://twitch.tv/supreme_ow" target="_blank">↗ Twitch</a>
         <!-- PLACEHOLDER: add Supreme's YouTube link when confirmed -->
-        <a class="c-ext" href="#" target="_blank" style="opacity:.45;">↗ YouTube (add link)</a>
+        <a class="c-ext" href="https://www.youtube.com/@SupuOjisan" target="_blank">↗ YouTube</a>
       </div>
       <div class="c-roles">
         <span class="c-role" data-en="Video Editor" data-jp="動画編集">Video Editor</span>
@@ -628,14 +628,19 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
   </div>
   <!-- LIVE STATS -->
   <div class="live-stats fi" id="supreme-stats">
-    <div class="ls-cell"><div class="ls-label">FOLLOWERS</div><div class="ls-num" id="supreme-stat-followers">—</div></div>
-    <div class="ls-cell"><div class="ls-label">TWITCH</div><div class="ls-num" id="supreme-stat-twitch">twitch.tv/supreme_ow</div></div>
-    <div class="ls-live"><span class="ls-dot"></span><span>links</span></div>
+    <div class="ls-cell"><div class="ls-label" data-en="YT SUBSCRIBERS" data-jp="YT登録者数">YT SUBSCRIBERS</div><div class="ls-num" id="supreme-stat-subs">—</div></div>
+    <div class="ls-cell"><div class="ls-label" data-en="YT TOTAL VIEWS" data-jp="YT総再生数">YT TOTAL VIEWS</div><div class="ls-num" id="supreme-stat-views">—</div></div>
+    <div class="ls-cell" style="border-right:none;"><div class="ls-label" data-en="YT VIDEOS" data-jp="YT動画数">YT VIDEOS</div><div class="ls-num" id="supreme-stat-videos">—</div></div>
+    <div class="ls-live"><span class="ls-dot"></span><span data-en="live" data-jp="リアルタイム">live</span></div>
   </div>
   <div class="vid-section fi">
     <p class="vid-eye" data-en="Selected edits" data-jp="編集サンプル">Selected edits</p>
-    <!-- PLACEHOLDER: replace with actual YouTube embeds -->
-    <div class="vid-ph"><span data-en="Videos coming soon" data-jp="動画準備中">Videos coming soon</span><small data-en="Replace with YouTube embed IDs" data-jp="YouTubeのIDを追加してください">Replace with YouTube embed IDs</small></div>
+    <div class="vid-grid">
+      <div class="vid-feat">
+        <div class="vid-wrap"><iframe src="https://www.youtube.com/embed/QZNcFD_11go" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div>
+        <p class="vid-lbl" data-en="Featured" data-jp="注目">Featured</p>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -704,7 +709,16 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
   </div>
   <div class="vid-section fi">
     <p class="vid-eye" data-en="Selected work" data-jp="制作サンプル">Selected work</p>
-    <div class="vid-ph"><span data-en="Videos & visuals coming soon" data-jp="動画・ビジュアル準備中">Videos & visuals coming soon</span><small data-en="Replace with YouTube embed IDs and image files" data-jp="YouTubeのIDと画像ファイルを追加">Replace with YouTube embed IDs and image files</small></div>
+    <div class="vid-grid">
+      <div class="vid-feat">
+        <div class="vid-wrap"><iframe src="https://www.youtube.com/embed/eFR-Nrn3hSU" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div>
+        <p class="vid-lbl" data-en="Featured" data-jp="注目">Featured</p>
+      </div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/_Cv-XY22_dY" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">02</p></div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/sFr7yGPaNns" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">03</p></div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/BggAZiNjE5o" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">04</p></div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/PjQGJ_qea6Y" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">05</p></div>
+    </div>
   </div>
 </div>
 
@@ -894,12 +908,17 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
   </div>
   <div class="vid-section fi">
     <p class="vid-eye" data-en="Selected edits" data-jp="編集サンプル">Selected edits</p>
-    <!-- PLACEHOLDER: replace with actual YouTube embed IDs -->
-    <div class="vid-ph"><span data-en="Add video links to display" data-jp="動画リンクを追加してください">Add video links to display</span><small>Replace vid-ph div with vid-wrap + iframe</small></div>
+    <div class="vid-grid">
+      <div class="vid-feat">
+        <div class="vid-wrap"><iframe src="https://www.youtube.com/embed/sY3DYa1JxYs" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div>
+        <p class="vid-lbl" data-en="Featured" data-jp="注目">Featured</p>
+      </div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/ZKSKzh8omoA" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">02</p></div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/Y7nUBJeEY-w" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">03</p></div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/5wRr9Jw7Ee0" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">04</p></div>
+    </div>
   </div>
 </div>
-
-<!-- ═══════════════ CLIENT: HRY ═══════════════ -->
 <div class="page" id="pg-hry">
   <button class="back-btn" onclick="go('roster')">← <span data-en="Roster" data-jp="ロスター">Roster</span></button>
   <div class="c-hero fi">
@@ -924,8 +943,16 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
   </div>
   <div class="vid-section fi">
     <p class="vid-eye" data-en="Selected edits" data-jp="編集サンプル">Selected edits</p>
-    <!-- PLACEHOLDER: replace with actual YouTube embed IDs -->
-    <div class="vid-ph"><span data-en="Add video links to display" data-jp="動画リンクを追加してください">Add video links to display</span><small>Replace vid-ph div with vid-wrap + iframe</small></div>
+    <div class="vid-grid">
+      <div class="vid-feat">
+        <div class="vid-wrap"><iframe src="https://www.youtube.com/embed/BS6-xUJ7-L4" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div>
+        <p class="vid-lbl" data-en="Featured" data-jp="注目">Featured</p>
+      </div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/hDoYuwpJvjY" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">02</p></div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/Otes3v-_0Rg" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">03</p></div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/m0lh1NevGqA" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">04</p></div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/dps-cDgMXR0" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">05</p></div>
+    </div>
   </div>
 </div>
 
@@ -1051,14 +1078,13 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
     <p class="ev-desc" data-en="OW community tournament hosted by 99Divine. I produced the opening movie and mini-game tutorial videos for the event." data-jp="99Divine主催のOWコミュニティトーナメントオープニング映像とミニゲームのチュートリアル動画を制作しました">OW community tournament hosted by 99Divine. I produced the opening movie and mini-game tutorial videos for the event.</p>
   </div>
   <div class="vid-section fi">
-    <p class="vid-eye" data-en="Opening movie" data-jp="オープニング映像">Opening movie</p>
-    <!-- PLACEHOLDER: replace with actual YouTube embed -->
-    <div class="vid-ph"><span data-en="Opening movie" data-jp="オープニング映像">Opening movie</span><small data-en="Replace with YouTube embed ID" data-jp="YouTubeのIDを追加">Replace with YouTube embed ID</small></div>
-  </div>
-  <div class="vid-section fi">
-    <p class="vid-eye" data-en="Mini-game tutorial videos" data-jp="ミニゲームチュートリアル動画">Mini-game tutorial videos</p>
-    <!-- PLACEHOLDER: replace with actual YouTube embeds -->
-    <div class="vid-ph"><span data-en="Tutorial videos" data-jp="チュートリアル動画">Tutorial videos</span><small data-en="Replace with YouTube embed IDs" data-jp="YouTubeのIDを追加">Replace with YouTube embed IDs</small></div>
+    <p class="vid-eye" data-en="Opening movie & tutorials" data-jp="オープニング映像・チュートリアル">Opening movie & tutorials</p>
+    <div class="vid-grid">
+      <div class="vid-feat">
+        <div class="vid-wrap"><iframe src="https://www.youtube.com/embed/4bgHe8tYpko" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div>
+        <p class="vid-lbl" data-en="Full stream — opening movie & mini-game tutorials at the start" data-jp="フル配信 — オープニング映像とミニゲームチュートリアルは冒頭にあります">Full stream — opening movie & mini-game tutorials at the start</p>
+      </div>
+    </div>
   </div>
 </div>
 
@@ -1079,7 +1105,7 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
         <li class="on" data-en="My genuine gratitude" data-jp="心からの感謝">My genuine gratitude</li>
       </ul>
       <!-- PLACEHOLDER: replace # with your Ko-fi URL -->
-      <button class="sup-btn" onclick="window.open('#','_blank')" data-en="Support on Ko-fi →" data-jp="Ko-fiでサポート →">Support on Ko-fi →</button>
+      <button class="sup-btn" onclick="window.open('https://ko-fi.com/edittto','_blank')" data-en="Support on Ko-fi →" data-jp="Ko-fiでサポート →">Support on Ko-fi →</button>
     </div>
     <div class="sup-card feat">
       <div class="sup-tier" data-en="Monthly" data-jp="月額">Monthly</div>
@@ -1091,7 +1117,7 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
         <li class="on" data-en="My genuine gratitude" data-jp="心からの感謝">My genuine gratitude</li>
       </ul>
       <!-- PLACEHOLDER: replace # with your Ko-fi URL -->
-      <button class="sup-btn" onclick="window.open('#','_blank')" data-en="Support on Ko-fi →" data-jp="Ko-fiでサポート →">Support on Ko-fi →</button>
+      <button class="sup-btn" onclick="window.open('https://ko-fi.com/edittto','_blank')" data-en="Support on Ko-fi →" data-jp="Ko-fiでサポート →">Support on Ko-fi →</button>
     </div>
     <div class="sup-card">
       <div class="sup-tier" data-en="Annual" data-jp="年額">Annual</div>
@@ -1104,7 +1130,7 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
         <li class="on" data-en="My genuine gratitude" data-jp="心からの感謝">My genuine gratitude</li>
       </ul>
       <!-- PLACEHOLDER: replace # with your Ko-fi URL -->
-      <button class="sup-btn" onclick="window.open('#','_blank')" data-en="Support on Ko-fi →" data-jp="Ko-fiでサポート →">Support on Ko-fi →</button>
+      <button class="sup-btn" onclick="window.open('https://ko-fi.com/edittto','_blank')" data-en="Support on Ko-fi →" data-jp="Ko-fiでサポート →">Support on Ko-fi →</button>
     </div>
   </div>
   <p class="kofi-note fi" data-en="Platform: Ko-fi — 0% fees on donations. Once your Ko-fi page is live, replace the # in the three buttons above with your actual Ko-fi URL." data-jp="プラットフォーム：Ko-fi — 寄付手数料0%Ko-fiページが完成したら、上の3つのボタンの # をあなたのKo-fi URLに置き換えてください">Platform: Ko-fi — 0% fees on donations. Once your Ko-fi page is live, replace the # in the three buttons above with your actual Ko-fi URL.</p>
@@ -1181,7 +1207,7 @@ function go(id) {
   animate('pg-' + id);
   if (id === 'sneaky') { fetchYTStats('UCLpvuIawEixyHxASIHDF8rQ','stat-subs','stat-views','stat-videos'); fetchSneakyTopVideos(); }
   if (id === 'divine') setTimeout(() => fetchYTStats('UClJrS0URFZTp46QamnB9L4A','divine-stat-subs','divine-stat-views','divine-stat-videos'), 200);
-  if (id === 'romani') fetchYTStats('UCB_nX6nq4k0QH1BuJFEzDmQ','romani-stat-subs','romani-stat-views','romani-stat-videos');
+  if (id === 'supreme') fetchYTStats('UCziBAJe9XhwEzJqGD7OG8iw','supreme-stat-subs','supreme-stat-views','supreme-stat-videos');
   if (id === 'hry')    fetchYTStats('UCW3pC7bBmvMEXCMB0KCQQXQ','hry-stat-subs','hry-stat-views','hry-stat-videos');
   if (id === 'kpi')    setTimeout(renderKPIDeltas, 50);
   return false;
@@ -1267,15 +1293,15 @@ async function fetchSneakyTopVideos() {
       const views = fmt(v.statistics.viewCount||0);
       const likes = fmt(v.statistics.likeCount||0);
       const title = v.snippet.title.length > 48 ? v.snippet.title.slice(0,48)+'…' : v.snippet.title;
-      return `<div${featured?' class="vid-feat"':''}>
+      return `<div>
         <div class="vid-wrap"><iframe src="https://www.youtube.com/embed/${vid}" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div>
         <p class="vid-lbl" style="line-height:1.5">${title}<br><span style="color:var(--m)">▶ ${views} views · ♥ ${likes}</span></p>
       </div>`;
     };
     const longEl  = document.getElementById('sneaky-long-vids');
     const shortEl = document.getElementById('sneaky-short-vids');
-    if (longEl)  longEl.innerHTML  = longs.length  ? longs.map((v,i)  => makeCard(v, i===0)).join('') : '<div class="vid-ph"><span>No long videos found</span></div>';
-    if (shortEl) shortEl.innerHTML = shorts.length ? shorts.map((v,i) => makeCard(v, i===0)).join('') : '<div class="vid-ph"><span>No shorts found</span></div>';
+    if (longEl)  longEl.innerHTML  = longs.length  ? longs.map(v => makeCard(v)).join('') : '<div class="vid-ph"><span>No long videos found</span></div>';
+    if (shortEl) shortEl.innerHTML = shorts.length ? shorts.map(v => makeCard(v)).join('') : '<div class="vid-ph"><span>No shorts found</span></div>';
   } catch(e) {
     ['sneaky-long-vids','sneaky-short-vids'].forEach(id => {
       const el = document.getElementById(id);
