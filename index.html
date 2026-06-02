@@ -1,1017 +1,1358 @@
 <!DOCTYPE html>
-<html lang="ja">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
-<title>FreelanceKit</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💼</text></svg>">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>edittto</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@2.44.0/tabler-icons.min.css" rel="stylesheet">
-<script src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
-<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
-<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Instrument+Serif:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html{font-family:'Noto Sans JP',sans-serif;font-size:14px}
-body{background:var(--clr-bg,#F8F8FF);min-height:100vh}
-input,select,textarea,button{font-family:inherit;font-size:inherit;outline:none}
-input,select,textarea{border:1.5px solid #E2E8F0;border-radius:8px;padding:7px 10px;width:100%;background:#fff;color:#1E293B;transition:border 0.15s}
-input:focus,select:focus,textarea:focus{border-color:var(--clr-primary,#6366F1)}
-button{border:1.5px solid #E2E8F0;border-radius:8px;padding:6px 14px;background:#fff;color:#64748B;cursor:pointer;transition:all 0.15s;font-weight:500}
-button:hover{background:#F1F5F9;border-color:#CBD5E1}
-button:active{transform:scale(0.97)}
-button:disabled{opacity:0.45;cursor:default}
-.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)}
-::-webkit-scrollbar{width:4px;height:4px}
-::-webkit-scrollbar-track{background:transparent}
-::-webkit-scrollbar-thumb{background:#CBD5E1;border-radius:4px}
-@media(max-width:600px){
-  .hide-mobile{display:none!important}
-  .grid-2{grid-template-columns:1fr!important}
-  .grid-3{grid-template-columns:1fr 1fr!important}
-  .modal-inner{max-width:100%!important;border-radius:16px 16px 0 0!important;position:fixed!important;bottom:0!important;left:0!important;right:0!important;max-height:92vh!important}
-  .modal-wrap{align-items:flex-end!important;padding:0!important}
+/* ============================================================
+   EDITTTO PORTFOLIO — single file, self-contained
+   To update: search "PLACEHOLDER" to find swap-in spots
+   To go live: upload as index.html to GitHub Pages
+   ============================================================ */
+:root{
+  --bg:#141414;--bg2:#1c1c1c;--bg3:#242424;
+  --w:#f0ede8;--w2:#e0ddd8;--w3:#c8c5c0;
+  --m:#7a7870;--m2:#5a5850;
+  --b:rgba(240,237,232,0.09);--b2:rgba(240,237,232,0.05);
 }
-@media print{.no-print{display:none!important}body{background:#fff}}
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--w);font-family:'DM Sans',sans-serif;font-weight:300;overflow-x:hidden;min-height:100vh;}
+
+/* ── NAV ── */
+nav{position:fixed;top:0;left:0;right:0;z-index:300;height:58px;display:flex;align-items:center;justify-content:space-between;padding:0 36px;background:rgba(20,20,20,0.95);backdrop-filter:blur(16px);border-bottom:0.5px solid var(--b);}
+.nav-logo{font-family:'DM Mono',monospace;font-size:15px;font-weight:500;color:var(--w);cursor:pointer;letter-spacing:-.01em;flex-shrink:0;}
+.nav-logo span{opacity:.38;font-weight:300;font-style:italic;}
+.nav-links{display:flex;gap:24px;list-style:none;flex:1;justify-content:center;flex-wrap:wrap;}
+.nav-links a{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--m);text-decoration:none;cursor:pointer;transition:color .2s;white-space:nowrap;}
+.nav-links a:hover,.nav-links a.active{color:var(--w);}
+.nav-right{display:flex;align-items:center;gap:12px;flex-shrink:0;}
+.lang-toggle{display:flex;border:0.5px solid var(--b);overflow:hidden;}
+.lang-btn{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;padding:5px 11px;cursor:pointer;color:var(--m);background:transparent;border:none;transition:all .2s;}
+.lang-btn.active{background:var(--w);color:var(--bg);}
+.assist-pill{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.07em;text-transform:uppercase;padding:6px 13px;border:0.5px solid rgba(240,237,232,.2);color:var(--w2);background:transparent;cursor:pointer;transition:all .2s;white-space:nowrap;}
+.assist-pill:hover{background:var(--w);color:var(--bg);}
+
+/* ── PAGE SYSTEM ── */
+.page{display:none;min-height:calc(100vh - 58px);padding:88px 36px 72px;max-width:1040px;margin:0 auto;}
+.page.active{display:block;}
+#pg-home{max-width:none;padding-left:0;padding-right:0;}
+#pg-home.active{display:flex;flex-direction:column;}
+
+/* ── HOME ── */
+.hero{min-height:calc(100vh - 58px);display:flex;flex-direction:column;justify-content:center;padding:0 36px;max-width:1040px;margin:0 auto;position:relative;}
+.hero-eye{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--m);margin-bottom:22px;opacity:0;animation:fu .7s forwards .1s;}
+.hero-h1{font-family:'Instrument Serif',serif;font-size:clamp(54px,8.5vw,104px);line-height:.92;letter-spacing:-.03em;color:var(--w);margin-bottom:26px;opacity:0;animation:fu .7s forwards .22s;}
+.hero-h1 em{font-style:italic;color:var(--w2);}
+.hero-p{font-size:14px;color:var(--m);max-width:420px;line-height:1.85;margin-bottom:40px;opacity:0;animation:fu .7s forwards .36s;}
+.hero-cta{display:flex;gap:11px;flex-wrap:wrap;opacity:0;animation:fu .7s forwards .5s;}
+.btn{display:inline-flex;align-items:center;gap:7px;padding:10px 24px;font-size:11px;font-family:'DM Sans',sans-serif;letter-spacing:.07em;text-transform:uppercase;cursor:pointer;border:none;text-decoration:none;transition:all .2s;}
+.btn-w{background:var(--w);color:var(--bg);}
+.btn-w:hover{background:var(--w2);}
+.btn-o{background:transparent;color:var(--w);border:0.5px solid var(--b);}
+.btn-o:hover{border-color:rgba(240,237,232,.28);background:rgba(240,237,232,.04);}
+.hero-foot{position:absolute;bottom:40px;right:36px;text-align:right;opacity:0;animation:fu .7s forwards .64s;}
+.hero-foot-line{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.07em;color:var(--m);line-height:2;}
+
+/* ── SECTION HEADER ── */
+.sh{margin-bottom:44px;padding-bottom:18px;border-bottom:0.5px solid var(--b);}
+.sh-eye{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--m);margin-bottom:11px;}
+.sh-title{font-family:'Instrument Serif',serif;font-size:clamp(30px,5vw,50px);line-height:.94;letter-spacing:-.022em;color:var(--w);}
+.sh-title em{font-style:italic;color:var(--w2);}
+
+/* ── ABOUT ── */
+.about-grid{display:grid;grid-template-columns:260px 1fr;gap:48px;margin-bottom:52px;}
+.about-photo{width:260px;aspect-ratio:1;background:var(--bg2);border:0.5px solid var(--b);overflow:hidden;}
+.about-photo img{width:100%;height:100%;object-fit:cover;filter:grayscale(12%);}
+.about-name{font-family:'Instrument Serif',serif;font-size:36px;letter-spacing:-.02em;line-height:1;color:var(--w);margin-bottom:5px;}
+.about-handle{font-family:'DM Mono',monospace;font-size:11px;color:var(--m);letter-spacing:.07em;margin-bottom:18px;}
+.about-p{font-size:13px;color:var(--m);line-height:1.88;margin-bottom:13px;}
+.about-p strong{color:var(--w2);font-weight:400;}
+.skill-wrap{display:flex;flex-wrap:wrap;gap:7px;margin:18px 0 24px;}
+.sk{font-family:'DM Mono',monospace;font-size:10px;padding:4px 11px;border:0.5px solid var(--b);color:var(--w2);letter-spacing:.05em;}
+.sns-col{display:flex;flex-direction:column;gap:9px;}
+.sns-a{display:flex;align-items:center;gap:9px;font-family:'DM Mono',monospace;font-size:11px;color:var(--m);text-decoration:none;transition:color .2s;}
+.sns-a:hover{color:var(--w);}
+.sns-ico{width:24px;height:24px;border:0.5px solid var(--b);display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;}
+.specs-block{margin-top:44px;padding-top:36px;border-top:0.5px solid var(--b);}
+.blk-eye{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--m);margin-bottom:18px;}
+.specs-grid{display:grid;grid-template-columns:1fr 1fr;border:0.5px solid var(--b);}
+.spec-row{display:flex;gap:14px;padding:10px 14px;border-bottom:0.5px solid var(--b2);}
+.spec-row:nth-child(odd){border-right:0.5px solid var(--b2);}
+.spec-k{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:var(--m);min-width:80px;padding-top:1px;}
+.spec-v{font-size:12px;color:var(--w2);line-height:1.4;}
+.soft-row{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px;}
+.soft-tag{font-family:'DM Mono',monospace;font-size:10px;padding:5px 13px;border:0.5px solid var(--b);color:var(--w2);}
+
+/* ── ORG BLOCK (99Divine) ── */
+.org-block{border:0.5px solid rgba(240,237,232,.22);background:var(--bg2);margin-bottom:8px;transition:background .2s;}
+.org-block:hover{background:var(--bg3);}
+.org-inner{display:flex;align-items:center;justify-content:space-between;padding:28px 32px;gap:20px;}
+.org-left{display:flex;align-items:center;gap:20px;}
+.org-av{width:72px;height:72px;border-radius:50%;background:var(--bg3);border:0.5px solid rgba(240,237,232,.18);overflow:hidden;flex-shrink:0;}
+.org-av img{width:100%;height:100%;object-fit:cover;}
+.org-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--m);margin-bottom:5px;}
+.org-name{font-family:'Instrument Serif',serif;font-size:28px;letter-spacing:-.02em;color:var(--w);line-height:1;margin-bottom:5px;}
+.org-role{font-size:12px;color:var(--m);font-weight:300;line-height:1.5;}
+.org-arrow{font-size:18px;color:var(--m);transition:color .2s;flex-shrink:0;}
+.org-block:hover .org-arrow{color:var(--w);}
+
+/* ── KPI DASHBOARD ── */
+.kpi-section{margin-bottom:32px;}
+.kpi-header{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:16px;padding-bottom:10px;border-bottom:0.5px solid var(--b);}
+.kpi-platform{font-family:'Instrument Serif',serif;font-size:20px;color:var(--w);letter-spacing:-.01em;}
+.kpi-period{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-spacing:.07em;}
+.kpi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:1px;background:var(--b);border:0.5px solid var(--b);}
+.kpi-card{background:var(--bg);padding:18px 16px;}
+.kpi-card.kpi-primary{background:var(--bg2);}
+.kpi-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--m);margin-bottom:8px;line-height:1.4;}
+.kpi-num{font-family:'DM Mono',monospace;font-size:22px;font-weight:300;color:var(--w);letter-spacing:-.02em;margin-bottom:4px;}
+.kpi-sub{font-size:10px;color:var(--m2);font-family:'DM Mono',monospace;letter-spacing:.03em;}
+
+/* ── TOP POSTS ── */
+.top-posts{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:1px;background:var(--b);border:0.5px solid var(--b);margin-bottom:44px;}
+.top-post{background:var(--bg);padding:20px 18px;display:flex;flex-direction:column;gap:8px;}
+.tp-meta{display:flex;align-items:baseline;justify-content:space-between;}
+.tp-views{font-family:'DM Mono',monospace;font-size:16px;color:var(--w);font-weight:300;letter-spacing:-.01em;}
+.tp-date{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-spacing:.04em;}
+.tp-desc{font-size:12px;color:var(--w2);line-height:1.5;flex:1;}
+.tp-stats{display:flex;gap:10px;flex-wrap:wrap;}
+.tp-stats span{font-family:'DM Mono',monospace;font-size:10px;color:var(--m);letter-spacing:.03em;}
+.tp-link{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);text-decoration:none;letter-spacing:.07em;text-transform:uppercase;transition:color .2s;align-self:flex-start;}
+.tp-link:hover{color:var(--w);}
+
+/* ── SNS PLACEHOLDER LIST ── */
+.sns-ph{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px;}
+.sns-ph-tag{font-family:'DM Mono',monospace;font-size:10px;padding:5px 13px;border:0.5px solid var(--b);color:var(--m);letter-spacing:.05em;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:5px;}
+.sns-ph-tag:hover{color:var(--w);border-color:rgba(240,237,232,.25);}
+.sns-ph-tag.real{color:var(--w2);border-color:rgba(240,237,232,.18);}
+
+/* ── ROSTER ── */
+.roster-intro{font-size:13px;color:var(--m);margin-bottom:28px;line-height:1.8;max-width:460px;}
+.roster-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:1px;background:var(--b);border:0.5px solid var(--b);}
+.r-card{background:var(--bg);padding:24px 20px;cursor:pointer;transition:background .2s;position:relative;}
+.r-card:hover{background:var(--bg2);}
+.r-av{width:56px;height:56px;border-radius:50%;background:var(--bg3);margin-bottom:14px;overflow:hidden;border:0.5px solid var(--b);}
+.r-av img{width:100%;height:100%;object-fit:cover;}
+.r-name{font-family:'Instrument Serif',serif;font-size:18px;letter-spacing:-.01em;color:var(--w);margin-bottom:3px;line-height:1.1;}
+.r-status{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.09em;text-transform:uppercase;color:var(--m);margin-bottom:9px;}
+.r-status.cur{color:var(--w2);}
+.r-tags{display:flex;flex-wrap:wrap;gap:4px;}
+.r-tag{font-family:'DM Mono',monospace;font-size:8px;padding:2px 7px;border:0.5px solid var(--b2);color:var(--m);letter-spacing:.04em;}
+.r-arrow{position:absolute;top:20px;right:16px;font-size:13px;color:var(--m2);transition:color .2s;}
+.r-card:hover .r-arrow{color:var(--w);}
+
+/* ── CLIENT PAGE ── */
+.back-btn{display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--m);cursor:pointer;margin-bottom:36px;text-decoration:none;transition:color .2s;background:none;border:none;}
+.back-btn:hover{color:var(--w);}
+.c-hero{display:flex;align-items:flex-start;gap:28px;margin-bottom:44px;padding-bottom:36px;border-bottom:0.5px solid var(--b);}
+.c-av{width:88px;height:88px;border-radius:50%;background:var(--bg2);border:0.5px solid var(--b);overflow:hidden;flex-shrink:0;}
+.c-av img{width:100%;height:100%;object-fit:cover;}
+.c-name{font-family:'Instrument Serif',serif;font-size:42px;letter-spacing:-.022em;line-height:.93;color:var(--w);margin-bottom:7px;}
+.c-handle{font-family:'DM Mono',monospace;font-size:10px;color:var(--m);letter-spacing:.07em;margin-bottom:11px;}
+.c-link-row{display:flex;gap:9px;flex-wrap:wrap;margin-bottom:12px;}
+.c-ext{font-family:'DM Mono',monospace;font-size:10px;color:var(--m);text-decoration:none;display:flex;align-items:center;gap:4px;padding:4px 11px;border:0.5px solid var(--b);transition:all .2s;}
+.c-ext:hover{color:var(--w);border-color:rgba(240,237,232,.22);}
+.c-roles{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:14px;}
+.c-role{font-family:'DM Mono',monospace;font-size:9px;padding:3px 9px;border:0.5px solid rgba(240,237,232,.18);color:var(--w2);letter-spacing:.05em;}
+.c-role.soft{border-color:var(--b2);color:var(--m);}
+.c-desc{font-size:13px;color:var(--m);max-width:480px;line-height:1.78;margin-bottom:16px;}
+.help-btn{display:inline-flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:8px 18px;border:0.5px solid rgba(240,237,232,.2);color:var(--w2);background:transparent;cursor:pointer;transition:all .2s;}
+.help-btn:hover{background:var(--w);color:var(--bg);}
+
+/* ── TIMELINE ── */
+.tl-wrap{margin-bottom:56px;}
+.tl-eye{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--m);margin-bottom:24px;}
+.tl-cols{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;}
+.tl-col-title{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--w2);margin-bottom:14px;padding-bottom:9px;border-bottom:0.5px solid var(--b);}
+.tl-row{display:flex;justify-content:space-between;align-items:baseline;padding:8px 0;border-bottom:0.5px solid var(--b2);gap:6px;}
+.tl-row:last-child{border-bottom:none;}
+.tl-g{font-size:12px;color:var(--w2);flex:1;}
+.tl-g.big{color:var(--w);}
+.tl-d{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);white-space:nowrap;letter-spacing:.02em;}
+
+/* ── VIDEO SECTION ── */
+.vid-section{margin-bottom:44px;}
+.vid-eye{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.2em;text-transform:uppercase;color:var(--m);margin-bottom:18px;}
+.vid-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:12px;}
+.vid-feat{grid-column:1/-1;}
+.vid-wrap{position:relative;width:100%;padding-bottom:56.25%;background:var(--bg2);overflow:hidden;}
+.vid-wrap iframe{position:absolute;top:0;left:0;width:100%;height:100%;border:none;}
+.vid-lbl{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-spacing:.09em;text-transform:uppercase;margin-top:7px;}
+.vid-ph{aspect-ratio:16/9;background:var(--bg2);border:0.5px solid var(--b);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;}
+.vid-ph span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-spacing:.1em;text-transform:uppercase;}
+.vid-ph small{font-family:'DM Mono',monospace;font-size:8px;color:var(--m2);letter-spacing:.05em;}
+
+/* ── IMAGE PLACEHOLDER ── */
+.img-ph{width:100%;aspect-ratio:16/9;background:var(--bg2);border:0.5px solid var(--b);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;}
+.img-ph span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-spacing:.1em;text-transform:uppercase;}
+.img-ph small{font-family:'DM Mono',monospace;font-size:8px;color:var(--m2);}
+.img-real{width:100%;aspect-ratio:16/9;object-fit:cover;border:0.5px solid var(--b);display:block;}
+
+/* ── 99DIVINE ROLES ── */
+.roles-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:1px;background:var(--b);border:0.5px solid var(--b);margin-bottom:44px;}
+.role-card{background:var(--bg);padding:26px 22px;}
+.role-ico{font-size:16px;margin-bottom:12px;color:var(--m);}
+.role-name{font-family:'Instrument Serif',serif;font-size:17px;color:var(--w);margin-bottom:7px;line-height:1.1;}
+.role-desc{font-size:12px;color:var(--m);line-height:1.72;}
+
+/* ── EVENTS LIST ── */
+.events-list{display:flex;flex-direction:column;gap:1px;background:var(--b);border:0.5px solid var(--b);}
+.ev-row-item{background:var(--bg);padding:24px 28px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:background .2s;gap:16px;}
+.ev-row-item:hover{background:var(--bg2);}
+.ev-left{display:flex;align-items:center;gap:20px;}
+.ev-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0;}
+.ev-dot.done{background:var(--w2);}
+.ev-dot.soon{background:transparent;border:1px solid var(--m);}
+.ev-row-name{font-family:'Instrument Serif',serif;font-size:22px;letter-spacing:-.01em;color:var(--w);line-height:1;}
+.ev-row-meta{font-family:'DM Mono',monospace;font-size:10px;color:var(--m);letter-spacing:.06em;margin-top:4px;}
+.ev-row-tags{display:flex;gap:6px;flex-wrap:wrap;}
+.ev-row-tag{font-family:'DM Mono',monospace;font-size:9px;padding:3px 9px;border:0.5px solid var(--b2);color:var(--m);}
+.ev-arrow{font-size:14px;color:var(--m);flex-shrink:0;transition:color .2s;}
+.ev-row-item:hover .ev-arrow{color:var(--w);}
+
+/* ── EVENT DETAIL PAGE ── */
+.ev-detail-hero{margin-bottom:44px;padding-bottom:36px;border-bottom:0.5px solid var(--b);}
+.ev-detail-status{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--m);display:flex;align-items:center;gap:7px;margin-bottom:18px;}
+.ev-detail-title{font-family:'Instrument Serif',serif;font-size:clamp(36px,6vw,60px);letter-spacing:-.025em;line-height:.92;color:var(--w);margin-bottom:18px;}
+.ev-meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:0;border:0.5px solid var(--b);margin-bottom:28px;}
+.ev-meta-cell{padding:14px 18px;border-right:0.5px solid var(--b2);}
+.ev-meta-cell:last-child{border-right:none;}
+.ev-meta-k{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--m);margin-bottom:5px;}
+.ev-meta-v{font-size:13px;color:var(--w2);}
+.ev-meta-v a{color:var(--w2);text-decoration:none;}
+.ev-meta-v a:hover{color:var(--w);}
+.ev-desc{font-size:13px;color:var(--m);line-height:1.8;max-width:520px;margin-bottom:28px;}
+.ev-thumbnail-wrap{margin-bottom:36px;}
+.ev-thumb-eye{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--m);margin-bottom:14px;}
+
+/* ── SUPPORT ── */
+.sup-intro{font-size:13px;color:var(--m);line-height:1.85;max-width:500px;margin-bottom:44px;}
+.sup-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--b);border:0.5px solid var(--b);margin-bottom:24px;}
+.sup-card{background:var(--bg);padding:32px 26px;transition:background .2s;}
+.sup-card:hover,.sup-card.feat{background:var(--bg2);}
+.sup-tier{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.18em;text-transform:uppercase;color:var(--m);margin-bottom:12px;}
+.sup-name{font-family:'Instrument Serif',serif;font-size:22px;color:var(--w);letter-spacing:-.01em;margin-bottom:5px;}
+.sup-freq{font-family:'DM Mono',monospace;font-size:10px;color:var(--m);margin-bottom:22px;letter-spacing:.03em;}
+.sup-perks{list-style:none;display:flex;flex-direction:column;gap:8px;margin-bottom:24px;}
+.sup-perks li{font-size:12px;color:var(--m);display:flex;gap:7px;line-height:1.5;}
+.sup-perks li::before{content:'—';font-family:'DM Mono',monospace;font-size:10px;color:var(--b);flex-shrink:0;margin-top:2px;}
+.sup-perks li.on::before{color:var(--w2);}
+.sup-btn{width:100%;padding:9px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.09em;text-transform:uppercase;border:0.5px solid var(--b);color:var(--w2);background:transparent;cursor:pointer;transition:all .2s;}
+.sup-btn:hover{background:var(--w);color:var(--bg);border-color:var(--w);}
+.kofi-note{font-size:11px;color:var(--m);font-family:'DM Mono',monospace;letter-spacing:.03em;padding:14px 18px;border:0.5px solid var(--b);line-height:1.7;}
+
+/* ── CONTACT ── */
+.con-intro{font-size:13px;color:var(--m);line-height:1.85;max-width:460px;margin-bottom:36px;}
+.con-grid{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--b);border:0.5px solid var(--b);margin-bottom:24px;}
+.con-card{background:var(--bg);padding:28px;transition:background .2s;text-decoration:none;display:block;}
+.con-card:hover{background:var(--bg2);}
+.con-ico{font-size:16px;color:var(--m);margin-bottom:12px;}
+.con-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--m);margin-bottom:6px;}
+.con-val{font-size:14px;color:var(--w);}
+.con-note{font-size:11px;color:var(--m);font-family:'DM Mono',monospace;letter-spacing:.03em;padding:14px 18px;border:0.5px solid var(--b);line-height:1.7;}
+
+/* ── MODAL ── */
+.overlay{display:none;position:fixed;inset:0;background:rgba(12,12,12,.9);z-index:500;align-items:center;justify-content:center;}
+.overlay.open{display:flex;}
+.modal{background:var(--bg2);border:0.5px solid rgba(240,237,232,.14);padding:40px;max-width:500px;width:90%;}
+.modal h2{font-family:'Instrument Serif',serif;font-size:30px;letter-spacing:-.02em;color:var(--w);margin-bottom:7px;}
+.modal-sub{font-size:12px;color:var(--m);line-height:1.75;margin-bottom:26px;}
+.modal-lbl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--m);margin-bottom:9px;}
+.modal-opts{display:flex;flex-wrap:wrap;gap:7px;margin-bottom:22px;}
+.m-opt{font-family:'DM Mono',monospace;font-size:10px;padding:5px 12px;border:0.5px solid var(--b);color:var(--m);cursor:pointer;transition:all .2s;letter-spacing:.05em;}
+.m-opt:hover,.m-opt.sel{border-color:rgba(240,237,232,.28);color:var(--w);}
+.modal-acts{display:flex;gap:10px;margin-top:22px;}
+.m-close{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:9px 20px;border:0.5px solid var(--b);color:var(--m);background:transparent;cursor:pointer;transition:all .2s;}
+.m-close:hover{color:var(--w);}
+.m-go{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:9px 20px;background:var(--w);color:var(--bg);cursor:pointer;border:none;transition:all .2s;}
+.m-go:hover{background:var(--w2);}
+
+/* ── LIVE STATS ── */
+.live-stats{display:flex;align-items:center;gap:0;border:0.5px solid rgba(240,237,232,.18);margin-bottom:44px;background:var(--bg2);}
+.ls-cell{flex:1;padding:20px 24px;border-right:0.5px solid var(--b2);}
+.ls-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.15em;text-transform:uppercase;color:var(--m);margin-bottom:6px;}
+.ls-num{font-family:'DM Mono',monospace;font-size:22px;font-weight:300;color:var(--w);letter-spacing:-.01em;}
+.ls-live{padding:20px 20px;display:flex;align-items:center;gap:6px;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;text-transform:uppercase;color:var(--m);flex-shrink:0;}
+.ls-dot{width:6px;height:6px;border-radius:50%;background:var(--w2);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+
+/* ── KPI CTA BUTTON ── */
+.kpi-cta{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.09em;text-transform:uppercase;padding:11px 24px;border:0.5px solid rgba(240,237,232,.22);color:var(--w2);background:transparent;cursor:pointer;transition:all .2s;}
+.kpi-cta:hover{background:var(--w);color:var(--bg);}
+.kpi-delta{font-family:'DM Mono',monospace;font-size:11px;font-weight:400;letter-spacing:.03em;min-height:16px;margin-bottom:2px;}
+.kpi-delta.up{color:#7ecba1;}
+.kpi-delta.down{color:#e07070;}
+.kpi-delta.flat{color:var(--m);}
+
+/* ── FOOTER ── */
+footer{border-top:0.5px solid var(--b);padding:18px 36px;display:flex;align-items:center;justify-content:space-between;}
+footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-spacing:.07em;}
+
+/* ── ANIMATIONS ── */
+@keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+.fi{opacity:0;}
+
+/* ── RESPONSIVE / MOBILE ── */
+@media(max-width:820px){
+  nav{padding:0 16px;height:52px;}
+  .nav-links{gap:10px;}
+  .nav-links a{font-size:9px;letter-spacing:.05em;}
+  .assist-pill{display:none;}
+  .page{padding:70px 16px 56px;}
+  .hero{padding:0 16px;}
+  .hero-h1{font-size:clamp(40px,12vw,68px);}
+  .hero-foot{position:static;text-align:left;margin-top:28px;opacity:1;animation:none;}
+  .about-grid{grid-template-columns:1fr;}
+  .about-photo{width:110px;aspect-ratio:1;}
+  .tl-cols{grid-template-columns:1fr;}
+  .sup-grid{grid-template-columns:1fr;}
+  .con-grid{grid-template-columns:1fr;}
+  .specs-grid{grid-template-columns:1fr;}
+  .specs-grid .spec-row:nth-child(odd){border-right:none;}
+  .c-hero{flex-direction:column;gap:14px;}
+  .c-av{width:60px;height:60px;}
+  .c-name{font-size:30px;}
+  .kpi-grid{grid-template-columns:repeat(2,1fr);}
+  .top-posts{grid-template-columns:1fr;}
+  .roster-grid{grid-template-columns:repeat(2,1fr);}
+  .org-inner{flex-direction:column;gap:10px;align-items:flex-start;}
+  .roles-grid{grid-template-columns:1fr 1fr;}
+  .ev-left{flex-direction:column;align-items:flex-start;gap:4px;}
+  .live-stats{flex-wrap:wrap;}
+  .ls-cell{min-width:90px;}
+  .sh-title{font-size:clamp(26px,8vw,40px);}
+  footer{flex-direction:column;gap:6px;align-items:flex-start;padding:16px;}
+  .events-list .ev-row-item{flex-direction:column;align-items:flex-start;gap:10px;}
+  .sup-grid{grid-template-columns:1fr;}
+}
 </style>
 </head>
 <body>
-<div id="root"></div>
-<script type="text/babel">
-const{useState,useEffect,useMemo,useRef,useCallback}=React;
 
-// ── SUPABASE ───────────────────────────────────────────────
-const SUPABASE_URL="https://ccdogcakiiflzccmwdbu.supabase.co";
-const SUPABASE_KEY="sb_publishable_LdlVCVzbimh-DFY7WYVDbA_v3VWyoxk";
-const sb=supabase.createClient(SUPABASE_URL,SUPABASE_KEY);
-
-// ── CONSTANTS ──────────────────────────────────────────────
-const TABS=[
-  {id:"home",label:"ホーム",icon:"ti-home"},
-  {id:"jobs",label:"案件",icon:"ti-clipboard-list"},
-  {id:"calendar",label:"カレンダー",icon:"ti-calendar"},
-  {id:"finance",label:"財務",icon:"ti-coins"},
-  {id:"analysis",label:"分析",icon:"ti-chart-bar"},
-  {id:"invoice",label:"請求書",icon:"ti-file-invoice"},
-  {id:"contract",label:"受注書",icon:"ti-writing"},
-  {id:"settings",label:"設定",icon:"ti-settings"},
-];
-const STATUS_LIST=["受付","制作中","修正中","納品済","入金済"];
-const STATUS_STYLE={
-  "受付":{bg:"#EFF6FF",text:"#1D4ED8",border:"#BFDBFE"},
-  "制作中":{bg:"#FFF7ED",text:"#C2410C",border:"#FED7AA"},
-  "修正中":{bg:"#FFF1F2",text:"#BE123C",border:"#FECDD3"},
-  "納品済":{bg:"#F0FDF4",text:"#15803D",border:"#BBF7D0"},
-  "入金済":{bg:"#F0FDFA",text:"#0F766E",border:"#99F6E4"},
-};
-const EXPENSE_LEVELS=[
-  {id:1,label:"必要経費",color:"#EF4444"},
-  {id:2,label:"できれば",color:"#F59E0B"},
-  {id:3,label:"任意",color:"#9CA3AF"},
-];
-const PAYMENT_METHODS=["銀行振込","PayPal","PayPay","クレジットカード","現金","その他"];
-const INCOME_WALLS=[
-  {label:"103万円",value:1030000},
-  {label:"130万円",value:1300000},
-  {label:"150万円",value:1500000},
-  {label:"自由設定",value:null},
-];
-const CLIENT_PALETTE=["#60A5FA","#34D399","#F87171","#A78BFA","#FB923C","#38BDF8","#4ADE80","#F472B6"];
-const ADDON_REASONS=["時間超過","素材量過多","仕様変更","修正超過","急ぎ対応","その他"];
-const PASTEL_THEMES=[
-  {id:"default",label:"デフォルト",primary:"#6366F1",bg:"#F8F8FF",card:"#FFFFFF",accent:"#818CF8"},
-  {id:"mint",label:"ミント",primary:"#10B981",bg:"#F0FDF9",card:"#FFFFFF",accent:"#34D399"},
-  {id:"peach",label:"ピーチ",primary:"#F97316",bg:"#FFF7F0",card:"#FFFFFF",accent:"#FB923C"},
-  {id:"lavender",label:"ラベンダー",primary:"#8B5CF6",bg:"#F5F3FF",card:"#FFFFFF",accent:"#A78BFA"},
-  {id:"rose",label:"ローズ",primary:"#E11D48",bg:"#FFF1F2",card:"#FFFFFF",accent:"#FB7185"},
-  {id:"sky",label:"スカイ",primary:"#0EA5E9",bg:"#F0F9FF",card:"#FFFFFF",accent:"#38BDF8"},
-];
-const TOOLTIPS={
-  workHours:"1日に確保できる作業時間。案件登録時に締切まで間に合うかの計算に使用されます。",
-  monthlyLimit:"受注できる月間案件数の上限。超えそうなときはホームでアラートが出ます。",
-  incomeLimit:"副業の年収上限（103万・130万など）を設定。収益がこの額に近づくとアラートが出ます。",
-  alertHourlyRate:"この時給を下回りそうな案件があると、アラートと改善アドバイスを表示します。",
-  jobType:"種別ごとに標準工数と標準単価を設定。時給換算も自動計算されます。",
-  paymentDelay:"このクライアントで過去に入金遅延があった場合にチェック。次回から前払い推奨アラートが出ます。",
-  addOnPrice:"基本料金に追加する費用。時間超過・仕様変更などの理由を選んで請求書に反映できます。",
-};
-const DEFAULT_CHECKLIST=[
-  "素材・仕様確認済み","契約書（受注書）発行済み","受注書をクライアントへ送付済み",
-  "前払い受領済み（前払いの場合）","制作着手","初稿・サンプル送付",
-  "修正対応完了","最終納品","請求書発行","入金確認済み",
-];
-const INIT_SETTINGS={
-  workHoursPerDay:4,monthlyJobLimit:20,incomeLimitType:"103万円",
-  incomeLimit:1030000,alertHourlyRate:1000,calendarView:"bar",
-  calendarDateType:"deadline",fontSize:14,themeId:"default",
-  jobTypes:[
-    {id:1,name:"動画編集",hours:6,defaultPrice:15000},
-    {id:2,name:"サムネイル制作",hours:1.5,defaultPrice:3000},
-    {id:3,name:"イラスト",hours:4,defaultPrice:10000},
-  ],
-};
-
-// ── UTILS ──────────────────────────────────────────────────
-const yen=n=>"¥"+Math.round(n||0).toLocaleString("ja-JP");
-const toDay=()=>new Date().toISOString().slice(0,10);
-const daysUntil=d=>{if(!d)return 999;return Math.ceil((new Date(d)-new Date(new Date().toDateString()))/86400000);};
-const totalPrice=j=>(j.basePrice||0)+(j.addOns||[]).reduce((s,a)=>s+(Number(a.amount)||0),0);
-const hrRate=(price,hours)=>hours>0?Math.round(price/hours):0;
-const thisMonth=()=>{const n=new Date();return`${n.getFullYear()}-${String(n.getMonth()+1).padStart(2,"0")}`;};
-const thisYear=()=>String(new Date().getFullYear());
-const uid=()=>localStorage.getItem("fk_uid")||(()=>{const id="user_"+Math.random().toString(36).slice(2);localStorage.setItem("fk_uid",id);return id;})();
-
-// ── SUPABASE SYNC ──────────────────────────────────────────
-async function dbLoad(table,userId){
-  const{data,error}=await sb.from(table).select("data").eq("user_id",userId).single();
-  if(error||!data)return null;
-  return data.data;
-}
-async function dbSave(table,userId,payload){
-  const{data:existing}=await sb.from(table).select("id").eq("user_id",userId).single();
-  if(existing){
-    await sb.from(table).update({data:payload,updated_at:new Date().toISOString()}).eq("user_id",userId);
-  }else{
-    await sb.from(table).insert({user_id:userId,data:payload});
-  }
-}
-
-// ── UI PRIMITIVES ──────────────────────────────────────────
-function Tooltip({text,children}){
-  const[show,setShow]=useState(false);
-  const ref=useRef();
-  useEffect(()=>{
-    function h(e){if(ref.current&&!ref.current.contains(e.target))setShow(false);}
-    document.addEventListener("mousedown",h);return()=>document.removeEventListener("mousedown",h);
-  },[]);
-  return(
-    <span ref={ref} style={{position:"relative",display:"inline-flex",alignItems:"center"}}>
-      {children}
-      <span onMouseEnter={()=>setShow(true)} onMouseLeave={()=>setShow(false)} onClick={()=>setShow(s=>!s)}
-        style={{display:"inline-flex",alignItems:"center",justifyContent:"center",width:16,height:16,borderRadius:"50%",background:"#F1F5F9",color:"#64748B",fontSize:10,cursor:"help",marginLeft:4,flexShrink:0,border:"1px solid #E2E8F0",userSelect:"none",fontWeight:700}}>?</span>
-      {show&&<span style={{position:"absolute",bottom:"calc(100% + 6px)",left:0,zIndex:9999,background:"#1E293B",color:"#F1F5F9",fontSize:12,padding:"8px 12px",borderRadius:8,whiteSpace:"pre-wrap",maxWidth:220,lineHeight:1.6,boxShadow:"0 4px 20px rgba(0,0,0,0.3)",pointerEvents:"none",minWidth:160}}>
-        {text}<span style={{position:"absolute",top:"100%",left:12,border:"5px solid transparent",borderTopColor:"#1E293B"}}/>
-      </span>}
-    </span>
-  );
-}
-function Badge({status}){
-  const s=STATUS_STYLE[status]||{bg:"#F3F4F6",text:"#374151",border:"#D1D5DB"};
-  return<span style={{background:s.bg,color:s.text,border:`1px solid ${s.border}`,borderRadius:20,padding:"2px 10px",fontSize:11,fontWeight:700,whiteSpace:"nowrap"}}>{status}</span>;
-}
-function Card({children,style,accent}){
-  return<div style={{background:"var(--clr-card)",border:`1.5px solid ${accent||"#E2E8F0"}`,borderRadius:12,padding:"1rem 1.125rem",...style}}>{children}</div>;
-}
-function MetricCard({label,value,sub,warn,tip}){
-  return(
-    <div style={{background:warn?"#FFF1F2":"var(--clr-bg)",border:`1.5px solid ${warn?"#FECDD3":"#E2E8F0"}`,borderRadius:10,padding:"0.875rem 1rem"}}>
-      <div style={{fontSize:11,color:"#64748B",marginBottom:4,display:"flex",alignItems:"center",gap:2}}>{tip?<Tooltip text={tip}>{label}</Tooltip>:label}</div>
-      <div style={{fontSize:20,fontWeight:700,color:warn?"#BE123C":"#1E293B",lineHeight:1.2}}>{value}</div>
-      {sub&&<div style={{fontSize:11,color:warn?"#FB7185":"#64748B",marginTop:2}}>{sub}</div>}
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav>
+  <div class="nav-logo" onclick="go('home')">edittto<span>.editor</span></div>
+  <ul class="nav-links">
+    <li><a id="nl-home"    class="active" onclick="go('home')">Home</a></li>
+    <li><a id="nl-about"   onclick="go('about')">About</a></li>
+    <li><a id="nl-roster"  onclick="go('roster')">Roster</a></li>
+    <li><a id="nl-events"  onclick="go('events')">Events</a></li>
+    <li><a id="nl-support" onclick="go('support')">Support</a></li>
+    <li><a id="nl-contact" onclick="go('contact')">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('en',this)">EN</button>
+      <button class="lang-btn"        onclick="setLang('jp',this)">JP</button>
     </div>
-  );
-}
-function ProgressBar({value,max,label,color}){
-  const pct=Math.min(100,max>0?Math.round((value/max)*100):0);
-  const c=pct>=90?"#EF4444":pct>=70?"#F59E0B":(color||"var(--clr-primary)");
-  return(
+    <button class="assist-pill" onclick="openModal()">Looking for assistant ↗</button>
+  </div>
+</nav>
+
+<!-- ═══════════════ HOME ═══════════════ -->
+<div class="page active" id="pg-home">
+  <div class="hero">
+    <p class="hero-eye" data-en="Video Editor · Translator · OW Community" data-jp="動画編集者 · 翻訳 · OWコミュニティ">Video Editor · Translator · OW Community</p>
+    <h1 class="hero-h1">edittto<br><em>the editor.</em></h1>
+    <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--m);letter-spacing:.06em;margin-bottom:20px;opacity:0;animation:fu .7s forwards .3s;">Adobe Premiere Pro · Photoshop</div>
+    <p class="hero-p" data-en="Self-taught editor based in Japan. Started editing as a challenge — something new, something I actually love. It turned into a real side career in the OW community." data-jp="日本を拠点とする独学の動画編集者新しい挑戦として編集を始め、本当に好きなことに気づきましたOWコミュニティでの副業として成長しています">Self-taught editor based in Japan. Started editing as a challenge — something new, something I actually love. It turned into a real side career in the OW community.</p>
+    <div class="hero-cta">
+      <button class="btn btn-w" onclick="go('roster')" data-en="See my clients" data-jp="クライアントを見る">See my clients</button>
+      <button class="btn btn-o" onclick="go('contact')" data-en="Get in touch" data-jp="連絡する">Get in touch</button>
+    </div>
+    <div class="hero-foot">
+      <div class="hero-foot-line" data-en="EN ↔ JP Translation" data-jp="英日翻訳">EN ↔ JP Translation</div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<div class="page" id="pg-about">
+  <div class="sh fi">
+    <p class="sh-eye" data-en="About me" data-jp="自己紹介">About me</p>
+    <h2 class="sh-title" data-en="Climbing the<br><em>editing rank.</em>" data-jp="編集の<br><em>ランクを上げ中</em>">Climbing the<br><em>editing rank.</em></h2>
+  </div>
+  <div class="about-grid fi">
     <div>
-      <div style={{display:"flex",justifyContent:"space-between",fontSize:12,color:"#64748B",marginBottom:4}}>
-        <span>{label}</span><span style={{color:pct>=90?"#EF4444":"#64748B",fontWeight:pct>=90?700:400}}>{pct}%</span>
-      </div>
-      <div style={{height:7,background:"#E2E8F0",borderRadius:4,overflow:"hidden"}}>
-        <div style={{height:"100%",width:`${pct}%`,background:c,borderRadius:4,transition:"width 0.5s"}}/>
+      <div class="about-photo">
+        <!-- PLACEHOLDER: replace src with your actual photo URL or local file -->
+        <img src="https://unavatar.io/twitter/edittto" alt="edittto" onerror="this.parentElement.style.background='var(--bg3)'">
       </div>
     </div>
-  );
-}
-function Modal({title,onClose,children,wide}){
-  useEffect(()=>{document.body.style.overflow="hidden";return()=>{document.body.style.overflow="";};},[]);
-  return(
-    <div className="modal-wrap" onClick={e=>e.target===e.currentTarget&&onClose()}
-      style={{position:"fixed",inset:0,zIndex:500,background:"rgba(0,0,0,0.55)",display:"flex",alignItems:"center",justifyContent:"center",padding:16}}>
-      <div className="modal-inner" style={{background:"#FFFFFF",borderRadius:16,border:"1.5px solid #E2E8F0",padding:"1.25rem",width:"100%",maxWidth:wide?660:520,maxHeight:"88vh",overflowY:"auto",boxShadow:"0 24px 48px rgba(0,0,0,0.2)"}}>
-        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"1rem"}}>
-          <h3 style={{margin:0,fontSize:16,fontWeight:700,color:"#1E293B"}}>{title}</h3>
-          <button onClick={onClose} style={{border:"none",background:"#F1F5F9",color:"#64748B",width:28,height:28,borderRadius:"50%",display:"flex",alignItems:"center",justifyContent:"center",fontSize:18,padding:0}}>×</button>
-        </div>
-        <div style={{color:"#334155"}}>{children}</div>
-      </div>
-    </div>
-  );
-}
-function Confirm({message,onConfirm,onCancel}){
-  return(
-    <div style={{position:"fixed",inset:0,zIndex:600,background:"rgba(0,0,0,0.55)",display:"flex",alignItems:"center",justifyContent:"center",padding:16}}>
-      <div style={{background:"#fff",borderRadius:16,border:"1.5px solid #E2E8F0",padding:"1.5rem",maxWidth:360,width:"100%",boxShadow:"0 24px 48px rgba(0,0,0,0.2)"}}>
-        <div style={{fontSize:14,color:"#1E293B",marginBottom:"1.25rem",lineHeight:1.7}}>{message}</div>
-        <div style={{display:"flex",gap:8,justifyContent:"flex-end"}}>
-          <button onClick={onCancel}>キャンセル</button>
-          <button onClick={onConfirm} style={{background:"#EF4444",color:"#fff",border:"none",padding:"6px 18px",borderRadius:8,fontWeight:700}}>削除する</button>
-        </div>
-      </div>
-    </div>
-  );
-}
-function Lbl({children,tip,required}){
-  return(
-    <div style={{fontSize:12,fontWeight:600,color:"#64748B",marginBottom:5,display:"flex",alignItems:"center",gap:2}}>
-      {required&&<span style={{color:"#EF4444",marginRight:2}}>*</span>}
-      {tip?<Tooltip text={tip}>{children}</Tooltip>:children}
-    </div>
-  );
-}
-function SyncBadge({syncing,lastSync}){
-  return(
-    <div style={{display:"flex",alignItems:"center",gap:5,fontSize:11,color:"#94A3B8"}}>
-      {syncing
-        ?<><i className="ti ti-refresh" style={{fontSize:13,animation:"spin 1s linear infinite"}}/> 同期中...</>
-        :lastSync
-          ?<><i className="ti ti-cloud-check" style={{fontSize:13,color:"#34D399"}}/> {lastSync}</>
-          :<><i className="ti ti-cloud-off" style={{fontSize:13}}/> 未同期</>
-      }
-      <style>{`@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}`}</style>
-    </div>
-  );
-}
-
-// ── HOME ───────────────────────────────────────────────────
-function HomeTab({jobs,clients,settings,expenses}){
-  const[compact,setCompact]=useState(false);
-  const tm=thisMonth(),ty=thisYear();
-  const gc=id=>clients.find(c=>c.id===id);
-  const paid=jobs.filter(j=>["納品済","入金済"].includes(j.status));
-  const incM=paid.filter(j=>j.receiveDate?.startsWith(tm)).reduce((s,j)=>s+totalPrice(j),0);
-  const incY=paid.filter(j=>j.receiveDate?.startsWith(ty)).reduce((s,j)=>s+totalPrice(j),0);
-  const jobsM=jobs.filter(j=>j.receiveDate?.startsWith(tm)).length;
-  const inProg=jobs.filter(j=>["受付","制作中","修正中"].includes(j.status));
-  const urgent=inProg.filter(j=>daysUntil(j.deadline)<=3);
-  const hrAlerts=inProg.filter(j=>j.actualHours>0&&hrRate(totalPrice(j),j.actualHours)<settings.alertHourlyRate);
-  const reqExp=expenses.filter(e=>e.level===1&&e.type==="monthly").reduce((s,e)=>s+Number(e.amount),0);
-  return(
     <div>
-      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"1rem"}}>
-        <h2 style={{fontSize:18,fontWeight:700,color:"#1E293B"}}>ダッシュボード</h2>
-        <button onClick={()=>setCompact(c=>!c)} style={{fontSize:12,padding:"4px 12px"}}>{compact?"詳細表示":"コンパクト"}</button>
+      <div class="about-name">edittto</div>
+      <div class="about-handle">@edittto</div>
+      <div style="font-family:'DM Mono',monospace;font-size:11px;color:var(--m);letter-spacing:.06em;margin-bottom:16px;">Adobe Premiere Pro · Photoshop</div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:22px;">
+        <li style="font-size:13px;color:var(--m);display:flex;gap:10px;line-height:1.5;"><span style="color:var(--m2);font-family:'DM Mono',monospace;font-size:10px;margin-top:2px;flex-shrink:0;">—</span><span data-en="Self-taught video editor based in Japan — started as a personal challenge, grew into a side career." data-jp="日本在住の独学動画編集者個人的な挑戦として始め、副業に成長しました">Self-taught video editor based in Japan — started as a personal challenge, grew into a side career.</span></li>
+        <li style="font-size:13px;color:var(--m);display:flex;gap:10px;line-height:1.5;"><span style="color:var(--m2);font-family:'DM Mono',monospace;font-size:10px;margin-top:2px;flex-shrink:0;">—</span><span data-en="Staff at <strong style='color:var(--w2);font-weight:400;cursor:pointer;' onclick='go(&quot;divine&quot;)'>99Divine</strong> — OW organization. Content Team Lead, Editor, Graphic Designer, X Manager." data-jp="<strong style='color:var(--w2);font-weight:400;cursor:pointer;' onclick='go(&quot;divine&quot;)'>99Divine</strong> スタッフ — OWチームコンテンツリード・編集・グラフィックデザイン・X運用を担当">Staff at <strong style="color:var(--w2);font-weight:400;cursor:pointer;" onclick="go('divine')">99Divine</strong> — OW organization. Content Team Lead, Editor, Graphic Designer, X Manager.</span></li>
+        <li style="font-size:13px;color:var(--m);display:flex;gap:10px;line-height:1.5;"><span style="color:var(--m2);font-family:'DM Mono',monospace;font-size:10px;margin-top:2px;flex-shrink:0;">—</span><span data-en="Family first, the rest comes second." data-jp="家族最優先、あとは全部その次"><strong style="color:var(--w2);font-weight:400;">Family first, the rest comes second.</strong></span></li>
+        <li style="font-size:13px;color:var(--m);display:flex;gap:10px;line-height:1.5;"><span style="color:var(--m2);font-family:'DM Mono',monospace;font-size:10px;margin-top:2px;flex-shrink:0;">—</span><span data-en="EN ↔ JP translation across all work — subtitles, captions, channel localisation." data-jp="全業務で英日翻訳を担当 — 字幕、キャプション、チャンネルのローカライズ">EN ↔ JP translation across all work — subtitles, captions, channel localisation.</span></li>
+        <li style="font-size:13px;color:var(--m);display:flex;gap:10px;line-height:1.5;"><span style="color:var(--m2);font-family:'DM Mono',monospace;font-size:10px;margin-top:2px;flex-shrink:0;">—</span><span data-en="Specialised in Overwatch content — streaming and competitive." data-jp="ストリーミング・競技両方のOWコンテンツを専門としています">Specialised in Overwatch content — streaming and competitive.</span></li>
+      </ul>
+      <div class="skill-wrap">
+        <span class="sk" data-en="Video Editing" data-jp="動画編集">Video Editing</span>
+        <span class="sk" data-en="Channel Management" data-jp="チャンネル管理">Channel Management</span>
+        <span class="sk" data-en="Graphic Design" data-jp="グラフィックデザイン">Graphic Design</span>
+        <span class="sk">EN ↔ JP</span>
+        <span class="sk" data-en="Content Strategy" data-jp="コンテンツ戦略">Content Strategy</span>
+        <span class="sk" data-en="X Management" data-jp="X運用">X Management</span>
+        <span class="sk" data-en="Subtitles & Captions" data-jp="字幕・キャプション">Subtitles & Captions</span>
       </div>
-      {urgent.length>0&&<div style={{background:"#FFF1F2",border:"1.5px solid #FECDD3",borderRadius:10,padding:"10px 14px",marginBottom:10,fontSize:13,color:"#BE123C",display:"flex",gap:8}}>
-        <i className="ti ti-bell" style={{fontSize:16,flexShrink:0,marginTop:1}}/>
-        <div><strong>締め切り間近：</strong>{urgent.map(j=>`${gc(j.clientId)?.name}「${j.type}」あと${daysUntil(j.deadline)}日`).join("　/　")}</div>
-      </div>}
-      {hrAlerts.length>0&&<div style={{background:"#FFF7ED",border:"1.5px solid #FED7AA",borderRadius:10,padding:"10px 14px",marginBottom:10,fontSize:13,color:"#C2410C",display:"flex",gap:8}}>
-        <i className="ti ti-alert-triangle" style={{fontSize:16,flexShrink:0,marginTop:1}}/>
-        <div><strong>時給アラート：</strong>{hrAlerts.map(j=>`${gc(j.clientId)?.name} 現在${yen(hrRate(totalPrice(j),j.actualHours))}/h`).join(" / ")}　目標{yen(settings.alertHourlyRate)}/h 未満</div>
-      </div>}
-      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(130px,1fr))",gap:10,marginBottom:"1rem"}}>
-        <MetricCard label="今月収益" value={yen(incM)} sub={`年間 ${yen(incY)}`}/>
-        <MetricCard label="今月案件数" value={`${jobsM}件`} sub={`上限まで${settings.monthlyJobLimit-jobsM}件`} warn={jobsM>=settings.monthlyJobLimit}/>
-        <MetricCard label="進行中" value={`${inProg.length}件`}/>
-        <MetricCard label="手取り試算" value={yen(incM-reqExp)} sub="収益－必要経費"/>
+      <div class="sns-col">
+        <a class="sns-a" href="https://x.com/edittto" target="_blank"><span class="sns-ico">𝕏</span>@edittto</a>
+        <a class="sns-a" href="mailto:edittto.editor@gmail.com"><span class="sns-ico">✉</span>edittto.editor@gmail.com</a>
+        <a class="sns-a" href="#" onclick="go('support');return false;"><span class="sns-ico">♡</span><span data-en="Support me" data-jp="サポートする">Support me</span></a>
+        <!-- PLACEHOLDER: replace # with your Amazon Wishlist URL -->
+        <a class="sns-a" href="#" target="_blank"><span class="sns-ico">★</span><span data-en="Amazon Wishlist" data-jp="Amazonウィッシュリスト">Amazon Wishlist</span></a>
       </div>
-      {!compact&&<div style={{display:"flex",flexDirection:"column",gap:8,marginBottom:"1rem"}}>
-        <ProgressBar value={incY} max={settings.incomeLimit} label={`年収益上限 (${settings.incomeLimitType}) ${yen(settings.incomeLimit)}`}/>
-        <ProgressBar value={jobsM} max={settings.monthlyJobLimit} label={`月間案件数 ${jobsM}/${settings.monthlyJobLimit}件`} color="#60A5FA"/>
-      </div>}
-      <Card>
-        <div style={{fontSize:14,fontWeight:700,marginBottom:10,color:"#1E293B"}}>進行中の案件</div>
-        {inProg.length===0?<div style={{color:"#64748B",fontSize:13}}>進行中の案件はありません</div>:
-        <div style={{display:"flex",flexDirection:"column",gap:7}}>
-          {inProg.map(j=>{
-            const cl=gc(j.clientId),tp=totalPrice(j);
-            const rate=j.actualHours>0?hrRate(tp,j.actualHours):null;
-            const rw=rate!==null&&rate<settings.alertHourlyRate;
-            return(<div key={j.id} style={{display:"flex",alignItems:"center",gap:8,padding:"8px 10px",background:"var(--clr-bg)",borderRadius:8,border:`1.5px solid ${rw?"#FED7AA":"#E2E8F0"}`,flexWrap:"wrap"}}>
-              <div style={{width:8,height:8,borderRadius:"50%",background:cl?.color||"#ccc",flexShrink:0}}/>
-              <Badge status={j.status}/>
-              <span style={{flex:1,fontSize:13,fontWeight:600,minWidth:70}}>{cl?.name}</span>
-              {!compact&&<span style={{fontSize:12,color:"#64748B"}}>{j.type}</span>}
-              <span style={{fontSize:12,fontWeight:600}}>{yen(tp)}</span>
-              {rate!==null&&<span style={{fontSize:11,color:rw?"#C2410C":"#64748B",background:rw?"#FFF7ED":"transparent",padding:rw?"1px 6px":0,borderRadius:4}}>{yen(rate)}/h</span>}
-              <span style={{fontSize:12,color:daysUntil(j.deadline)<=3?"#EF4444":"#64748B"}}>締切{j.deadline}({daysUntil(j.deadline)}日後)</span>
-            </div>);
-          })}
-        </div>}
-      </Card>
     </div>
-  );
-}
-
-// ── JOB MODAL ──────────────────────────────────────────────
-function JobModal({job,clients,settings,onSave,onAddClient,onClose}){
-  const blank={clientId:clients[0]?.id||null,type:settings.jobTypes[0]?.name||"",status:"受付",
-    basePrice:settings.jobTypes[0]?.defaultPrice||0,addOns:[],receiveDate:toDay(),deadline:"",
-    startDate:toDay(),targetDate:"",estimatedHours:settings.jobTypes[0]?.hours||1,
-    actualHours:0,paymentType:"後払い",notes:"",
-    checklist:DEFAULT_CHECKLIST.map((t,i)=>({id:i,text:t,done:false})),invoiced:false,contracted:false};
-  const[form,setForm]=useState(job||blank);
-  const[newCk,setNewCk]=useState("");
-  const[addingCl,setAddingCl]=useState(false);
-  const[newClName,setNewClName]=useState("");
-  const selType=settings.jobTypes.find(t=>t.name===form.type);
-  const selCl=clients.find(c=>c.id===form.clientId);
-  const tp=totalPrice(form);
-  const rate=Number(form.estimatedHours)>0?hrRate(tp,Number(form.estimatedHours)):0;
-  const actRate=Number(form.actualHours)>0?hrRate(tp,Number(form.actualHours)):0;
-  const rw=rate>0&&rate<settings.alertHourlyRate;
-  const arw=actRate>0&&actRate<settings.alertHourlyRate;
-  const daysAvail=form.deadline?daysUntil(form.deadline)*settings.workHoursPerDay:null;
-  const hw=daysAvail!==null&&daysAvail<Number(form.estimatedHours);
-  function hType(name){const t=settings.jobTypes.find(x=>x.name===name);setForm(f=>({...f,type:name,estimatedHours:t?.hours||f.estimatedHours,basePrice:t?.defaultPrice||f.basePrice}));}
-  function addAddon(){setForm(f=>({...f,addOns:[...f.addOns,{id:Date.now(),reason:"その他",customReason:"",amount:0}]}));}
-  function upAddon(id,field,val){setForm(f=>({...f,addOns:f.addOns.map(a=>a.id===id?{...a,[field]:val}:a)}));}
-  function rmAddon(id){setForm(f=>({...f,addOns:f.addOns.filter(a=>a.id!==id)}));}
-  function togCk(id){setForm(f=>({...f,checklist:f.checklist.map(c=>c.id===id?{...c,done:!c.done}:c)}));}
-  function addCk(){if(!newCk.trim())return;setForm(f=>({...f,checklist:[...f.checklist,{id:Date.now(),text:newCk.trim(),done:false}]}));setNewCk("");}
-  function rmCk(id){setForm(f=>({...f,checklist:f.checklist.filter(c=>c.id!==id)}));}
-  function save(){if(!form.clientId||!form.deadline)return alert("クライアントと締め切り日は必須です");
-    onSave({...form,basePrice:Number(form.basePrice),estimatedHours:Number(form.estimatedHours),actualHours:Number(form.actualHours)});onClose();}
-  const inp={width:"100%",boxSizing:"border-box"};
-  const sect={background:"#F8FAFC",borderRadius:10,border:"1.5px solid #E2E8F0",padding:"12px 14px"};
-  return(
-    <div style={{display:"flex",flexDirection:"column",gap:12}}>
-      {hw&&<div style={{background:"#FFF1F2",border:"1.5px solid #FECDD3",borderRadius:8,padding:"8px 12px",fontSize:13,color:"#BE123C"}}>
-        <i className="ti ti-alert-triangle" style={{marginRight:6}}/>作業可能時間が不足しています（必要:{form.estimatedHours}h / 確保可能:{daysAvail?.toFixed(1)}h）
-      </div>}
-      {selCl?.paymentDelay&&<div style={{background:"#FFF7ED",border:"1.5px solid #FED7AA",borderRadius:8,padding:"8px 12px",fontSize:13,color:"#C2410C"}}>
-        <i className="ti ti-shield-exclamation" style={{marginRight:6}}/>このクライアントは過去に入金遅延があります。前払いを推奨します。
-      </div>}
-      <div className="grid-2" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
-        <div>
-          <Lbl required>クライアント</Lbl>
-          <select value={form.clientId||""} onChange={e=>setForm(f=>({...f,clientId:Number(e.target.value)}))} style={inp}>
-            <option value="">選択</option>
-            {clients.map(c=><option key={c.id} value={c.id}>{c.name}{c.paymentDelay?" ⚠":""}</option>)}
-          </select>
-          <button onClick={()=>setAddingCl(true)} style={{fontSize:11,marginTop:4,padding:"2px 8px",color:"var(--clr-primary)",borderColor:"var(--clr-primary)",background:"transparent"}}>+ 新規クライアント</button>
-        </div>
-        <div><Lbl tip={TOOLTIPS.jobType}>作業種別</Lbl><select value={form.type} onChange={e=>hType(e.target.value)} style={inp}>{settings.jobTypes.map(t=><option key={t.id}>{t.name}</option>)}</select></div>
-      </div>
-      <div className="grid-3" style={{display:"grid",gridTemplateColumns:"1fr 1fr 1fr",gap:10}}>
-        <div><Lbl>ステータス</Lbl><select value={form.status} onChange={e=>setForm(f=>({...f,status:e.target.value}))} style={inp}>{STATUS_LIST.map(s=><option key={s}>{s}</option>)}</select></div>
-        <div><Lbl>支払方法</Lbl><select value={form.paymentType} onChange={e=>setForm(f=>({...f,paymentType:e.target.value}))} style={inp}><option>前払い</option><option>後払い</option></select></div>
-        <div><Lbl>推定工数(h)</Lbl><input type="number" value={form.estimatedHours} onChange={e=>setForm(f=>({...f,estimatedHours:e.target.value}))} style={inp} step="0.5"/></div>
-      </div>
-      <div className="grid-2" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
-        <div><Lbl>受付日</Lbl><input type="date" value={form.receiveDate} onChange={e=>setForm(f=>({...f,receiveDate:e.target.value}))} style={inp}/></div>
-        <div><Lbl required>締め切り日</Lbl><input type="date" value={form.deadline} onChange={e=>setForm(f=>({...f,deadline:e.target.value}))} style={inp}/></div>
-        <div><Lbl>取り掛かり日</Lbl><input type="date" value={form.startDate} onChange={e=>setForm(f=>({...f,startDate:e.target.value}))} style={inp}/></div>
-        <div><Lbl>目標納品日</Lbl><input type="date" value={form.targetDate} onChange={e=>setForm(f=>({...f,targetDate:e.target.value}))} style={inp}/></div>
-      </div>
-      <div style={sect}>
-        <div style={{fontSize:13,fontWeight:700,color:"#334155",marginBottom:8}}>料金設定</div>
-        <div className="grid-2" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:8}}>
+  </div>
+  <div class="specs-block fi">
+    <!-- 99Divine org banner -->
+    <div class="org-block fi" onclick="goClient('divine')" style="cursor:pointer;margin-bottom:36px;">
+      <div class="org-inner">
+        <div class="org-left">
+          <div class="org-av"><img src="https://unavatar.io/youtube/99DIVINE-z2c6t" alt="99Divine" onerror="this.parentElement.style.background='var(--bg3)'"></div>
           <div>
-            <Lbl>基本料金</Lbl>
-            <input type="number" value={form.basePrice} onChange={e=>setForm(f=>({...f,basePrice:e.target.value}))} style={inp}/>
-            {selType&&form.basePrice!=selType.defaultPrice&&<div style={{fontSize:11,color:form.basePrice>selType.defaultPrice?"#15803D":"#BE123C",marginTop:3}}>標準{yen(selType.defaultPrice)}から{form.basePrice>selType.defaultPrice?"+":""}{yen(form.basePrice-selType.defaultPrice)}</div>}
+            <div class="org-label" data-en="Where I belong" data-jp="所属先">Where I belong</div>
+            <div class="org-name">99Divine</div>
+            <div class="org-role" data-en="Staff — Content Team Lead · Editor · Graphic Designer · X Manager" data-jp="スタッフ — コンテンツリード · 編集 · グラフィックデザイン · X運用">Staff — Content Team Lead · Editor · Graphic Designer · X Manager</div>
           </div>
-          <div><Lbl>実績工数(h)</Lbl><input type="number" value={form.actualHours} onChange={e=>setForm(f=>({...f,actualHours:e.target.value}))} style={inp} step="0.5"/></div>
         </div>
-        <Lbl tip={TOOLTIPS.addOnPrice}>追加料金</Lbl>
-        {form.addOns.map(a=>(
-          <div key={a.id} style={{display:"grid",gridTemplateColumns:"1fr 1fr 80px 28px",gap:6,marginBottom:6,alignItems:"center"}}>
-            <select value={a.reason} onChange={e=>upAddon(a.id,"reason",e.target.value)} style={{fontSize:12,padding:"5px 6px",borderRadius:6,border:"1.5px solid #E2E8F0"}}>{ADDON_REASONS.map(r=><option key={r}>{r}</option>)}</select>
-            <input placeholder="詳細" value={a.customReason} onChange={e=>upAddon(a.id,"customReason",e.target.value)} style={{fontSize:12,padding:"5px 8px"}}/>
-            <input type="number" value={a.amount} onChange={e=>upAddon(a.id,"amount",e.target.value)} style={{fontSize:12,padding:"5px 8px"}} placeholder="金額"/>
-            <button onClick={()=>rmAddon(a.id)} style={{padding:"4px",color:"#EF4444",border:"1px solid #FECDD3",background:"#FFF1F2",borderRadius:6,fontWeight:700,fontSize:14}}>×</button>
-          </div>
-        ))}
-        <button onClick={addAddon} style={{fontSize:12,padding:"3px 10px",color:"var(--clr-primary)",borderColor:"var(--clr-primary)",background:"transparent"}}>+ 追加料金を追加</button>
-        <div style={{marginTop:10,paddingTop:10,borderTop:"1px solid #E2E8F0",display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-          <span style={{fontSize:13,color:"#64748B"}}>請求合計</span>
-          <span style={{fontSize:20,fontWeight:700,color:"#1E293B"}}>{yen(tp)}</span>
-        </div>
-        {rate>0&&<div style={{fontSize:12,color:rw?"#C2410C":"#64748B",marginTop:3}}>推定時給: {yen(rate)}/h{rw?` ⚠ 目標${yen(settings.alertHourlyRate)}/h未満`:""}</div>}
-        {actRate>0&&<div style={{fontSize:12,color:arw?"#C2410C":"#15803D",marginTop:2}}>実績時給: {yen(actRate)}/h</div>}
-        {(rw||arw)&&<div style={{fontSize:12,color:"#92400E",background:"#FFFBEB",borderRadius:6,padding:"6px 10px",marginTop:6,lineHeight:1.7}}>
-          💡 目標時給{yen(settings.alertHourlyRate)}/hにするには請求を<strong>{yen(settings.alertHourlyRate*Number(form.actualHours||form.estimatedHours))}</strong>以上にするか、追加料金で調整してください。
-        </div>}
+        <div class="org-arrow">↗</div>
       </div>
-      <div style={sect}>
-        <div style={{fontSize:13,fontWeight:700,color:"#334155",marginBottom:8,display:"flex",alignItems:"center",gap:4}}>
-          チェックリスト <span style={{fontSize:12,color:"#64748B",fontWeight:400}}>{form.checklist.filter(c=>c.done).length}/{form.checklist.length}</span>
-        </div>
-        {form.checklist.map(c=>(
-          <div key={c.id} style={{display:"flex",alignItems:"center",gap:8,marginBottom:5}}>
-            <input type="checkbox" checked={c.done} onChange={()=>togCk(c.id)} style={{width:15,height:15,accentColor:"var(--clr-primary)",flexShrink:0}}/>
-            <span style={{flex:1,fontSize:13,textDecoration:c.done?"line-through":"none",color:c.done?"#94A3B8":"#334155"}}>{c.text}</span>
-            <button onClick={()=>rmCk(c.id)} style={{fontSize:12,padding:"1px 6px",color:"#94A3B8",border:"none",background:"none"}}>×</button>
-          </div>
-        ))}
-        <div style={{display:"flex",gap:6,marginTop:6}}>
-          <input value={newCk} onChange={e=>setNewCk(e.target.value)} onKeyDown={e=>e.key==="Enter"&&addCk()} placeholder="項目を追加..." style={{flex:1,fontSize:12}}/>
-          <button onClick={addCk} style={{fontSize:12,padding:"4px 10px"}}>追加</button>
-        </div>
-      </div>
-      <div><Lbl>メモ</Lbl><textarea value={form.notes} onChange={e=>setForm(f=>({...f,notes:e.target.value}))} style={{width:"100%",height:56,boxSizing:"border-box",resize:"vertical",fontSize:13}}/></div>
-      <div style={{display:"flex",gap:8,justifyContent:"flex-end",borderTop:"1px solid #E2E8F0",paddingTop:12}}>
-        <button onClick={onClose}>キャンセル</button>
-        <button onClick={save} style={{background:"var(--clr-primary)",color:"#fff",border:"none",borderRadius:8,padding:"7px 22px",fontWeight:700,cursor:"pointer"}}>保存する</button>
-      </div>
-      {addingCl&&<Modal title="新規クライアント" onClose={()=>setAddingCl(false)}>
-        <div style={{display:"flex",flexDirection:"column",gap:10}}>
-          <div><Lbl>クライアント名</Lbl><input value={newClName} onChange={e=>setNewClName(e.target.value)} style={{width:"100%",boxSizing:"border-box"}}/></div>
-          <div style={{display:"flex",gap:8,justifyContent:"flex-end"}}>
-            <button onClick={()=>setAddingCl(false)}>キャンセル</button>
-            <button onClick={()=>{if(newClName.trim()){const nc={id:Date.now(),name:newClName.trim(),paymentMethod:"銀行振込",paymentDelay:false,color:CLIENT_PALETTE[Math.floor(Math.random()*CLIENT_PALETTE.length)],note:""};onAddClient(nc);setForm(f=>({...f,clientId:nc.id}));setAddingCl(false);}}} style={{background:"var(--clr-primary)",color:"#fff",border:"none",borderRadius:8,padding:"6px 18px",fontWeight:700,cursor:"pointer"}}>追加</button>
-          </div>
-        </div>
-      </Modal>}
     </div>
-  );
-}
+    <p class="blk-eye" data-en="Setup" data-jp="環境">Setup</p>
+    <div class="specs-grid">
+      <div class="spec-row"><span class="spec-k">CPU</span><span class="spec-v">Intel Core i9-10900K</span></div>
+      <div class="spec-row"><span class="spec-k">GPU</span><span class="spec-v">NVIDIA GeForce RTX 1080 Ti</span></div>
+      <div class="spec-row"><span class="spec-k" data-en="Memory" data-jp="メモリ">Memory</span><span class="spec-v">32 GB RAM</span></div>
+      <div class="spec-row"><span class="spec-k">SSD</span><span class="spec-v">1 TB</span></div>
+      <div class="spec-row"><span class="spec-k">HDD</span><span class="spec-v">1 TB</span></div>
+      <div class="spec-row"><span class="spec-k">Motherboard</span><span class="spec-v">MSI MAG B560 Torpedo</span></div>
+      <div class="spec-row"><span class="spec-k" data-en="Power" data-jp="電源">Power</span><span class="spec-v">750W 80+ Silver</span></div>
+      <div class="spec-row"><span class="spec-k" data-en="Case" data-jp="ケース">Case</span><span class="spec-v">Zalman T8</span></div>
+      <div class="spec-row"><span class="spec-k" data-en="Monitors" data-jp="モニター">Monitors</span><span class="spec-v">ASUS 75Hz + 144Hz (dual)</span></div>
+      <div class="spec-row"><span class="spec-k" data-en="Audio" data-jp="オーディオ">Audio</span><span class="spec-v">Sennheiser CX100 Pro · Mix-Amp</span></div>
+      <div class="spec-row"><span class="spec-k" data-en="Chair" data-jp="チェア">Chair</span><span class="spec-v">GTRacing</span></div>
+      <div class="spec-row"><span class="spec-k" data-en="Desk" data-jp="デスク">Desk</span><span class="spec-v" data-en="Electric sit/stand gaming desk" data-jp="電動昇降ゲーミングデスク">Electric sit/stand gaming desk</span></div>
+      <div class="spec-row"><span class="spec-k">OS</span><span class="spec-v">Windows 11 Pro</span></div>
+      <div class="spec-row"><span class="spec-k" data-en="Peripherals" data-jp="周辺機器">Peripherals</span><span class="spec-v">Logicool Mouse · Savior KB</span></div>
+    </div>
+    <div class="soft-row" style="margin-top:18px;">
+      <span class="soft-tag">Adobe Premiere Pro</span>
+      <span class="soft-tag">Adobe Photoshop</span>
+    </div>
+  </div>
+</div>
 
-// ── JOBS TAB ───────────────────────────────────────────────
-function JobsTab({jobs,setJobs,clients,setClients,settings}){
-  const[modal,setModal]=useState(false);
-  const[editJob,setEditJob]=useState(null);
-  const[filterS,setFilterS]=useState("すべて");
-  const[compact,setCompact]=useState(false);
-  const[confirmDel,setConfirmDel]=useState(null);
-  const gc=id=>clients.find(c=>c.id===id);
-  function saveJob(job){setJobs(prev=>{const i=prev.findIndex(j=>j.id===job.id);if(i>=0){const n=[...prev];n[i]=job;return n;}return[...prev,{...job,id:Date.now()}];});}
-  const filtered=filterS==="すべて"?jobs:jobs.filter(j=>j.status===filterS);
-  return(
+<!-- ═══════════════ ROSTER LIST ═══════════════ -->
+<div class="page" id="pg-roster">
+  <div class="sh fi">
+    <p class="sh-eye" data-en="Clients" data-jp="クライアント">Clients</p>
+    <h2 class="sh-title" data-en="The<br><em>roster.</em>" data-jp="クライアント<br><em>一覧</em>">The<br><em>roster.</em></h2>
+  </div>
+
+  <!-- 99Divine org block moved to About page -->
+
+  <!-- 99Divine also shown here — my org, not a client -->
+  <div class="org-block fi" onclick="goClient('divine')" style="cursor:pointer;margin-bottom:36px;">
+    <div class="org-inner">
+      <div class="org-left">
+        <div class="org-av"><img src="https://unavatar.io/youtube/99DIVINE-z2c6t" alt="99Divine" onerror="this.parentElement.style.background='var(--bg3)'"></div>
+        <div>
+          <div class="org-label" data-en="My organization — I work here" data-jp="所属先 — ここで働いています">My organization — I work here</div>
+          <div class="org-name">99Divine</div>
+          <div class="org-role" data-en="Staff — Content Team Lead · Editor · Graphic Designer · X Manager" data-jp="スタッフ — コンテンツリード · 編集 · グラフィックデザイン · X運用">Staff — Content Team Lead · Editor · Graphic Designer · X Manager</div>
+        </div>
+      </div>
+      <div class="org-arrow">↗</div>
+    </div>
+  </div>
+
+  <p class="roster-intro fi" style="margin-top:0;" data-en="Creators I work with — current and past. Click any card to see the work." data-jp="現在と過去のクライアントカードをクリックして制作物を見てください">Creators I work with — current and past. Click any card to see the work.</p>
+
+  <p class="blk-eye fi" style="margin-bottom:14px;" data-en="Current" data-jp="現在">Current</p>
+  <div class="roster-grid fi" style="margin-bottom:36px;">
+    <div class="r-card" onclick="goClient('sneaky')">
+      <div class="r-av"><img src="https://unavatar.io/youtube/SneakyKirby_JP" alt="SneakyKirby" onerror="this.parentElement.style.background='var(--bg3)'"></div>
+      <div class="r-name">SneakyKirby</div>
+      <div class="r-status cur" data-en="● Current" data-jp="● 現在">● Current</div>
+      <div class="r-tags"><span class="r-tag">Editor</span><span class="r-tag">Manager</span><span class="r-tag">EN↔JP</span></div>
+      <span class="r-arrow">↗</span>
+    </div>
+    <div class="r-card" onclick="goClient('supreme')">
+      <div class="r-av"><img src="https://unavatar.io/twitter/supreme__ow" alt="Supreme_ow" onerror="this.parentElement.style.background='var(--bg3)'"></div>
+      <div class="r-name">Supreme_ow</div>
+      <div class="r-status cur" data-en="● Current" data-jp="● 現在">● Current</div>
+      <div class="r-tags"><span class="r-tag">Editor</span><span class="r-tag">EN↔JP</span></div>
+      <span class="r-arrow">↗</span>
+    </div>
+  </div>
+
+  <p class="blk-eye fi" style="margin-bottom:14px;" data-en="Past" data-jp="過去">Past</p>
+  <div class="roster-grid fi">
+    <div class="r-card" onclick="goClient('romani')">
+      <div class="r-av"><img src="https://unavatar.io/youtube/romani_ow" alt="romani_ow" onerror="this.parentElement.style.background='var(--bg3)'"></div>
+      <div class="r-name">Romani_ow</div>
+      <div class="r-status" data-en="○ Past" data-jp="○ 過去">○ Past</div>
+      <div class="r-tags"><span class="r-tag">Editor</span><span class="r-tag">EN↔JP</span></div>
+      <span class="r-arrow">↗</span>
+    </div>
+    <div class="r-card" onclick="goClient('hry')">
+      <div class="r-av"><img src="https://unavatar.io/youtube/Hry_ow" alt="Hry_ow" onerror="this.parentElement.style.background='var(--bg3)'"></div>
+      <div class="r-name">Hry_ow</div>
+      <div class="r-status" data-en="○ Past" data-jp="○ 過去">○ Past</div>
+      <div class="r-tags"><span class="r-tag">Editor</span><span class="r-tag">EN↔JP</span></div>
+      <span class="r-arrow">↗</span>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ CLIENT: SNEAKYKIRBY ═══════════════ -->
+<div class="page" id="pg-sneaky">
+  <button class="back-btn" onclick="go('roster')">← <span data-en="Roster" data-jp="ロスター">Roster</span></button>
+  <div class="c-hero fi">
+    <div class="c-av"><img src="https://unavatar.io/youtube/SneakyKirby_JP" alt="SneakyKirby" onerror="this.parentElement.style.background='var(--bg3)'"></div>
     <div>
-      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"1rem",flexWrap:"wrap",gap:8}}>
-        <h2 style={{fontSize:18,fontWeight:700,color:"#1E293B"}}>案件管理</h2>
-        <div style={{display:"flex",gap:8}}>
-          <button onClick={()=>setCompact(c=>!c)} style={{fontSize:12,padding:"4px 10px"}}>{compact?"詳細":"コンパクト"}</button>
-          <button onClick={()=>{setEditJob(null);setModal(true);}} style={{background:"var(--clr-primary)",color:"#fff",border:"none",borderRadius:8,padding:"6px 16px",fontWeight:700,cursor:"pointer",fontSize:13}}><i className="ti ti-plus"/> 新規案件</button>
-        </div>
+      <h1 class="c-name">SneakyKirby</h1>
+      <p class="c-handle">@SneakyKirby_JP</p>
+      <div class="c-link-row">
+        <a class="c-ext" href="https://www.youtube.com/@SneakyKirby_JP" target="_blank">↗ YouTube</a>
+        <a class="c-ext" href="https://twitch.tv/sneakykirby" target="_blank">↗ Twitch</a>
+        <a class="c-ext" href="https://x.com/sneakykirby" target="_blank">𝕏 X</a>
       </div>
-      <div style={{display:"flex",gap:6,flexWrap:"wrap",marginBottom:"1rem"}}>
-        {["すべて",...STATUS_LIST].map(s=>(
-          <button key={s} onClick={()=>setFilterS(s)} style={{fontSize:12,padding:"4px 12px",fontWeight:filterS===s?700:400,background:filterS===s?"var(--clr-primary)":"transparent",color:filterS===s?"#fff":"#64748B",border:`1.5px solid ${filterS===s?"var(--clr-primary)":"#E2E8F0"}`,borderRadius:20}}>{s}</button>
-        ))}
+      <div class="c-roles">
+        <span class="c-role" data-en="Video Editor" data-jp="動画編集">Video Editor</span>
+        <span class="c-role" data-en="Channel Manager" data-jp="チャンネル管理">Channel Manager</span>
+        <span class="c-role" data-en="EN↔JP Translator" data-jp="英日翻訳">EN↔JP Translator</span>
+        <span class="c-role soft">OW</span><span class="c-role soft">JP Channel</span>
       </div>
-      <div style={{display:"flex",flexDirection:"column",gap:8}}>
-        {filtered.length===0&&<div style={{color:"#64748B",fontSize:13,padding:"1rem"}}>案件がありません</div>}
-        {filtered.map(j=>{
-          const cl=gc(j.clientId),tp=totalPrice(j);
-          const rate=j.actualHours>0?hrRate(tp,j.actualHours):j.estimatedHours>0?hrRate(tp,j.estimatedHours):null;
-          const rw=rate!==null&&rate<settings.alertHourlyRate;
-          const ck=j.checklist.filter(c=>c.done).length;
-          return(
-            <Card key={j.id} style={{padding:"0.875rem 1rem"}} accent={rw?"#FED7AA":undefined}>
-              <div style={{display:"flex",alignItems:"flex-start",gap:8,flexWrap:"wrap"}}>
-                <div style={{width:10,height:10,borderRadius:"50%",background:cl?.color||"#ccc",flexShrink:0,marginTop:4}}/>
-                <Badge status={j.status}/>
-                <div style={{flex:1,minWidth:80}}>
-                  <div style={{fontWeight:700,fontSize:14,color:"#1E293B"}}>{cl?.name}</div>
-                  {!compact&&<div style={{fontSize:12,color:"#64748B",marginTop:2}}>{j.type} · 推定{j.estimatedHours}h{j.actualHours>0?` / 実績${j.actualHours}h`:""}</div>}
-                </div>
-                <div style={{textAlign:"right"}}>
-                  <div style={{fontWeight:700,fontSize:14}}>{yen(tp)}</div>
-                  {rate!==null&&<div style={{fontSize:11,color:rw?"#C2410C":"#64748B"}}>{yen(rate)}/h{rw?" ⚠":""}</div>}
-                </div>
-                {!compact&&<div style={{fontSize:12,color:"#64748B",textAlign:"right"}}>
-                  <div>締切:{j.deadline}</div>
-                  <div style={{marginTop:2}}>✓ {ck}/{j.checklist.length}</div>
-                </div>}
-                <div style={{display:"flex",gap:4}}>
-                  <button onClick={()=>{setEditJob(j);setModal(true);}} style={{padding:"3px 8px",fontSize:13,borderRadius:6}}><i className="ti ti-edit"/></button>
-                  <button onClick={()=>setConfirmDel(j.id)} style={{padding:"3px 8px",fontSize:13,borderRadius:6,color:"#fff",background:"#EF4444",border:"1px solid #EF4444"}}><i className="ti ti-trash"/></button>
-                </div>
-              </div>
-              {!compact&&j.notes&&<div style={{fontSize:12,color:"#64748B",marginTop:8,paddingTop:8,borderTop:"1px solid #E2E8F0"}}>{j.notes}</div>}
-            </Card>
-          );
-        })}
-      </div>
-      {modal&&<Modal title={editJob?"案件を編集":"新規案件登録"} onClose={()=>setModal(false)} wide>
-        <JobModal job={editJob} clients={clients} settings={settings} onSave={saveJob} onAddClient={nc=>setClients(p=>[...p,nc])} onClose={()=>setModal(false)}/>
-      </Modal>}
-      {confirmDel&&<Confirm message="この案件を削除しますか？この操作は元に戻せません。" onConfirm={()=>{setJobs(p=>p.filter(j=>j.id!==confirmDel));setConfirmDel(null);}} onCancel={()=>setConfirmDel(null)}/>}
+      <p class="c-desc" data-en="SneakyKirby is a Twitch Partner and competitive OW player who launched a Japanese-language YouTube channel for her JP fanbase. I handle all editing, subtitles, and channel management. The milestones below are hers — I just help make the content possible." data-jp="SneakyKirbyはTwitchパートナーで競技OWプレイヤー日本のファン向けに日本語チャンネルを立ち上げました編集・字幕・チャンネル管理を担当しています以下の数字は彼女のもの — 私はコンテンツ制作をサポートしているだけです">SneakyKirby is a Twitch Partner and competitive OW player who launched a Japanese-language YouTube channel for her JP fanbase. I handle all editing, subtitles, and channel management. The milestones below are hers — I just help make the content possible.</p>
+      <button class="help-btn" onclick="go('contact')" data-en="Want to help with SneakyKirby's content? →" data-jp="SneakyKirbyのコンテンツを手伝いたい？ →">Want to help with SneakyKirby's content? →</button>
     </div>
-  );
-}
+  </div>
+  <!-- LIVE STATS BAR -->
+  <div class="live-stats fi" id="sneaky-stats">
+    <div class="ls-cell">
+      <div class="ls-label" data-en="YT SUBSCRIBERS" data-jp="YT登録者数">YT SUBSCRIBERS</div>
+      <div class="ls-num" id="stat-subs">—</div>
+    </div>
+    <div class="ls-cell">
+      <div class="ls-label" data-en="YT TOTAL VIEWS" data-jp="YT総再生数">YT TOTAL VIEWS</div>
+      <div class="ls-num" id="stat-views">—</div>
+    </div>
+    <div class="ls-cell" style="border-right:none;">
+      <div class="ls-label" data-en="YT VIDEOS" data-jp="YT動画数">YT VIDEOS</div>
+      <div class="ls-num" id="stat-videos">—</div>
+    </div>
+    <div class="ls-live"><span class="ls-dot"></span><span data-en="live" data-jp="リアルタイム">live</span></div>
+  </div>
 
-// ── CALENDAR ───────────────────────────────────────────────
-function CalendarTab({jobs,clients,settings}){
-  const[yr,setYr]=useState(new Date().getFullYear());
-  const[mo,setMo]=useState(new Date().getMonth());
-  const[vt,setVt]=useState(settings.calendarView);
-  const[dt,setDt]=useState(settings.calendarDateType);
-  const gc=id=>clients.find(c=>c.id===id);
-  const first=new Date(yr,mo,1).getDay(),dim=new Date(yr,mo+1,0).getDate();
-  const cells=[...Array(first).fill(null),...Array.from({length:dim},(_,i)=>i+1)];
-  const ds=d=>`${yr}-${String(mo+1).padStart(2,"0")}-${String(d).padStart(2,"0")}`;
-  const todStr=toDay();
-  function inRange(j,d){const date=ds(d),start=j.startDate||j.receiveDate,end=dt==="targetDate"?(j.targetDate||j.deadline):j.deadline;return date>=start&&date<=end;}
-  return(
+  <div class="tl-wrap fi">
+    <p class="tl-eye" data-en="Her journey — channel milestones" data-jp="チャンネルの成長記録">Her journey — channel milestones</p>
+    <div class="tl-cols">
+      <div>
+        <p class="tl-col-title" data-en="Subscribers" data-jp="登録者数">Subscribers</p>
+        <div class="tl-row"><span class="tl-g" data-en="Channel online" data-jp="チャンネル開設">Channel online</span><span class="tl-d">2024/3/31</span></div>
+        <div class="tl-row"><span class="tl-g">500</span><span class="tl-d">2024/4/1</span></div>
+        <div class="tl-row"><span class="tl-g">1,000</span><span class="tl-d">2024/4/7</span></div>
+        <div class="tl-row"><span class="tl-g">2,000</span><span class="tl-d">2024/5/31</span></div>
+        <div class="tl-row"><span class="tl-g">5,000</span><span class="tl-d">2024/8/27</span></div>
+        <div class="tl-row"><span class="tl-g big">10,000 🎉</span><span class="tl-d">2025/2/11</span></div>
+      </div>
+      <div>
+        <p class="tl-col-title" data-en="Watch Hours" data-jp="視聴時間">Watch Hours</p>
+        <div class="tl-row"><span class="tl-g" data-en="Channel online" data-jp="チャンネル開設">Channel online</span><span class="tl-d">2024/3/31</span></div>
+        <div class="tl-row"><span class="tl-g" data-en="1,000 hrs" data-jp="1,000時間">1,000 hrs</span><span class="tl-d">2024/5/13</span></div>
+        <div class="tl-row"><span class="tl-g" data-en="2,000 hrs" data-jp="2,000時間">2,000 hrs</span><span class="tl-d">2024/5/31</span></div>
+        <div class="tl-row"><span class="tl-g" data-en="4,000 hrs" data-jp="4,000時間">4,000 hrs</span><span class="tl-d">2024/6/1</span></div>
+      </div>
+      <div>
+        <p class="tl-col-title" data-en="Total Views" data-jp="総再生数">Total Views</p>
+        <div class="tl-row"><span class="tl-g" data-en="Channel online" data-jp="チャンネル開設">Channel online</span><span class="tl-d">2024/3/31</span></div>
+        <div class="tl-row"><span class="tl-g">10,000</span><span class="tl-d">2024/5/9</span></div>
+        <div class="tl-row"><span class="tl-g">100,000</span><span class="tl-d">2024/8/23</span></div>
+        <div class="tl-row"><span class="tl-g">200,000</span><span class="tl-d">2024/9/24</span></div>
+        <div class="tl-row"><span class="tl-g big">400,000 🎉</span><span class="tl-d">2025/5/9</span></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LONG VIDEOS — auto-fetched -->
+  <div class="vid-section fi">
+    <p class="vid-eye" data-en="Long videos — top 3 by views" data-jp="長尺動画 — 再生数トップ3">Long videos — top 3 by views</p>
+    <div id="sneaky-long-vids" class="vid-grid" style="grid-template-columns:repeat(3,1fr);">
+      <div class="vid-ph" style="aspect-ratio:16/9;grid-column:1/-1"><span data-en="Loading..." data-jp="読み込み中...">Loading...</span></div>
+    </div>
+  </div>
+
+  <!-- SHORTS — auto-fetched -->
+  <div class="vid-section fi">
+    <p class="vid-eye" data-en="Shorts — top 3 by views" data-jp="ショート — 再生数トップ3">Shorts — top 3 by views</p>
+    <div id="sneaky-short-vids" class="vid-grid" style="grid-template-columns:repeat(3,1fr);">
+      <div class="vid-ph" style="aspect-ratio:16/9;grid-column:1/-1"><span data-en="Loading..." data-jp="読み込み中...">Loading...</span></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ CLIENT: SUPREME ═══════════════ -->
+<div class="page" id="pg-supreme">
+  <button class="back-btn" onclick="go('roster')">← <span data-en="Roster" data-jp="ロスター">Roster</span></button>
+  <div class="c-hero fi">
+    <div class="c-av"><img src="https://unavatar.io/twitter/supreme__ow" alt="Supreme_ow" onerror="this.parentElement.style.background='var(--bg3)'"></div>
     <div>
-      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"1rem",flexWrap:"wrap",gap:8}}>
-        <h2 style={{fontSize:18,fontWeight:700,color:"#1E293B"}}>カレンダー</h2>
-        <div style={{display:"flex",gap:6,alignItems:"center",flexWrap:"wrap"}}>
-          <select value={vt} onChange={e=>setVt(e.target.value)} style={{fontSize:12,padding:"5px 8px",width:"auto"}}><option value="bar">バー表示</option><option value="dot">点のみ</option></select>
-          <select value={dt} onChange={e=>setDt(e.target.value)} style={{fontSize:12,padding:"5px 8px",width:"auto"}}><option value="deadline">締め切り基準</option><option value="targetDate">目標納品日基準</option><option value="start">取り掛かり基準</option></select>
-          <div style={{display:"flex",alignItems:"center",gap:4}}>
-            <button onClick={()=>mo===0?(setYr(y=>y-1),setMo(11)):setMo(m=>m-1)} style={{padding:"4px 10px"}}>‹</button>
-            <span style={{fontSize:13,fontWeight:700,minWidth:80,textAlign:"center"}}>{yr}年{mo+1}月</span>
-            <button onClick={()=>mo===11?(setYr(y=>y+1),setMo(0)):setMo(m=>m+1)} style={{padding:"4px 10px"}}>›</button>
-          </div>
+      <h1 class="c-name">Supreme_ow</h1>
+      <p class="c-handle">@supreme__ow · aka SupuOjisan · OW · 99Divine</p>
+      <div class="c-link-row">
+        <a class="c-ext" href="https://x.com/supreme__ow" target="_blank">𝕏 X</a>
+        <a class="c-ext" href="https://twitch.tv/supreme_ow" target="_blank">↗ Twitch</a>
+        <!-- PLACEHOLDER: add Supreme's YouTube link when confirmed -->
+        <a class="c-ext" href="https://www.youtube.com/@SupuOjisan" target="_blank">↗ YouTube</a>
+      </div>
+      <div class="c-roles">
+        <span class="c-role" data-en="Video Editor" data-jp="動画編集">Video Editor</span>
+        <span class="c-role" data-en="EN↔JP Translator" data-jp="英日翻訳">EN↔JP Translator</span>
+        <span class="c-role soft">OW</span>
+        <span class="c-role soft">99Divine</span>
+      </div>
+      <p class="c-desc" data-en="Editing for Supreme_ow's OW content. Supreme is also the Founder & CEO of 99Divine — my organization. I handle EN ↔ JP translation for subtitles and captions." data-jp="Supreme_owのOWコンテンツを編集SupremeはまたSupremeは99Divineの創設者兼CEO — 私の所属先です字幕・キャプションの英日翻訳も担当しています">Editing for Supreme_ow's OW content. Supreme is also the Founder & CEO of 99Divine — my organization. I handle EN ↔ JP translation for subtitles and captions.</p>
+      <button class="help-btn" onclick="go('contact')" data-en="Want to help with Supreme's content? →" data-jp="Supremeのコンテンツを手伝いたい？ →">Want to help with Supreme's content? →</button>
+    </div>
+  </div>
+  <!-- LIVE STATS -->
+  <div class="live-stats fi" id="supreme-stats">
+    <div class="ls-cell"><div class="ls-label" data-en="YT SUBSCRIBERS" data-jp="YT登録者数">YT SUBSCRIBERS</div><div class="ls-num" id="supreme-stat-subs">—</div></div>
+    <div class="ls-cell"><div class="ls-label" data-en="YT TOTAL VIEWS" data-jp="YT総再生数">YT TOTAL VIEWS</div><div class="ls-num" id="supreme-stat-views">—</div></div>
+    <div class="ls-cell" style="border-right:none;"><div class="ls-label" data-en="YT VIDEOS" data-jp="YT動画数">YT VIDEOS</div><div class="ls-num" id="supreme-stat-videos">—</div></div>
+    <div class="ls-live"><span class="ls-dot"></span><span data-en="live" data-jp="リアルタイム">live</span></div>
+  </div>
+  <div class="vid-section fi">
+    <p class="vid-eye" data-en="Selected edits" data-jp="編集サンプル">Selected edits</p>
+    <div class="vid-grid">
+      <div class="vid-feat">
+        <div class="vid-wrap"><iframe src="https://www.youtube.com/embed/QZNcFD_11go" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div>
+        <p class="vid-lbl" data-en="Featured" data-jp="注目">Featured</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ CLIENT: 99DIVINE ═══════════════ -->
+<div class="page" id="pg-divine">
+  <button class="back-btn" onclick="go('roster')">← <span data-en="Roster" data-jp="ロスター">Roster</span></button>
+  <div class="c-hero fi">
+    <div class="c-av"><img src="https://unavatar.io/youtube/99DIVINE-z2c6t" alt="99Divine" onerror="this.parentElement.style.background='var(--bg3)'"></div>
+    <div>
+      <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.2em;text-transform:uppercase;color:var(--m);margin-bottom:6px;" data-en="My organization" data-jp="所属先">My organization</div>
+      <h1 class="c-name">99Divine</h1>
+      <p class="c-handle">@99DIVINE · OW Org</p>
+      <div class="c-link-row">
+        <a class="c-ext" href="https://www.youtube.com/@99DIVINE-z2c6t" target="_blank">↗ YouTube</a>
+        <a class="c-ext" href="https://x.com/99DIVINE_" target="_blank">𝕏 X</a>
+      </div>
+      <div class="c-roles">
+        <span class="c-role" style="border-color:rgba(240,237,232,.3);" data-en="Staff Member" data-jp="スタッフ">Staff Member</span>
+        <span class="c-role" data-en="Content Team Lead" data-jp="コンテンツリード">Content Team Lead</span>
+        <span class="c-role" data-en="Video Editor" data-jp="動画編集">Video Editor</span>
+        <span class="c-role" data-en="Graphic Designer" data-jp="グラフィックデザイン">Graphic Designer</span>
+        <span class="c-role" data-en="X Manager" data-jp="X運用">X Manager</span>
+        <span class="c-role soft">OW</span>
+      </div>
+      <p class="c-desc" style="margin-top:14px;" data-en="Leading content operations end-to-end: editing, graphic design, X management, and content planning, etc." data-jp="コンテンツ制作全体をエンドツーエンドでリード：編集・グラフィックデザイン・X運用・コンテンツ計画など">Leading content operations end-to-end: editing, graphic design, X management, and content planning, etc.</p>
+      <button class="help-btn" onclick="go('contact')" data-en="Want to join the 99Divine content team? →" data-jp="99Divineのコンテンツチームに参加したい？ →">Want to join the 99Divine content team? →</button>
+    </div>
+  </div>
+  <!-- YOUTUBE LIVE STATS -->
+  <div class="live-stats fi" id="divine-stats">
+    <div class="ls-cell"><div class="ls-label" data-en="YT SUBSCRIBERS" data-jp="YT登録者数">YT SUBSCRIBERS</div><div class="ls-num" id="divine-stat-subs">—</div></div>
+    <div class="ls-cell"><div class="ls-label" data-en="YT TOTAL VIEWS" data-jp="YT総再生数">YT TOTAL VIEWS</div><div class="ls-num" id="divine-stat-views">—</div></div>
+    <div class="ls-cell"><div class="ls-label" data-en="YT VIDEOS" data-jp="YT動画数">YT VIDEOS</div><div class="ls-num" id="divine-stat-videos">—</div></div>
+    <div class="ls-live"><span class="ls-dot"></span><span data-en="live" data-jp="リアルタイム">live</span></div>
+  </div>
+
+  <!-- SOCIAL PERFORMANCE BUTTON -->
+  <div class="fi" style="margin-bottom:44px;">
+    <button class="kpi-cta" onclick="go('kpi')" data-en="Social Performance & KPI →" data-jp="ソーシャルパフォーマンス & KPI →">Social Performance & KPI →</button>
+    <p style="font-size:11px;color:var(--m);font-family:'DM Mono',monospace;letter-spacing:.04em;margin-top:8px;" data-en="Reach, engagement, competitive record — for sponsors & investors" data-jp="リーチ・エンゲージメント・競技成績 — スポンサー・投資家向け">Reach, engagement, competitive record — for sponsors & investors</p>
+  </div>
+
+  <!-- WHAT I DO -->
+  <div class="fi" style="margin-bottom:14px;"><p class="tl-eye" data-en="What I do" data-jp="担当業務">What I do</p></div>
+  <div class="roles-grid fi">
+    <div class="role-card">
+      <div class="role-ico">✂</div>
+      <div class="role-name" data-en="Video Editing" data-jp="動画編集">Video Editing</div>
+      <div class="role-desc" data-en="Full production from raw footage to final cut." data-jp="素材から完成動画まで、フル制作を担当">Full production from raw footage to final cut.</div>
+    </div>
+    <div class="role-card">
+      <div class="role-ico">🎨</div>
+      <div class="role-name" data-en="Graphic Design" data-jp="グラフィックデザイン">Graphic Design</div>
+      <div class="role-desc" data-en="Game day, win/loss, roster, birthday, welcome, new roster, thank you visuals." data-jp="ゲームデー、勝敗、ロスター、誕生日、ウェルカム、感謝など全ビジュアル">Game day, win/loss, roster, birthday, welcome, new roster, thank you visuals.</div>
+    </div>
+    <div class="role-card">
+      <div class="role-ico">𝕏</div>
+      <div class="role-name" data-en="X Management" data-jp="X運用">X Management</div>
+      <div class="role-desc" data-en="Daily posting, scheduling, and account management." data-jp="日々の投稿・スケジューリング・アカウント管理">Daily posting, scheduling, and account management.</div>
+    </div>
+    <div class="role-card">
+      <div class="role-ico">📋</div>
+      <div class="role-name" data-en="Content Planning" data-jp="コンテンツ計画">Content Planning</div>
+      <div class="role-desc" data-en="YouTube strategy, planning, and publishing." data-jp="YouTubeの戦略立案・計画・公開">YouTube strategy, planning, and publishing.</div>
+    </div>
+  </div>
+  <div class="vid-section fi">
+    <p class="vid-eye" data-en="Selected work" data-jp="制作サンプル">Selected work</p>
+    <div class="vid-grid">
+      <div class="vid-feat">
+        <div class="vid-wrap"><iframe src="https://www.youtube.com/embed/eFR-Nrn3hSU" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div>
+        <p class="vid-lbl" data-en="Featured" data-jp="注目">Featured</p>
+      </div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/_Cv-XY22_dY" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">02</p></div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/sFr7yGPaNns" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">03</p></div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/BggAZiNjE5o" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">04</p></div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/PjQGJ_qea6Y" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">05</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ KPI PAGE ═══════════════ -->
+<div class="page" id="pg-kpi">
+  <button class="back-btn" onclick="go('divine')">← <span data-en="99Divine" data-jp="99Divine">99Divine</span></button>
+  <div class="sh fi">
+    <p class="sh-eye" data-en="Social Performance & KPI" data-jp="ソーシャルパフォーマンス & KPI">Social Performance & KPI</p>
+    <h2 class="sh-title" data-en="99Divine<br><em>by the numbers.</em>" data-jp="99Divine<br><em>数字で見る</em>">99Divine<br><em>by the numbers.</em></h2>
+  </div>
+
+  <!-- X KPI -->
+  <div class="kpi-section fi">
+    <div class="kpi-header">
+      <span class="kpi-platform">𝕏 X (Twitter)</span>
+      <span class="kpi-period" id="kpi-updated-label">3-month period · updated 2026/05</span>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi-card kpi-primary">
+        <div class="kpi-label" data-en="Impressions" data-jp="インプレッション">Impressions</div>
+        <div class="kpi-num" id="kv-impressions">1.3M</div>
+        <div class="kpi-delta" id="kd-impressions"></div>
+        <div class="kpi-sub" data-en="3-month total" data-jp="3ヶ月合計">3-month total</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" data-en="Followers" data-jp="フォロワー">Followers</div>
+        <div class="kpi-num" id="kv-followers">3,324</div>
+        <div class="kpi-delta" id="kd-followers"></div>
+        <div class="kpi-sub">@99divine_</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" data-en="Follower Growth" data-jp="フォロワー増加">Follower Growth</div>
+        <div class="kpi-num" id="kv-growth">+266</div>
+        <div class="kpi-delta" id="kd-growth"></div>
+        <div class="kpi-sub" data-en="in 3 months" data-jp="3ヶ月で">in 3 months</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" data-en="Engagement Rate" data-jp="エンゲージメント率">Engagement Rate</div>
+        <div class="kpi-num" id="kv-engrate">0.8%</div>
+        <div class="kpi-delta" id="kd-engrate"></div>
+        <div class="kpi-sub" data-en="above avg for esports" data-jp="eスポーツ平均以上">above avg for esports</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" data-en="Total Engagements" data-jp="総エンゲージメント">Total Engagements</div>
+        <div class="kpi-num" id="kv-engagements">11K</div>
+        <div class="kpi-delta" id="kd-engagements"></div>
+        <div class="kpi-sub" data-en="3-month total" data-jp="3ヶ月合計">3-month total</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" data-en="Profile Visits" data-jp="プロフィール訪問">Profile Visits</div>
+        <div class="kpi-num" id="kv-profile">4.5K</div>
+        <div class="kpi-delta" id="kd-profile"></div>
+        <div class="kpi-sub" data-en="3-month total" data-jp="3ヶ月合計">3-month total</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" data-en="Likes" data-jp="いいね">Likes</div>
+        <div class="kpi-num" id="kv-likes">4.6K</div>
+        <div class="kpi-delta" id="kd-likes"></div>
+        <div class="kpi-sub" data-en="3-month total" data-jp="3ヶ月合計">3-month total</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" data-en="Reposts" data-jp="リポスト">Reposts</div>
+        <div class="kpi-num" id="kv-reposts">1.5K</div>
+        <div class="kpi-delta" id="kd-reposts"></div>
+        <div class="kpi-sub" data-en="3-month total" data-jp="3ヶ月合計">3-month total</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" data-en="Bookmarks" data-jp="ブックマーク">Bookmarks</div>
+        <div class="kpi-num" id="kv-bookmarks">184</div>
+        <div class="kpi-delta" id="kd-bookmarks"></div>
+        <div class="kpi-sub" data-en="3-month total" data-jp="3ヶ月合計">3-month total</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" data-en="Shares" data-jp="シェア">Shares</div>
+        <div class="kpi-num" id="kv-shares">96</div>
+        <div class="kpi-delta" id="kd-shares"></div>
+        <div class="kpi-sub" data-en="3-month total" data-jp="3ヶ月合計">3-month total</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- COMPETITIVE -->
+  <div class="kpi-section fi">
+    <div class="kpi-header">
+      <span class="kpi-platform">⚔ Competitive</span>
+      <span class="kpi-period" data-en="via Liquipedia" data-jp="Liquipedia参照">via Liquipedia</span>
+    </div>
+    <div class="kpi-grid">
+      <div class="kpi-card kpi-primary">
+        <div class="kpi-label" data-en="Founded" data-jp="設立">Founded</div>
+        <div class="kpi-num">2024</div>
+        <div class="kpi-sub">July 15, 2024</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label" data-en="Region" data-jp="地域">Region</div>
+        <div class="kpi-num" style="font-size:16px;">Asia</div>
+        <div class="kpi-sub">OWCS Japan</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">OWCS 2026 Stage 1</div>
+        <div class="kpi-num" style="font-size:20px;">4th</div>
+        <div class="kpi-sub">Japan</div>
+      </div>
+      <div class="kpi-card">
+        <div class="kpi-label">OWCS 2025 Stage 3</div>
+        <div class="kpi-num" style="font-size:20px;">4th</div>
+        <div class="kpi-sub">Japan</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOP POSTS -->
+  <div class="fi" style="margin:44px 0 14px;">
+    <p class="tl-eye" data-en="Top performing posts" data-jp="トップパフォーマンス投稿">Top performing posts</p>
+  </div>
+  <div class="top-posts fi">
+    <div class="top-post">
+      <div class="tp-meta">
+        <span class="tp-views">300K <span data-en="views" data-jp="表示">views</span></span>
+        <span class="tp-date">2026/05/25</span>
+      </div>
+      <div class="tp-desc" data-en="2026 OWCS Stage 2 Roster announcement" data-jp="2026 OWCS Stage 2 ロスター発表">2026 OWCS Stage 2 Roster announcement</div>
+      <div class="tp-stats">
+        <span>♥ 1,229</span><span>↺ 396</span><span>🔖 39</span><span>💬 7</span>
+      </div>
+      <a class="tp-link" href="https://x.com/99divine_/status/2049790516947238967" target="_blank">View post ↗</a>
+    </div>
+    <div class="top-post">
+      <div class="tp-meta">
+        <span class="tp-views">150K <span data-en="views" data-jp="表示">views</span></span>
+        <span class="tp-date">2026/05/17</span>
+      </div>
+      <div class="tp-desc" data-en="Season end thank you" data-jp="シーズン終了感謝">Season end thank you</div>
+      <div class="tp-stats">
+        <span>♥ 276</span><span>↺ 48</span><span>🔖 4</span>
+      </div>
+      <a class="tp-link" href="https://x.com/99divine_/status/2050411708464984421" target="_blank">View post ↗</a>
+    </div>
+    <div class="top-post">
+      <div class="tp-meta">
+        <span class="tp-views">23K <span data-en="views" data-jp="表示">views</span></span>
+        <span class="tp-date">2026/05/02</span>
+      </div>
+      <div class="tp-desc" data-en="New Content Creator member announcement" data-jp="新コンテンツクリエイター加入発表">New Content Creator member announcement</div>
+      <div class="tp-stats">
+        <span>♥ 154</span><span>↺ 25</span><span>🔖 6</span><span>💬 2</span>
+      </div>
+      <a class="tp-link" href="https://x.com/99divine_/status/2055884378644111831" target="_blank">View post ↗</a>
+    </div>
+    <div class="top-post">
+      <div class="tp-meta">
+        <span class="tp-views">17K <span data-en="views" data-jp="表示">views</span></span>
+        <span class="tp-date">2026/04/30</span>
+      </div>
+      <div class="tp-desc" data-en="Crowd Funding supporters Logo" data-jp="クラウドファンディングサポーターロゴ">Crowd Funding supporters Logo</div>
+      <div class="tp-stats">
+        <span>♥ 29</span><span>↺ 6</span><span>🔖 1</span>
+      </div>
+      <a class="tp-link" href="https://x.com/99divine_/status/2058835471221035280" target="_blank">View post ↗</a>
+    </div>
+  </div>
+
+  <p style="font-size:10px;color:var(--m2);font-family:'DM Mono',monospace;letter-spacing:.04em;padding:14px 0;border-top:0.5px solid var(--b2);" data-en="X analytics updated manually. API access requires X Enterprise subscription. Delta (±) shows change from previous update stored in your browser." data-jp="Xのアナリティクスは手動で更新されますAPIアクセスにはXエンタープライズが必要です差分(±)はブラウザに保存された前回更新からの変化を示します">X analytics updated manually. API access requires X Enterprise subscription. Delta (±) shows change from previous update stored in your browser.</p>
+</div>
+
+<!-- ═══════════════ CLIENT: ROMANI ═══════════════ -->
+<div class="page" id="pg-romani">
+  <button class="back-btn" onclick="go('roster')">← <span data-en="Roster" data-jp="ロスター">Roster</span></button>
+  <div class="c-hero fi">
+    <div class="c-av"><img src="https://unavatar.io/youtube/romani_ow" alt="romani_ow" onerror="this.parentElement.style.background='var(--bg3)'"></div>
+    <div>
+      <h1 class="c-name">Romani_ow</h1>
+      <p class="c-handle">@romani_ow · OW</p>
+      <div class="c-link-row">
+        <a class="c-ext" href="https://www.youtube.com/@romani_ow" target="_blank">↗ YouTube</a>
+        <a class="c-ext" href="https://x.com/imp_romani" target="_blank">𝕏 X</a>
+        <a class="c-ext" href="https://twitch.tv/romani_ow" target="_blank">↗ Twitch</a>
+      </div>
+      <div class="c-roles">
+        <span class="c-role" data-en="Video Editor" data-jp="動画編集">Video Editor</span>
+        <span class="c-role" data-en="EN↔JP Translator" data-jp="英日翻訳">EN↔JP Translator</span>
+        <span class="c-role soft">OW</span>
+        <span class="c-role soft" data-en="Past Client" data-jp="過去のクライアント">Past Client</span>
+      </div>
+      <p class="c-desc" data-en="Edited a selection of videos for Romani's OW channel, including EN ↔ JP translation for subtitles." data-jp="RomaniのOWチャンネル向けに複数の動画を編集字幕の英日翻訳も担当しました">Edited a selection of videos for Romani's OW channel, including EN ↔ JP translation for subtitles.</p>
+    </div>
+  </div>
+  <div class="vid-section fi">
+    <p class="vid-eye" data-en="Selected edits" data-jp="編集サンプル">Selected edits</p>
+    <div class="vid-grid">
+      <div class="vid-feat">
+        <div class="vid-wrap"><iframe src="https://www.youtube.com/embed/sY3DYa1JxYs" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div>
+        <p class="vid-lbl" data-en="Featured" data-jp="注目">Featured</p>
+      </div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/ZKSKzh8omoA" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">02</p></div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/Y7nUBJeEY-w" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">03</p></div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/5wRr9Jw7Ee0" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">04</p></div>
+    </div>
+  </div>
+</div>
+<div class="page" id="pg-hry">
+  <button class="back-btn" onclick="go('roster')">← <span data-en="Roster" data-jp="ロスター">Roster</span></button>
+  <div class="c-hero fi">
+    <div class="c-av"><img src="https://unavatar.io/youtube/Hry_ow" alt="Hry_ow" onerror="this.parentElement.style.background='var(--bg3)'"></div>
+    <div>
+      <h1 class="c-name">Hry_ow</h1>
+      <p class="c-handle">@Hry_ow · OW</p>
+      <div class="c-link-row">
+        <a class="c-ext" href="https://www.youtube.com/@Hry_ow" target="_blank">↗ YouTube</a>
+        <a class="c-ext" href="https://x.com/HRY_ow" target="_blank">𝕏 X</a>
+        <!-- PLACEHOLDER: add Hry's Twitch if he has one -->
+        <a class="c-ext" href="#" target="_blank" style="opacity:.45;">↗ Twitch (add if exists)</a>
+      </div>
+      <div class="c-roles">
+        <span class="c-role" data-en="Video Editor" data-jp="動画編集">Video Editor</span>
+        <span class="c-role" data-en="EN↔JP Translator" data-jp="英日翻訳">EN↔JP Translator</span>
+        <span class="c-role soft">OW</span>
+        <span class="c-role soft" data-en="Past Client" data-jp="過去のクライアント">Past Client</span>
+      </div>
+      <p class="c-desc" data-en="Edited a selection of videos for Hry's OW channel, including EN ↔ JP translation for subtitles." data-jp="HryのOWチャンネル向けに複数の動画を編集字幕の英日翻訳も担当しました">Edited a selection of videos for Hry's OW channel, including EN ↔ JP translation for subtitles.</p>
+    </div>
+  </div>
+  <div class="vid-section fi">
+    <p class="vid-eye" data-en="Selected edits" data-jp="編集サンプル">Selected edits</p>
+    <div class="vid-grid">
+      <div class="vid-feat">
+        <div class="vid-wrap"><iframe src="https://www.youtube.com/embed/BS6-xUJ7-L4" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div>
+        <p class="vid-lbl" data-en="Featured" data-jp="注目">Featured</p>
+      </div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/hDoYuwpJvjY" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">02</p></div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/Otes3v-_0Rg" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">03</p></div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/m0lh1NevGqA" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">04</p></div>
+      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/dps-cDgMXR0" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">05</p></div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ EVENTS LIST ═══════════════ -->
+<div class="page" id="pg-events">
+  <div class="sh fi">
+    <p class="sh-eye" data-en="Community Events" data-jp="コミュニティイベント">Community Events</p>
+    <h2 class="sh-title" data-en="Event<br><em>work.</em>" data-jp="イベント<br><em>制作</em>">Event<br><em>work.</em></h2>
+  </div>
+  <div class="events-list fi">
+    <div class="ev-row-item" onclick="goEvent('sawadi2')">
+      <div class="ev-left">
+        <span class="ev-dot done"></span>
+        <div>
+          <div class="ev-row-name">Sawadi Cup #2</div>
+          <div class="ev-row-meta" data-en="Completed · Visual Design & Branding" data-jp="終了 · ビジュアルデザイン・ブランディング">Completed · Visual Design & Branding</div>
         </div>
       </div>
-      <div style={{display:"flex",gap:8,flexWrap:"wrap",marginBottom:10}}>{clients.map(c=><div key={c.id} style={{display:"flex",alignItems:"center",gap:5,fontSize:12,color:"#64748B"}}><div style={{width:9,height:9,borderRadius:"50%",background:c.color}}/>{c.name}</div>)}</div>
-      <Card style={{padding:"0.75rem"}}>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:1,marginBottom:4}}>
-          {["日","月","火","水","木","金","土"].map((d,i)=><div key={d} style={{textAlign:"center",fontSize:11,fontWeight:700,color:i===0?"#EF4444":i===6?"#60A5FA":"#64748B",padding:"4px 0"}}>{d}</div>)}
+      <div style="display:flex;align-items:center;gap:16px;">
+        <div class="ev-row-tags">
+          <span class="ev-row-tag" data-en="Thumbnail" data-jp="サムネイル">Thumbnail</span>
+          <span class="ev-row-tag" data-en="Branding" data-jp="ブランディング">Branding</span>
         </div>
-        <div style={{display:"grid",gridTemplateColumns:"repeat(7,1fr)",gap:2}}>
-          {cells.map((d,i)=>{
-            if(!d)return<div key={i}/>;
-            const dateStr=ds(d),isToday=dateStr===todStr;
-            const rj=vt==="bar"?jobs.filter(j=>inRange(j,d)):[];
-            const dj=vt==="dot"?jobs.filter(j=>{if(dt==="deadline")return j.deadline===dateStr;if(dt==="targetDate")return j.targetDate===dateStr;return j.startDate===dateStr;}):[];
-            const isSun=(first+d-1)%7===0,isSat=(first+d-1)%7===6;
-            return(
-              <div key={i} style={{minHeight:52,padding:"3px 4px",borderRadius:6,background:isToday?"var(--clr-primary-soft,#EEF2FF)":"transparent",border:`1px solid ${isToday?"var(--clr-primary)":"#E2E8F0"}`}}>
-                <div style={{fontSize:12,fontWeight:isToday?700:400,color:isToday?"var(--clr-primary)":isSun?"#EF4444":isSat?"#60A5FA":"#1E293B",marginBottom:2}}>{d}</div>
-                {vt==="dot"?<div style={{display:"flex",flexWrap:"wrap",gap:2}}>{dj.map(j=><div key={j.id} title={gc(j.clientId)?.name} style={{width:7,height:7,borderRadius:"50%",background:gc(j.clientId)?.color||"#888"}}/>)}</div>
-                :rj.map(j=><div key={j.id} title={`${gc(j.clientId)?.name} ${j.type}`} style={{fontSize:10,background:gc(j.clientId)?.color||"#888",color:"#fff",borderRadius:3,padding:"1px 3px",marginBottom:1,overflow:"hidden",textOverflow:"ellipsis",whiteSpace:"nowrap"}}>{gc(j.clientId)?.name?.slice(0,4)}</div>)}
-              </div>
-            );
-          })}
-        </div>
-      </Card>
-    </div>
-  );
-}
-
-// ── FINANCE ────────────────────────────────────────────────
-function FinanceTab({jobs,expenses,setExpenses,settings,setSettings}){
-  const[expLv,setExpLv]=useState([1,2,3]);
-  const[showAdd,setShowAdd]=useState(false);
-  const[newExp,setNewExp]=useState({name:"",amount:0,type:"monthly",level:1});
-  const[custom,setCustom]=useState(settings.incomeLimit);
-  const[confirmDel,setConfirmDel]=useState(null);
-  const tm=thisMonth(),ty=thisYear();
-  const paid=jobs.filter(j=>["納品済","入金済"].includes(j.status));
-  const incM=paid.filter(j=>j.receiveDate?.startsWith(tm)).reduce((s,j)=>s+totalPrice(j),0);
-  const incY=paid.filter(j=>j.receiveDate?.startsWith(ty)).reduce((s,j)=>s+totalPrice(j),0);
-  const filtE=expenses.filter(e=>expLv.includes(e.level));
-  const mExp=filtE.filter(e=>e.type==="monthly").reduce((s,e)=>s+Number(e.amount),0);
-  const oExp=filtE.filter(e=>e.type==="one-time").reduce((s,e)=>s+Number(e.amount),0);
-  function setWall(label){const w=INCOME_WALLS.find(x=>x.label===label);if(w?.value)setSettings(s=>({...s,incomeLimitType:label,incomeLimit:w.value}));else setSettings(s=>({...s,incomeLimitType:"自由設定"}));}
-  return(
-    <div>
-      <h2 style={{fontSize:18,fontWeight:700,color:"#1E293B",marginBottom:"1rem"}}>財務管理</h2>
-      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fit,minmax(130px,1fr))",gap:10,marginBottom:"1rem"}}>
-        <MetricCard label="今月収益" value={yen(incM)}/><MetricCard label="今年収益" value={yen(incY)}/>
-        <MetricCard label="今月経費" value={yen(mExp+oExp)}/><MetricCard label="手取り試算" value={yen(incM-mExp-oExp)} warn={incM-mExp-oExp<0}/>
+        <span class="ev-arrow">↗</span>
       </div>
-      <Card style={{marginBottom:"1rem"}}>
-        <div style={{fontSize:14,fontWeight:700,color:"#1E293B",marginBottom:10,display:"flex",alignItems:"center",gap:4}}><Tooltip text={TOOLTIPS.incomeLimit}>収益上限設定</Tooltip></div>
-        <div style={{display:"flex",gap:6,flexWrap:"wrap",marginBottom:10}}>
-          {INCOME_WALLS.map(w=><button key={w.label} onClick={()=>setWall(w.label)} style={{fontSize:12,padding:"4px 12px",background:settings.incomeLimitType===w.label?"var(--clr-primary)":"transparent",color:settings.incomeLimitType===w.label?"#fff":"#64748B",border:`1.5px solid ${settings.incomeLimitType===w.label?"var(--clr-primary)":"#E2E8F0"}`,borderRadius:20}}>{w.label}{w.value?` (${yen(w.value)})`:""}</button>)}
-        </div>
-        {settings.incomeLimitType==="自由設定"&&<div style={{display:"flex",gap:8,marginBottom:10,alignItems:"center"}}><input type="number" value={custom} onChange={e=>setCustom(Number(e.target.value))} style={{width:150}}/><button onClick={()=>setSettings(s=>({...s,incomeLimit:custom}))} style={{padding:"5px 14px"}}>適用</button></div>}
-        <ProgressBar value={incY} max={settings.incomeLimit} label={`年収益 ${yen(incY)} / 上限 ${yen(settings.incomeLimit)}`}/>
-      </Card>
-      <Card>
-        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10,flexWrap:"wrap",gap:8}}>
-          <div style={{fontSize:14,fontWeight:700,color:"#1E293B"}}>経費管理</div>
-          <div style={{display:"flex",gap:6,alignItems:"center",flexWrap:"wrap"}}>
-            <span style={{fontSize:11,color:"#64748B"}}>表示:</span>
-            {EXPENSE_LEVELS.map(l=><button key={l.id} onClick={()=>setExpLv(p=>p.includes(l.id)?p.filter(x=>x!==l.id):[...p,l.id])} style={{fontSize:11,padding:"2px 8px",background:expLv.includes(l.id)?l.color:"transparent",color:expLv.includes(l.id)?"#fff":"#64748B",border:`1.5px solid ${l.color}`,borderRadius:20}}>Lv{l.id}</button>)}
-            <button onClick={()=>setShowAdd(true)} style={{fontSize:12,padding:"3px 10px"}}>+ 追加</button>
-          </div>
-        </div>
-        <div style={{display:"flex",flexDirection:"column",gap:6}}>
-          {expenses.map(e=>(
-            <div key={e.id} style={{display:"flex",alignItems:"center",gap:8,padding:"7px 10px",background:expLv.includes(e.level)?"var(--clr-bg)":"transparent",borderRadius:8,border:"1px solid #E2E8F0",opacity:expLv.includes(e.level)?1:0.45}}>
-              <div style={{width:8,height:8,borderRadius:"50%",background:EXPENSE_LEVELS[e.level-1]?.color,flexShrink:0}}/>
-              <span style={{flex:1,fontSize:13,color:"#1E293B"}}>{e.name}</span>
-              <span style={{fontSize:11,color:"#64748B",background:"#F1F5F9",padding:"1px 6px",borderRadius:10}}>{e.type==="monthly"?"毎月":"単発"}</span>
-              <span style={{fontSize:13,fontWeight:600}}>{yen(e.amount)}</span>
-              <button onClick={()=>setConfirmDel(e.id)} style={{padding:"3px 7px",fontSize:12,color:"#fff",background:"#EF4444",border:"1px solid #EF4444",borderRadius:6}}><i className="ti ti-trash"/></button>
-            </div>
-          ))}
-        </div>
-        <div style={{marginTop:10,paddingTop:10,borderTop:"1px solid #E2E8F0",display:"flex",justifyContent:"space-between",fontSize:13}}>
-          <span style={{color:"#64748B"}}>経費合計（表示中）</span><strong>{yen(mExp+oExp)}</strong>
-        </div>
-      </Card>
-      {showAdd&&<Modal title="経費追加" onClose={()=>setShowAdd(false)}>
-        <div style={{display:"flex",flexDirection:"column",gap:10}}>
-          <div><Lbl>名称</Lbl><input value={newExp.name} onChange={e=>setNewExp(f=>({...f,name:e.target.value}))} style={{width:"100%",boxSizing:"border-box"}}/></div>
-          <div><Lbl>金額</Lbl><input type="number" value={newExp.amount} onChange={e=>setNewExp(f=>({...f,amount:e.target.value}))} style={{width:"100%",boxSizing:"border-box"}}/></div>
-          <div><Lbl>種別</Lbl><select value={newExp.type} onChange={e=>setNewExp(f=>({...f,type:e.target.value}))} style={{width:"100%"}}><option value="monthly">毎月</option><option value="one-time">単発</option></select></div>
-          <div><Lbl>レベル</Lbl><select value={newExp.level} onChange={e=>setNewExp(f=>({...f,level:Number(e.target.value)}))} style={{width:"100%"}}>{EXPENSE_LEVELS.map(l=><option key={l.id} value={l.id}>Lv{l.id}: {l.label}</option>)}</select></div>
-          <div style={{display:"flex",gap:8,justifyContent:"flex-end"}}>
-            <button onClick={()=>setShowAdd(false)}>キャンセル</button>
-            <button onClick={()=>{setExpenses(p=>[...p,{...newExp,id:Date.now(),amount:Number(newExp.amount)}]);setNewExp({name:"",amount:0,type:"monthly",level:1});setShowAdd(false);}} style={{background:"var(--clr-primary)",color:"#fff",border:"none",borderRadius:8,padding:"6px 18px",fontWeight:700,cursor:"pointer"}}>追加</button>
-          </div>
-        </div>
-      </Modal>}
-      {confirmDel&&<Confirm message="この経費を削除しますか？" onConfirm={()=>{setExpenses(p=>p.filter(e=>e.id!==confirmDel));setConfirmDel(null);}} onCancel={()=>setConfirmDel(null)}/>}
     </div>
-  );
-}
-
-// ── ANALYSIS ───────────────────────────────────────────────
-function AnalysisTab({jobs,clients,settings}){
-  const gc=id=>clients.find(c=>c.id===id);
-  const paid=jobs.filter(j=>["納品済","入金済"].includes(j.status));
-  const cStats=useMemo(()=>{
-    const m={};
-    jobs.forEach(j=>{const cl=gc(j.clientId),k=j.clientId;if(!m[k])m[k]={name:cl?.name||"不明",color:cl?.color,count:0,total:0,disc:0};
-      m[k].count++;m[k].total+=totalPrice(j);const t=settings.jobTypes.find(x=>x.name===j.type);if(t&&totalPrice(j)<t.defaultPrice)m[k].disc+=(t.defaultPrice-totalPrice(j));});
-    return Object.values(m).sort((a,b)=>b.total-a.total);
-  },[jobs,clients]);
-  const mData=useMemo(()=>{
-    const m={};paid.forEach(j=>{const mo=j.receiveDate?.slice(0,7);if(!mo)return;if(!m[mo])m[mo]={month:mo,income:0,count:0};m[mo].income+=totalPrice(j);m[mo].count++;});
-    return Object.values(m).sort((a,b)=>a.month.localeCompare(b.month)).slice(-6);
-  },[jobs]);
-  const maxInc=Math.max(...mData.map(m=>m.income),1);
-  const hrRates=settings.jobTypes.map(t=>({...t,rate:t.hours>0?Math.round(t.defaultPrice/t.hours):0}));
-  return(
-    <div>
-      <h2 style={{fontSize:18,fontWeight:700,color:"#1E293B",marginBottom:"1rem"}}>分析・レポート</h2>
-      <Card style={{marginBottom:"1rem"}}>
-        <div style={{fontSize:14,fontWeight:700,marginBottom:12,color:"#1E293B"}}>月別収益推移</div>
-        <div style={{display:"flex",alignItems:"flex-end",gap:8,height:110}}>
-          {mData.map(m=>(
-            <div key={m.month} style={{flex:1,display:"flex",flexDirection:"column",alignItems:"center",gap:3}}>
-              <div style={{fontSize:10,color:"#64748B"}}>{yen(m.income)}</div>
-              <div style={{width:"100%",background:"var(--clr-primary)",borderRadius:"4px 4px 0 0",height:`${Math.max(4,Math.round((m.income/maxInc)*72))}px`}}/>
-              <div style={{fontSize:11,color:"#64748B"}}>{m.month.slice(5)}月</div>
-            </div>
-          ))}
-          {mData.length===0&&<div style={{color:"#64748B",fontSize:13}}>データがありません</div>}
+    <div class="ev-row-item" onclick="goEvent('divinecup')">
+      <div class="ev-left">
+        <span class="ev-dot done"></span>
+        <div>
+          <div class="ev-row-name">Divine Cup</div>
+          <div class="ev-row-meta" data-en="Hosted by 99Divine · Opening Movie & Tutorial Videos" data-jp="99Divine主催 · オープニング映像・チュートリアル動画">Hosted by 99Divine · Opening Movie & Tutorial Videos</div>
         </div>
-      </Card>
-      <Card style={{marginBottom:"1rem"}}>
-        <div style={{fontSize:14,fontWeight:700,marginBottom:10,color:"#1E293B"}}>クライアント別売上</div>
-        {cStats.map((c,i)=>(
-          <div key={c.name} style={{marginBottom:10}}>
-            <div style={{display:"flex",justifyContent:"space-between",fontSize:13,marginBottom:4}}>
-              <span style={{fontWeight:i===0?700:400,color:"#1E293B",display:"flex",alignItems:"center",gap:6}}>
-                <span style={{width:8,height:8,borderRadius:"50%",background:c.color,display:"inline-block"}}/>{c.name}<span style={{color:"#64748B",fontWeight:400,fontSize:12}}>({c.count}件)</span>
-              </span>
-              <span style={{fontWeight:600}}>{yen(c.total)}{c.disc>0&&<span style={{color:"#BE123C",fontSize:11,marginLeft:8}}>値引き{yen(c.disc)}</span>}</span>
-            </div>
-            <div style={{height:6,background:"#E2E8F0",borderRadius:3,overflow:"hidden"}}>
-              <div style={{height:"100%",width:`${Math.round((c.total/(cStats[0]?.total||1))*100)}%`,background:c.color,borderRadius:3}}/>
-            </div>
-          </div>
-        ))}
-      </Card>
-      <Card>
-        <div style={{fontSize:14,fontWeight:700,marginBottom:10,color:"#1E293B",display:"flex",alignItems:"center",gap:4}}><Tooltip text={TOOLTIPS.jobType}>時間単価分析</Tooltip></div>
-        {hrRates.map(t=>{
-          const isLow=t.rate<settings.alertHourlyRate;
-          return(
-            <div key={t.id} style={{marginBottom:10,padding:"10px 12px",background:isLow?"#FFF7ED":"var(--clr-bg)",borderRadius:10,border:`1.5px solid ${isLow?"#FED7AA":"#E2E8F0"}`}}>
-              <div style={{display:"flex",justifyContent:"space-between",alignItems:"center"}}>
-                <div><div style={{fontWeight:700,fontSize:13,color:"#1E293B"}}>{t.name}</div><div style={{fontSize:12,color:"#64748B",marginTop:2}}>{yen(t.defaultPrice)} ÷ {t.hours}h</div></div>
-                <div style={{textAlign:"right"}}><div style={{fontSize:18,fontWeight:700,color:isLow?"#C2410C":"#15803D"}}>{yen(t.rate)}/h</div>{isLow&&<div style={{fontSize:11,color:"#C2410C"}}>⚠ 目標{yen(settings.alertHourlyRate)}/h未満</div>}</div>
-              </div>
-              {isLow&&<div style={{marginTop:8,paddingTop:8,borderTop:"1px solid #FED7AA",fontSize:12,color:"#92400E",lineHeight:1.7}}>
-                💡 目標時給にするには単価を<strong>{yen(settings.alertHourlyRate*t.hours)}</strong>以上にするか、作業時間を<strong>{Math.round(t.defaultPrice/settings.alertHourlyRate*10)/10}h</strong>以内に短縮してください。
-              </div>}
-            </div>
-          );
-        })}
-      </Card>
-    </div>
-  );
-}
-
-// ── INVOICE ────────────────────────────────────────────────
-function InvoiceTab({jobs,clients}){
-  const[selCl,setSelCl]=useState("");const[selMo,setSelMo]=useState(thisMonth());const[selJ,setSelJ]=useState([]);
-  const[invNum,setInvNum]=useState(`INV-${Date.now().toString().slice(-6)}`);const[preview,setPreview]=useState(false);const[addonDisp,setAddonDisp]=useState("separate");
-  const gc=id=>clients.find(c=>c.id===id);
-  const elig=jobs.filter(j=>(!selCl||j.clientId===Number(selCl))&&(!selMo||j.receiveDate?.startsWith(selMo)));
-  const invJ=jobs.filter(j=>selJ.includes(j.id));const invTotal=invJ.reduce((s,j)=>s+totalPrice(j),0);
-  const clName=gc(invJ[0]?.clientId)?.name||"クライアント名";const payM=gc(invJ[0]?.clientId)?.paymentMethod||"銀行振込";
-  function copyText(){const lines=[`請求書 ${invNum}`,`発行日: ${toDay()}`,`請求先: ${clName} 御中`,"",...invJ.flatMap(j=>{const base=[`・${j.type}  ${yen(j.basePrice)}`];if(addonDisp==="separate")j.addOns.forEach(a=>base.push(`  追加料金（${a.reason}${a.customReason?":"+a.customReason:""}）  ${yen(a.amount)}`));return base;}),"",`合計: ${yen(invTotal)}`,`お支払い方法: ${payM}`];navigator.clipboard?.writeText(lines.join("\n")).then(()=>alert("コピーしました"));}
-  return(
-    <div>
-      <h2 style={{fontSize:18,fontWeight:700,color:"#1E293B",marginBottom:"1rem"}}>請求書</h2>
-      <Card style={{marginBottom:"1rem"}}>
-        <div style={{fontSize:14,fontWeight:700,marginBottom:10,color:"#1E293B"}}>対象案件を選択</div>
-        <div className="grid-2" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10,marginBottom:10}}>
-          <div><Lbl>クライアント</Lbl><select value={selCl} onChange={e=>setSelCl(e.target.value)} style={{width:"100%"}}><option value="">すべて</option>{clients.map(c=><option key={c.id} value={c.id}>{c.name}</option>)}</select></div>
-          <div><Lbl>対象月</Lbl><input type="month" value={selMo} onChange={e=>setSelMo(e.target.value)} style={{width:"100%",boxSizing:"border-box"}}/></div>
-        </div>
-        <div style={{display:"flex",flexDirection:"column",gap:5}}>
-          {elig.length===0&&<div style={{color:"#64748B",fontSize:13}}>該当案件がありません</div>}
-          {elig.map(j=>{const cl=gc(j.clientId);return(<label key={j.id} style={{display:"flex",alignItems:"center",gap:8,cursor:"pointer",padding:"6px 8px",borderRadius:8,background:selJ.includes(j.id)?"var(--clr-bg)":"transparent"}}>
-            <input type="checkbox" checked={selJ.includes(j.id)} onChange={()=>setSelJ(p=>p.includes(j.id)?p.filter(x=>x!==j.id):[...p,j.id])} style={{accentColor:"var(--clr-primary)"}}/>
-            <Badge status={j.status}/><span style={{flex:1,fontSize:13,color:"#1E293B"}}>{cl?.name} — {j.type}</span>
-            <span style={{fontSize:13,fontWeight:600}}>{yen(totalPrice(j))}</span>
-          </label>);})}
-        </div>
-        <div style={{marginTop:10,display:"flex",gap:8,justifyContent:"space-between",flexWrap:"wrap"}}>
-          <button onClick={()=>setSelJ(elig.map(j=>j.id))} style={{fontSize:12}}>すべて選択</button>
-          <button onClick={()=>setPreview(true)} disabled={selJ.length===0} style={{background:"var(--clr-primary)",color:"#fff",border:"none",borderRadius:8,padding:"6px 18px",fontWeight:700,fontSize:13,cursor:"pointer"}}>請求書を作成({selJ.length}件)</button>
-        </div>
-      </Card>
-      {preview&&invJ.length>0&&<Card>
-        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:12,flexWrap:"wrap",gap:8}}>
-          <div style={{fontSize:14,fontWeight:700,color:"#1E293B"}}>プレビュー</div>
-          <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>
-            <select value={addonDisp} onChange={e=>setAddonDisp(e.target.value)} style={{fontSize:12,padding:"4px 8px",width:"auto"}}><option value="separate">追加料金を別行表示</option><option value="merged">まとめて表示</option></select>
-            <input value={invNum} onChange={e=>setInvNum(e.target.value)} style={{fontSize:12,width:140}}/>
-            <button onClick={copyText} style={{fontSize:12,padding:"4px 10px"}}><i className="ti ti-copy"/> コピー</button>
-            <button onClick={()=>window.print()} className="no-print" style={{fontSize:12,padding:"4px 10px"}}><i className="ti ti-printer"/> 印刷</button>
-          </div>
-        </div>
-        <div style={{border:"1.5px solid #E2E8F0",borderRadius:10,padding:"1.25rem",background:"#FAFAFA"}}>
-          <div style={{fontSize:20,fontWeight:700,marginBottom:4,color:"#1E293B"}}>請求書</div>
-          <div style={{fontSize:12,color:"#64748B",marginBottom:16}}>{invNum}　{toDay()}</div>
-          <div style={{marginBottom:16,fontSize:14,color:"#1E293B"}}><strong>{clName}</strong> 御中</div>
-          <table style={{width:"100%",borderCollapse:"collapse",fontSize:13}}>
-            <thead><tr style={{borderBottom:"1.5px solid #E2E8F0"}}><th style={{textAlign:"left",padding:"6px 0",color:"#64748B",fontWeight:600}}>内容</th><th style={{textAlign:"right",padding:"6px 0",color:"#64748B",fontWeight:600}}>金額</th></tr></thead>
-            <tbody>{invJ.map(j=>{const rows=[<tr key={j.id}><td style={{padding:"7px 0",color:"#334155"}}>{j.type}（{j.deadline}納品）</td><td style={{padding:"7px 0",textAlign:"right"}}>{yen(j.basePrice)}</td></tr>];if(addonDisp==="separate")j.addOns.forEach(a=>rows.push(<tr key={a.id}><td style={{padding:"4px 0 4px 12px",color:"#64748B",fontSize:12}}>追加料金（{a.reason}{a.customReason?": "+a.customReason:""}）</td><td style={{padding:"4px 0",textAlign:"right",color:"#64748B"}}>{yen(a.amount)}</td></tr>));return rows;})}</tbody>
-            <tfoot><tr style={{borderTop:"1.5px solid #E2E8F0"}}><td style={{padding:"10px 0",fontWeight:700,fontSize:14}}>合計</td><td style={{padding:"10px 0",textAlign:"right",fontWeight:700,fontSize:20,color:"#1E293B"}}>{yen(invTotal)}</td></tr></tfoot>
-          </table>
-          <div style={{marginTop:12,paddingTop:12,borderTop:"1px solid #E2E8F0",fontSize:13,color:"#64748B"}}>お支払い方法: <strong style={{color:"#334155"}}>{payM}</strong></div>
-        </div>
-      </Card>}
-    </div>
-  );
-}
-
-// ── CONTRACT ───────────────────────────────────────────────
-function ContractTab({jobs,clients,settings}){
-  const[selJob,setSelJob]=useState("");
-  const[form,setForm]=useState({revisions:3,paymentDays:14,deliveryFormat:"MP4, JPG",copyright:"クライアントに譲渡",additionalNotes:"",paymentTiming:"納品後"});
-  const[editTxt,setEditTxt]=useState("");const[generated,setGenerated]=useState(false);
-  const gc=id=>clients.find(c=>c.id===id);
-  const job=jobs.find(j=>j.id===Number(selJob));const client=job?gc(job.clientId):null;const tp=job?totalPrice(job):0;
-  function generate(){
-    const text=["業務委託 受注書","",`発行日: ${toDay()}`,`受注番号: ORD-${Date.now().toString().slice(-6)}`,``,`【依頼者】${client?.name||""}`,`【受注者】（あなたの名前・屋号）`,"","─────────────────────────────","■ 業務内容",`  種別: ${job?.type||""}`,`  納品物: ${form.deliveryFormat}`,`  受注日: ${job?.receiveDate||""}`,`  納品予定日: ${job?.deadline||""}（修正対応完了後の最終納品日）`,"","■ 料金",`  基本料金: ${yen(job?.basePrice||0)}`,...(job?.addOns?.length?[`  追加料金: ${yen(tp-(job?.basePrice||0))}`,`  ─────────────────────`]:[]),`  合計（税込）: ${yen(tp)}`,"","■ 修正について",`  本見積もりに含まれる修正回数: ${form.revisions}回まで`,"  上記を超える修正は追加料金が発生します（都度ご相談）。","  納品日は修正回数の対応完了後を想定しており、修正が増えた場合は","  納品日が後ろ倒しになる可能性があります。","","■ 追加料金について","  素材の量・仕様・構成が当初の想定を大幅に超えた場合、","  事前にご連絡のうえ追加料金が発生することがあります。","  本料金表はあくまで目安であり、作業量により変動する場合があります。","","■ 著作権",`  ${form.copyright}`,"","■ お支払い",`  方法: ${client?.paymentMethod||"銀行振込"}`,`  タイミング: ${form.paymentTiming}`,`  期限: ${form.paymentTiming==="前払い"?"受注確認後":"納品後"} ${form.paymentDays}日以内`,...(client?.paymentDelay?["  ※ 過去の入金遅延により、今回は前払いをお願いしております。"]:[]),"","■ 特記事項",form.additionalNotes||"  なし","","─────────────────────────────","上記内容をご確認のうえ、ご同意いただけましたらご返信ください。","ご不明な点がございましたらお気軽にお問い合わせください。"].join("\n");
-    setEditTxt(text);setGenerated(true);
-  }
-  return(
-    <div>
-      <h2 style={{fontSize:18,fontWeight:700,color:"#1E293B",marginBottom:"1rem"}}>受注書・契約書</h2>
-      <Card style={{marginBottom:"1rem"}}>
-        <div style={{fontSize:14,fontWeight:700,marginBottom:10,color:"#1E293B"}}>案件を選択</div>
-        <select value={selJob} onChange={e=>{setSelJob(e.target.value);setGenerated(false);}} style={{width:"100%",marginBottom:12}}>
-          <option value="">案件を選んでください</option>
-          {jobs.map(j=><option key={j.id} value={j.id}>{gc(j.clientId)?.name} — {j.type} ({j.receiveDate})</option>)}
-        </select>
-        {job&&<><div className="grid-2" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
-          <div><Lbl>修正回数</Lbl><input type="number" value={form.revisions} onChange={e=>setForm(f=>({...f,revisions:e.target.value}))} style={{width:"100%",boxSizing:"border-box"}}/></div>
-          <div><Lbl>支払い期限（日数）</Lbl><input type="number" value={form.paymentDays} onChange={e=>setForm(f=>({...f,paymentDays:e.target.value}))} style={{width:"100%",boxSizing:"border-box"}}/></div>
-          <div><Lbl>支払いタイミング</Lbl><select value={form.paymentTiming} onChange={e=>setForm(f=>({...f,paymentTiming:e.target.value}))} style={{width:"100%"}}><option>納品後</option><option>前払い</option><option>分割（前払い50%）</option></select></div>
-          <div><Lbl>納品形式</Lbl><input value={form.deliveryFormat} onChange={e=>setForm(f=>({...f,deliveryFormat:e.target.value}))} style={{width:"100%",boxSizing:"border-box"}}/></div>
-          <div style={{gridColumn:"1/-1"}}><Lbl>著作権</Lbl><select value={form.copyright} onChange={e=>setForm(f=>({...f,copyright:e.target.value}))} style={{width:"100%"}}><option>クライアントに譲渡</option><option>受注者が保持（ライセンス提供）</option><option>別途協議</option></select></div>
-          <div style={{gridColumn:"1/-1"}}><Lbl>特記事項</Lbl><textarea value={form.additionalNotes} onChange={e=>setForm(f=>({...f,additionalNotes:e.target.value}))} style={{width:"100%",height:60,boxSizing:"border-box",resize:"vertical"}}/></div>
-        </div>
-        <div style={{marginTop:10,textAlign:"right"}}><button onClick={generate} style={{background:"var(--clr-primary)",color:"#fff",border:"none",borderRadius:8,padding:"7px 22px",fontWeight:700,cursor:"pointer"}}>受注書を生成</button></div></>}
-      </Card>
-      {generated&&<Card>
-        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10,flexWrap:"wrap",gap:8}}>
-          <div style={{fontSize:14,fontWeight:700,color:"#1E293B"}}>受注書（編集可能）</div>
-          <div style={{display:"flex",gap:6}}>
-            <button onClick={()=>navigator.clipboard?.writeText(editTxt).then(()=>alert("コピーしました"))} style={{fontSize:12,padding:"4px 10px"}}><i className="ti ti-copy"/> コピー</button>
-            <button onClick={()=>window.print()} className="no-print" style={{fontSize:12,padding:"4px 10px"}}><i className="ti ti-printer"/> 印刷</button>
-          </div>
-        </div>
-        <textarea value={editTxt} onChange={e=>setEditTxt(e.target.value)} style={{width:"100%",height:400,boxSizing:"border-box",fontFamily:"monospace",fontSize:12,lineHeight:1.8,border:"1.5px solid #E2E8F0",borderRadius:8,padding:"12px",resize:"vertical",color:"#334155",background:"#FAFAFA"}}/>
-      </Card>}
-    </div>
-  );
-}
-
-// ── SETTINGS ───────────────────────────────────────────────
-function SettingsTab({settings,setSettings,clients,setClients}){
-  const[local,setLocal]=useState(settings);const[confirmDel,setConfirmDel]=useState(null);const[editCl,setEditCl]=useState(null);
-  function save(){setSettings(local);alert("設定を保存しました");}
-  function upJT(id,field,val){setLocal(s=>({...s,jobTypes:s.jobTypes.map(t=>t.id===id?{...t,[field]:field==="name"?val:Number(val)}:t)}));}
-  function rmJT(id){setLocal(s=>({...s,jobTypes:s.jobTypes.filter(t=>t.id!==id)}));setConfirmDel(null);}
-  const theme=PASTEL_THEMES.find(t=>t.id===local.themeId)||PASTEL_THEMES[0];
-  return(
-    <div>
-      <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"1rem"}}>
-        <h2 style={{fontSize:18,fontWeight:700,color:"#1E293B"}}>設定</h2>
-        <button onClick={save} style={{background:"var(--clr-primary)",color:"#fff",border:"none",borderRadius:8,padding:"6px 22px",fontWeight:700,cursor:"pointer"}}>保存する</button>
       </div>
-      <Card style={{marginBottom:"1rem"}}>
-        <div style={{fontSize:14,fontWeight:700,color:"#1E293B",marginBottom:10}}>テーマ・表示</div>
-        <div style={{marginBottom:12}}>
-          <Lbl>テーマカラー（{theme.label}）</Lbl>
-          <div style={{display:"flex",gap:8,flexWrap:"wrap",marginTop:6}}>
-            {PASTEL_THEMES.map(t=><button key={t.id} onClick={()=>setLocal(s=>({...s,themeId:t.id}))} title={t.label} style={{width:36,height:36,borderRadius:"50%",background:t.primary,border:local.themeId===t.id?"3px solid #1E293B":`3px solid ${t.primary}`,cursor:"pointer",position:"relative",padding:0}}>
-              {local.themeId===t.id&&<span style={{position:"absolute",inset:0,display:"flex",alignItems:"center",justifyContent:"center",color:"#fff",fontSize:16}}>✓</span>}
-            </button>)}
-          </div>
+      <div style="display:flex;align-items:center;gap:16px;">
+        <div class="ev-row-tags">
+          <span class="ev-row-tag" data-en="Opening Movie" data-jp="オープニング">Opening Movie</span>
+          <span class="ev-row-tag" data-en="Tutorials" data-jp="チュートリアル">Tutorials</span>
         </div>
-        <div><Lbl>フォントサイズ: {local.fontSize}px</Lbl><input type="range" min={12} max={18} step={1} value={local.fontSize} onChange={e=>setLocal(s=>({...s,fontSize:Number(e.target.value)}))} style={{width:"100%"}}/></div>
-      </Card>
-      <Card style={{marginBottom:"1rem"}}>
-        <div style={{fontSize:14,fontWeight:700,color:"#1E293B",marginBottom:10}}>作業ルール</div>
-        <div className="grid-2" style={{display:"grid",gridTemplateColumns:"1fr 1fr",gap:10}}>
-          <div><Lbl tip={TOOLTIPS.workHours}>1日の作業時間（h）</Lbl><input type="number" value={local.workHoursPerDay} onChange={e=>setLocal(s=>({...s,workHoursPerDay:Number(e.target.value)}))} style={{width:"100%",boxSizing:"border-box"}}/></div>
-          <div><Lbl tip={TOOLTIPS.monthlyLimit}>月間案件上限数</Lbl><input type="number" value={local.monthlyJobLimit} onChange={e=>setLocal(s=>({...s,monthlyJobLimit:Number(e.target.value)}))} style={{width:"100%",boxSizing:"border-box"}}/></div>
-          <div style={{gridColumn:"1/-1"}}>
-            <Lbl tip={TOOLTIPS.alertHourlyRate}>時給アラート: {yen(local.alertHourlyRate)}/h</Lbl>
-            <input type="range" min={500} max={5000} step={100} value={local.alertHourlyRate} onChange={e=>setLocal(s=>({...s,alertHourlyRate:Number(e.target.value)}))} style={{width:"100%"}}/>
-            <div style={{fontSize:12,color:"#64748B",marginTop:2}}>この時給を下回る案件にアラートが表示されます</div>
-          </div>
-        </div>
-      </Card>
-      <Card style={{marginBottom:"1rem"}}>
-        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:10}}>
-          <div style={{fontSize:14,fontWeight:700,color:"#1E293B",display:"flex",alignItems:"center",gap:4}}><Tooltip text={TOOLTIPS.jobType}>作業種別・料金表</Tooltip></div>
-          <button onClick={()=>setLocal(s=>({...s,jobTypes:[...s.jobTypes,{id:Date.now(),name:"新しい種別",hours:2,defaultPrice:5000}]}))} style={{fontSize:12,padding:"4px 10px"}}>+ 追加</button>
-        </div>
-        <div style={{fontSize:12,color:"#64748B",marginBottom:8}}>種別名 / 工数(h) / 標準価格 / 時給換算</div>
-        {local.jobTypes.map(t=>{const rate=t.hours>0?Math.round(t.defaultPrice/t.hours):0;return(
-          <div key={t.id} style={{display:"grid",gridTemplateColumns:"1fr 60px 100px 72px 36px",gap:6,alignItems:"center",marginBottom:6}}>
-            <input value={t.name} onChange={e=>upJT(t.id,"name",e.target.value)} style={{boxSizing:"border-box"}}/>
-            <input type="number" value={t.hours} onChange={e=>upJT(t.id,"hours",e.target.value)} style={{boxSizing:"border-box"}} step="0.5"/>
-            <input type="number" value={t.defaultPrice} onChange={e=>upJT(t.id,"defaultPrice",e.target.value)} style={{boxSizing:"border-box"}}/>
-            <div style={{fontSize:12,color:rate<local.alertHourlyRate?"#C2410C":"#15803D",fontWeight:700,textAlign:"center"}}>{yen(rate)}/h</div>
-            <button onClick={()=>setConfirmDel({type:"jobType",id:t.id})} style={{padding:"4px",color:"#fff",background:"#EF4444",border:"1px solid #EF4444",borderRadius:6,cursor:"pointer",fontWeight:700,fontSize:13}}><i className="ti ti-trash"/></button>
-          </div>
-        );})}
-      </Card>
-      <Card style={{marginBottom:"1rem"}}>
-        <div style={{fontSize:14,fontWeight:700,color:"#1E293B",marginBottom:10}}>クライアント管理</div>
-        {clients.map(c=>(
-          <div key={c.id} style={{display:"flex",alignItems:"center",gap:8,padding:"7px 10px",background:"var(--clr-bg)",borderRadius:8,marginBottom:6,border:"1px solid #E2E8F0"}}>
-            <div style={{width:10,height:10,borderRadius:"50%",background:c.color,flexShrink:0}}/>
-            <span style={{flex:1,fontSize:13,fontWeight:600,color:"#1E293B"}}>{c.name}{c.paymentDelay&&<span style={{marginLeft:6,fontSize:11,color:"#C2410C",background:"#FFF7ED",padding:"1px 6px",borderRadius:10}}>⚠ 遅延歴</span>}</span>
-            <span style={{fontSize:12,color:"#64748B"}}>{c.paymentMethod}</span>
-            <button onClick={()=>setEditCl({...c})} style={{fontSize:12,padding:"3px 8px",borderRadius:6}}><i className="ti ti-edit"/></button>
-            <button onClick={()=>setConfirmDel({type:"client",id:c.id})} style={{padding:"3px 7px",fontSize:13,color:"#fff",background:"#EF4444",border:"1px solid #EF4444",borderRadius:6,cursor:"pointer"}}><i className="ti ti-trash"/></button>
-          </div>
-        ))}
-      </Card>
-      <Card>
-        <div style={{fontSize:14,fontWeight:700,color:"#1E293B",marginBottom:10}}>データ管理</div>
-        <div style={{fontSize:12,color:"#64748B",marginBottom:8}}>※ データはSupabaseクラウドに自動保存されています。PCとスマホで同じデータを共有できます。</div>
-        <button onClick={()=>{const b=new Blob([JSON.stringify({settings,clients},null,2)],{type:"application/json"});const a=document.createElement("a");a.href=URL.createObjectURL(b);a.download="freelancekit-backup.json";a.click();}} style={{fontSize:13}}><i className="ti ti-download"/> バックアップ (JSON)</button>
-      </Card>
-      {confirmDel&&<Confirm message={confirmDel.type==="jobType"?"この種別を削除しますか？":"このクライアントを削除しますか？"} onConfirm={()=>{if(confirmDel.type==="jobType")rmJT(confirmDel.id);else{setClients(p=>p.filter(c=>c.id!==confirmDel.id));setConfirmDel(null);}}} onCancel={()=>setConfirmDel(null)}/>}
-      {editCl&&<Modal title="クライアント編集" onClose={()=>setEditCl(null)}>
-        <div style={{display:"flex",flexDirection:"column",gap:10}}>
-          <div><Lbl>クライアント名</Lbl><input value={editCl.name} onChange={e=>setEditCl(c=>({...c,name:e.target.value}))} style={{width:"100%",boxSizing:"border-box"}}/></div>
-          <div><Lbl>支払い方法</Lbl><select value={editCl.paymentMethod} onChange={e=>setEditCl(c=>({...c,paymentMethod:e.target.value}))} style={{width:"100%"}}>{PAYMENT_METHODS.map(m=><option key={m}>{m}</option>)}</select></div>
-          <div style={{display:"flex",alignItems:"center",gap:8}}>
-            <input type="checkbox" id="delay" checked={editCl.paymentDelay} onChange={e=>setEditCl(c=>({...c,paymentDelay:e.target.checked}))} style={{accentColor:"#EF4444",width:15,height:15}}/>
-            <label htmlFor="delay" style={{fontSize:13,color:"#1E293B",cursor:"pointer",display:"flex",alignItems:"center",gap:4}}><Tooltip text={TOOLTIPS.paymentDelay}>入金遅延歴あり（前払い推奨）</Tooltip></label>
-          </div>
-          <div style={{display:"flex",gap:6,flexWrap:"wrap"}}>{CLIENT_PALETTE.map(col=><button key={col} onClick={()=>setEditCl(c=>({...c,color:col}))} style={{width:28,height:28,borderRadius:"50%",background:col,border:editCl.color===col?"3px solid #1E293B":`3px solid ${col}`,cursor:"pointer",padding:0}}/>)}</div>
-          <div style={{display:"flex",gap:8,justifyContent:"flex-end"}}>
-            <button onClick={()=>setEditCl(null)}>キャンセル</button>
-            <button onClick={()=>{setClients(p=>p.map(c=>c.id===editCl.id?editCl:c));setEditCl(null);}} style={{background:"var(--clr-primary)",color:"#fff",border:"none",borderRadius:8,padding:"6px 18px",fontWeight:700,cursor:"pointer"}}>保存</button>
-          </div>
-        </div>
-      </Modal>}
-    </div>
-  );
-}
-
-// ── ROOT APP ───────────────────────────────────────────────
-function App(){
-  const USER_ID=uid();
-  const[activeTab,setActiveTab]=useState("home");
-  const[jobs,setJobsRaw]=useState([]);
-  const[clients,setClientsRaw]=useState([]);
-  const[expenses,setExpensesRaw]=useState([]);
-  const[settings,setSettingsRaw]=useState(INIT_SETTINGS);
-  const[loading,setLoading]=useState(true);
-  const[syncing,setSyncing]=useState(false);
-  const[lastSync,setLastSync]=useState(null);
-  const[menuOpen,setMenuOpen]=useState(false);
-  const syncTimer=useRef(null);
-
-  // load from Supabase on mount
-  useEffect(()=>{
-    async function load(){
-      setLoading(true);
-      try{
-        const[j,c,e,s]=await Promise.all([
-          dbLoad("jobs",USER_ID),dbLoad("clients",USER_ID),
-          dbLoad("expenses",USER_ID),dbLoad("settings",USER_ID)
-        ]);
-        if(j)setJobsRaw(j);
-        if(c)setClientsRaw(c);else setClientsRaw([]);
-        if(e)setExpensesRaw(e);else setExpensesRaw([]);
-        if(s)setSettingsRaw(s);
-      }catch(err){console.error("Load error:",err);}
-      setLoading(false);
-    }
-    load();
-  },[]);
-
-  // debounced auto-save
-  function scheduleSave(table,data){
-    setSyncing(true);
-    if(syncTimer.current)clearTimeout(syncTimer.current);
-    syncTimer.current=setTimeout(async()=>{
-      try{
-        await dbSave(table,USER_ID,data);
-        setLastSync(new Date().toLocaleTimeString("ja-JP",{hour:"2-digit",minute:"2-digit"})+"保存");
-      }catch(err){console.error("Save error:",err);}
-      setSyncing(false);
-    },1200);
-  }
-
-  function setJobs(v){const next=typeof v==="function"?v(jobs):v;setJobsRaw(next);scheduleSave("jobs",next);}
-  function setClients(v){const next=typeof v==="function"?v(clients):v;setClientsRaw(next);scheduleSave("clients",next);}
-  function setExpenses(v){const next=typeof v==="function"?v(expenses):v;setExpensesRaw(next);scheduleSave("expenses",next);}
-  function setSettings(v){const next=typeof v==="function"?v(settings):v;setSettingsRaw(next);scheduleSave("settings",next);}
-
-  const theme=PASTEL_THEMES.find(t=>t.id===settings.themeId)||PASTEL_THEMES[0];
-  useEffect(()=>{
-    const r=document.documentElement;
-    r.style.setProperty("--clr-primary",theme.primary);
-    r.style.setProperty("--clr-accent",theme.accent);
-    r.style.setProperty("--clr-bg",theme.bg);
-    r.style.setProperty("--clr-card",theme.card);
-    document.body.style.background=theme.bg;
-    document.body.style.fontSize=settings.fontSize+"px";
-  },[theme,settings.fontSize]);
-
-  if(loading)return(
-    <div style={{display:"flex",flexDirection:"column",alignItems:"center",justifyContent:"center",height:"100vh",gap:16,background:theme.bg}}>
-      <div style={{width:44,height:44,borderRadius:12,background:theme.primary,display:"flex",alignItems:"center",justifyContent:"center"}}>
-        <i className="ti ti-briefcase" style={{color:"#fff",fontSize:24}}/>
+        <span class="ev-arrow">↗</span>
       </div>
-      <div style={{fontSize:18,fontWeight:700,color:theme.primary}}>FreelanceKit</div>
-      <div style={{fontSize:13,color:"#94A3B8"}}>データを読み込んでいます...</div>
     </div>
-  );
+    <div class="ev-row-item" onclick="goEvent('sawadi3')">
+      <div class="ev-left">
+        <span class="ev-dot soon"></span>
+        <div>
+          <div class="ev-row-name">Sawadi Cup #3</div>
+          <div class="ev-row-meta" data-en="Upcoming · July 2026 · Visual Design & Branding" data-jp="開催予定 · 2026年7月 · ビジュアルデザイン・ブランディング">Upcoming · July 2026 · Visual Design & Branding</div>
+        </div>
+      </div>
+      <div style="display:flex;align-items:center;gap:16px;">
+        <div class="ev-row-tags">
+          <span class="ev-row-tag" data-en="In production" data-jp="制作中">In production</span>
+        </div>
+        <span class="ev-arrow">↗</span>
+      </div>
+    </div>
+  </div>
+</div>
 
-  const tabContent={
-    home:<HomeTab jobs={jobs} clients={clients} settings={settings} expenses={expenses}/>,
-    jobs:<JobsTab jobs={jobs} setJobs={setJobs} clients={clients} setClients={setClients} settings={settings}/>,
-    calendar:<CalendarTab jobs={jobs} clients={clients} settings={settings}/>,
-    finance:<FinanceTab jobs={jobs} expenses={expenses} setExpenses={setExpenses} settings={settings} setSettings={setSettings}/>,
-    analysis:<AnalysisTab jobs={jobs} clients={clients} settings={settings}/>,
-    invoice:<InvoiceTab jobs={jobs} clients={clients} settings={settings}/>,
-    contract:<ContractTab jobs={jobs} clients={clients} settings={settings}/>,
-    settings:<SettingsTab settings={settings} setSettings={setSettings} clients={clients} setClients={setClients}/>,
+<!-- ═══════════════ EVENT: SAWADI CUP #2 ═══════════════ -->
+<div class="page" id="pg-sawadi2">
+  <button class="back-btn" onclick="go('events')">← <span data-en="Events" data-jp="イベント">Events</span></button>
+  <div class="ev-detail-hero fi">
+    <div class="ev-detail-status"><span class="ev-dot done"></span><span data-en="Completed" data-jp="終了">Completed</span></div>
+    <h1 class="ev-detail-title">Sawadi Cup #2</h1>
+    <div class="ev-meta-grid">
+      <div class="ev-meta-cell"><div class="ev-meta-k" data-en="Host" data-jp="主催">Host</div><div class="ev-meta-v"><a href="https://x.com/OWissigk" target="_blank">花知事 @OWissigk ↗</a></div></div>
+      <div class="ev-meta-cell"><div class="ev-meta-k" data-en="Game" data-jp="ゲーム">Game</div><div class="ev-meta-v">Overwatch</div></div>
+      <div class="ev-meta-cell"><div class="ev-meta-k" data-en="My role" data-jp="担当">My role</div><div class="ev-meta-v" data-en="Visual Design & Branding" data-jp="ビジュアルデザイン・ブランディング">Visual Design & Branding</div></div>
+      <div class="ev-meta-cell"><div class="ev-meta-k" data-en="Thumbnail" data-jp="サムネイル">Thumbnail</div><div class="ev-meta-v" data-en="Made by me" data-jp="私が制作">Made by me</div></div>
+    </div>
+    <p class="ev-desc" data-en="OW community tournament. Handled all visual assets including the event thumbnail and branding materials." data-jp="OWコミュニティトーナメントイベントサムネイルとブランディング素材を含む全ビジュアルを担当しました">OW community tournament. Handled all visual assets including the event thumbnail and branding materials.</p>
+  </div>
+  <div class="ev-thumbnail-wrap fi">
+    <p class="ev-thumb-eye" data-en="Event thumbnail — made by me" data-jp="イベントサムネイル（私が制作）">Event thumbnail — made by me</p>
+    <!-- PLACEHOLDER: replace with <img class="img-real" src="sawadi2-thumbnail.jpg" alt="Sawadi Cup #2"> -->
+    <div class="img-ph"><span data-en="Sawadi Cup #2 thumbnail" data-jp="さわでぃカップ #2 サムネイル">Sawadi Cup #2 thumbnail</span><small data-en="Replace with your image file" data-jp="画像ファイルを追加してください">Replace with your image file</small></div>
+  </div>
+  <div class="vid-section fi">
+    <p class="vid-eye" data-en="Event visuals & clips" data-jp="イベントビジュアル・クリップ">Event visuals & clips</p>
+    <!-- PLACEHOLDER: add YouTube embeds or images here -->
+    <div class="vid-ph"><span data-en="Add visuals or clips" data-jp="ビジュアル・クリップを追加">Add visuals or clips</span><small data-en="Replace with YouTube embed IDs or image files" data-jp="YouTubeのIDか画像を追加">Replace with YouTube embed IDs or image files</small></div>
+  </div>
+</div>
+
+<!-- ═══════════════ EVENT: SAWADI CUP #3 ═══════════════ -->
+<div class="page" id="pg-sawadi3">
+  <button class="back-btn" onclick="go('events')">← <span data-en="Events" data-jp="イベント">Events</span></button>
+  <div class="ev-detail-hero fi">
+    <div class="ev-detail-status"><span class="ev-dot soon"></span><span data-en="Upcoming — July 2026" data-jp="開催予定 — 2026年7月">Upcoming — July 2026</span></div>
+    <h1 class="ev-detail-title">Sawadi Cup #3</h1>
+    <div class="ev-meta-grid">
+      <div class="ev-meta-cell"><div class="ev-meta-k" data-en="Host" data-jp="主催">Host</div><div class="ev-meta-v"><a href="https://x.com/OWissigk" target="_blank">花知事 @OWissigk ↗</a></div></div>
+      <div class="ev-meta-cell"><div class="ev-meta-k" data-en="Game" data-jp="ゲーム">Game</div><div class="ev-meta-v">Overwatch</div></div>
+      <div class="ev-meta-cell"><div class="ev-meta-k" data-en="My role" data-jp="担当">My role</div><div class="ev-meta-v" data-en="Visual Design & Branding" data-jp="ビジュアルデザイン・ブランディング">Visual Design & Branding</div></div>
+      <div class="ev-meta-cell"><div class="ev-meta-k" data-en="Status" data-jp="状況">Status</div><div class="ev-meta-v" data-en="In production" data-jp="制作中">In production</div></div>
+    </div>
+    <p class="ev-desc" data-en="Third edition of the OW community tournament. Currently producing all visual assets and branding." data-jp="OWコミュニティトーナメントの第3回現在全ビジュアルとブランディングを制作中です">Third edition of the OW community tournament. Currently producing all visual assets and branding.</p>
+  </div>
+  <div class="ev-thumbnail-wrap fi">
+    <p class="ev-thumb-eye" data-en="Event thumbnail — made by me" data-jp="イベントサムネイル（私が制作）">Event thumbnail — made by me</p>
+    <!-- PLACEHOLDER: replace with <img class="img-real" src="sawadi3-thumbnail.jpg" alt="Sawadi Cup #3"> -->
+    <div class="img-ph"><span data-en="Sawadi Cup #3 thumbnail" data-jp="さわでぃカップ #3 サムネイル">Sawadi Cup #3 thumbnail</span><small data-en="In production — add when ready" data-jp="制作中 — 完成後に追加">In production — add when ready</small></div>
+  </div>
+  <div class="vid-section fi">
+    <p class="vid-eye" data-en="Event visuals & clips" data-jp="イベントビジュアル・クリップ">Event visuals & clips</p>
+    <div class="vid-ph"><span data-en="Coming soon" data-jp="準備中">Coming soon</span><small data-en="Add when event materials are ready" data-jp="素材が完成したら追加">Add when event materials are ready</small></div>
+  </div>
+</div>
+
+<!-- ═══════════════ EVENT: DIVINE CUP ═══════════════ -->
+<div class="page" id="pg-divinecup">
+  <button class="back-btn" onclick="go('events')">← <span data-en="Events" data-jp="イベント">Events</span></button>
+  <div class="ev-detail-hero fi">
+    <div class="ev-detail-status"><span class="ev-dot done"></span><span data-en="Completed" data-jp="終了">Completed</span></div>
+    <h1 class="ev-detail-title">Divine Cup</h1>
+    <div class="ev-meta-grid">
+      <div class="ev-meta-cell"><div class="ev-meta-k" data-en="Host" data-jp="主催">Host</div><div class="ev-meta-v"><a href="https://www.youtube.com/@99DIVINE-z2c6t" target="_blank">99Divine ↗</a></div></div>
+      <div class="ev-meta-cell"><div class="ev-meta-k" data-en="Game" data-jp="ゲーム">Game</div><div class="ev-meta-v">Overwatch</div></div>
+      <div class="ev-meta-cell"><div class="ev-meta-k" data-en="My role" data-jp="担当">My role</div><div class="ev-meta-v" data-en="Opening Movie · Tutorial Videos" data-jp="オープニング映像・チュートリアル動画">Opening Movie · Tutorial Videos</div></div>
+    </div>
+    <p class="ev-desc" data-en="OW community tournament hosted by 99Divine. I produced the opening movie and mini-game tutorial videos for the event." data-jp="99Divine主催のOWコミュニティトーナメントオープニング映像とミニゲームのチュートリアル動画を制作しました">OW community tournament hosted by 99Divine. I produced the opening movie and mini-game tutorial videos for the event.</p>
+  </div>
+  <div class="vid-section fi">
+    <p class="vid-eye" data-en="Opening movie & tutorials" data-jp="オープニング映像・チュートリアル">Opening movie & tutorials</p>
+    <div class="vid-grid">
+      <div class="vid-feat">
+        <div class="vid-wrap"><iframe src="https://www.youtube.com/embed/4bgHe8tYpko" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div>
+        <p class="vid-lbl" data-en="Full stream — opening movie & mini-game tutorials at the start" data-jp="フル配信 — オープニング映像とミニゲームチュートリアルは冒頭にあります">Full stream — opening movie & mini-game tutorials at the start</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ SUPPORT ═══════════════ -->
+<div class="page" id="pg-support">
+  <div class="sh fi">
+    <p class="sh-eye" data-en="Support me" data-jp="サポートする">Support me</p>
+    <h2 class="sh-title" data-en="Keep editing<br><em>alive.</em>" data-jp="編集を<br><em>続けるために</em>">Keep editing<br><em>alive.</em></h2>
+  </div>
+  <p class="sup-intro fi" data-en="Editing is a passion project on top of a full life — family, work, and Overwatch. If you've enjoyed any of the content I've helped create, any support means a lot and goes directly toward keeping this going." data-jp="編集は、家族・仕事・オーバーウォッチでいっぱいの生活の中での情熱プロジェクトです関わったコンテンツを楽しんでいただけたなら、どんなサポートも活動継続の励みになります">Editing is a passion project on top of a full life — family, work, and Overwatch. If you've enjoyed any of the content I've helped create, any support means a lot and goes directly toward keeping this going.</p>
+  <div class="sup-grid fi">
+    <div class="sup-card">
+      <div class="sup-tier" data-en="One-time" data-jp="単発">One-time</div>
+      <div class="sup-name" data-en="Buy me a coffee" data-jp="コーヒー一杯">Buy me a coffee</div>
+      <div class="sup-freq" data-en="Anytime, no commitment" data-jp="いつでも、縛りなし">Anytime, no commitment</div>
+      <ul class="sup-perks">
+        <li class="on" data-en="One-time Ko-fi support" data-jp="Ko-fi単発サポート">One-time Ko-fi support</li>
+        <li class="on" data-en="My genuine gratitude" data-jp="心からの感謝">My genuine gratitude</li>
+      </ul>
+      <!-- PLACEHOLDER: replace # with your Ko-fi URL -->
+      <button class="sup-btn" onclick="window.open('https://ko-fi.com/edittto','_blank')" data-en="Support on Ko-fi →" data-jp="Ko-fiでサポート →">Support on Ko-fi →</button>
+    </div>
+    <div class="sup-card feat">
+      <div class="sup-tier" data-en="Monthly" data-jp="月額">Monthly</div>
+      <div class="sup-name" data-en="Regular support" data-jp="月額サポート">Regular support</div>
+      <div class="sup-freq" data-en="Billed monthly · cancel anytime" data-jp="月額制 · いつでもキャンセル可">Billed monthly · cancel anytime</div>
+      <ul class="sup-perks">
+        <li class="on" data-en="Monthly Ko-fi membership" data-jp="Ko-fi月額メンバーシップ">Monthly Ko-fi membership</li>
+        <li class="on" data-en="Name in my bio (optional)" data-jp="プロフィール掲載（任意）">Name in my bio (optional)</li>
+        <li class="on" data-en="My genuine gratitude" data-jp="心からの感謝">My genuine gratitude</li>
+      </ul>
+      <!-- PLACEHOLDER: replace # with your Ko-fi URL -->
+      <button class="sup-btn" onclick="window.open('https://ko-fi.com/edittto','_blank')" data-en="Support on Ko-fi →" data-jp="Ko-fiでサポート →">Support on Ko-fi →</button>
+    </div>
+    <div class="sup-card">
+      <div class="sup-tier" data-en="Annual" data-jp="年額">Annual</div>
+      <div class="sup-name" data-en="All-in support" data-jp="年額サポート">All-in support</div>
+      <div class="sup-freq" data-en="Billed yearly" data-jp="年額制">Billed yearly</div>
+      <ul class="sup-perks">
+        <li class="on" data-en="Annual Ko-fi membership" data-jp="Ko-fi年額メンバーシップ">Annual Ko-fi membership</li>
+        <li class="on" data-en="Name in my bio (optional)" data-jp="プロフィール掲載（任意）">Name in my bio (optional)</li>
+        <li class="on" data-en="Priority DM response" data-jp="DM優先対応">Priority DM response</li>
+        <li class="on" data-en="My genuine gratitude" data-jp="心からの感謝">My genuine gratitude</li>
+      </ul>
+      <!-- PLACEHOLDER: replace # with your Ko-fi URL -->
+      <button class="sup-btn" onclick="window.open('https://ko-fi.com/edittto','_blank')" data-en="Support on Ko-fi →" data-jp="Ko-fiでサポート →">Support on Ko-fi →</button>
+    </div>
+  </div>
+  <p class="kofi-note fi" data-en="Platform: Ko-fi — 0% fees on donations. Once your Ko-fi page is live, replace the # in the three buttons above with your actual Ko-fi URL." data-jp="プラットフォーム：Ko-fi — 寄付手数料0%Ko-fiページが完成したら、上の3つのボタンの # をあなたのKo-fi URLに置き換えてください">Platform: Ko-fi — 0% fees on donations. Once your Ko-fi page is live, replace the # in the three buttons above with your actual Ko-fi URL.</p>
+</div>
+
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<div class="page" id="pg-contact">
+  <div class="sh fi">
+    <p class="sh-eye" data-en="Get in touch" data-jp="連絡する">Get in touch</p>
+    <h2 class="sh-title" data-en="Contact me<br><em>for anything.</em>" data-jp="何でも<br><em>連絡してください</em>">Contact me<br><em>for anything.</em></h2>
+  </div>
+  <p class="con-intro fi" data-en="Creator looking for an editor, want to help with my work, have a question, or just want to talk — DMs are open. I try to reply within 24 hours." data-jp="編集者を探しているクリエイター、活動を手伝いたい方、質問がある方、ただ話したい方 — DMオープンです24時間以内に返信するよう心がけています">Creator looking for an editor, want to help with my work, have a question, or just want to talk — DMs are open. I try to reply within 24 hours.</p>
+  <div class="con-grid fi">
+    <a class="con-card" href="https://x.com/edittto" target="_blank">
+      <div class="con-ico">𝕏</div>
+      <div class="con-lbl">X / Twitter</div>
+      <div class="con-val">@edittto</div>
+    </a>
+    <a class="con-card" href="mailto:edittto.editor@gmail.com">
+      <div class="con-ico">✉</div>
+      <div class="con-lbl" data-en="Email" data-jp="メール">Email</div>
+      <div class="con-val">edittto.editor@gmail.com</div>
+    </a>
+  </div>
+  <p class="con-note fi" data-en="X DM is fastest. For email, mention what you're reaching out about in the subject line." data-jp="X DMが一番早いですメールの場合は件名に用件を書いてください">X DM is fastest. For email, mention what you're reaching out about in the subject line.</p>
+</div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <span>© 2026 edittto</span>
+</footer>
+
+<!-- ═══════════════ ASSISTANT MODAL ═══════════════ -->
+<div class="overlay" id="modal">
+  <div class="modal">
+    <h2 data-en="Looking for an assistant" data-jp="アシスタント募集">Looking for an assistant</h2>
+    <p class="modal-sub" data-en="Looking for someone with genuine passion for OW — not a professional, just someone who cares and won't disappear in two days." data-jp="OWへの本物の情熱を持つ人を探していますプロでなくていい、本当に気にかけてくれる人を">Looking for someone with genuine passion for OW — not a professional, just someone who cares and won't disappear in two days.</p>
+    <p class="modal-lbl" data-en="What kind of help?" data-jp="どんな手伝いが必要？">What kind of help?</p>
+    <div class="modal-opts">
+      <span class="m-opt" data-en="General (edittto)" data-jp="全般（edittto）">General (edittto)</span>
+      <span class="m-opt" data-en="SneakyKirby edits" data-jp="SneakyKirby編集">SneakyKirby edits</span>
+      <span class="m-opt" data-en="Supreme_ow edits" data-jp="Supreme_ow編集">Supreme_ow edits</span>
+      <span class="m-opt" data-en="99Divine content" data-jp="99Divineコンテンツ">99Divine content</span>
+      <span class="m-opt" data-en="Events / Tournaments" data-jp="イベント・トーナメント">Events / Tournaments</span>
+      <span class="m-opt" data-en="Not sure yet" data-jp="まだわからない">Not sure yet</span>
+    </div>
+    <div class="modal-acts">
+      <button class="m-close" onclick="closeModal()" data-en="Close" data-jp="閉じる">Close</button>
+      <button class="m-go" onclick="go('contact');closeModal();" data-en="Contact me →" data-jp="連絡する →">Contact me →</button>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── ROUTING ── */
+const clientPages = ['sneaky','supreme','divine','romani','hry'];
+const eventPages  = ['sawadi2','sawadi3','divinecup'];
+const mainPages   = ['home','about','roster','events','support','contact'];
+
+function go(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-links a').forEach(a => a.classList.remove('active'));
+  const pg = document.getElementById('pg-' + id);
+  if (pg) pg.classList.add('active');
+  const navMap = {
+    sneaky:'roster', supreme:'roster', divine:'roster', romani:'roster', hry:'roster',
+    sawadi2:'events', sawadi3:'events', divinecup:'events',
+    kpi:'roster'
   };
-
-  return(
-    <div style={{maxWidth:820,margin:"0 auto",padding:"0.75rem",minHeight:"100vh"}}>
-      <h1 className="sr-only">FreelanceKit</h1>
-      {/* header */}
-      <div style={{display:"flex",alignItems:"center",gap:10,marginBottom:"0.75rem",padding:"0.75rem 1rem",background:theme.card,borderRadius:12,border:"1.5px solid #E2E8F0",boxShadow:"0 1px 4px rgba(0,0,0,0.06)"}}>
-        <div style={{width:32,height:32,borderRadius:8,background:theme.primary,display:"flex",alignItems:"center",justifyContent:"center",flexShrink:0}}>
-          <i className="ti ti-briefcase" style={{color:"#fff",fontSize:18}}/>
-        </div>
-        <div style={{flex:1}}>
-          <div style={{fontSize:16,fontWeight:900,color:theme.primary,letterSpacing:-0.5}}>FreelanceKit</div>
-          <div style={{fontSize:11,color:"#94A3B8"}}>フリーランサー管理ツール</div>
-        </div>
-        <SyncBadge syncing={syncing} lastSync={lastSync}/>
-      </div>
-      {/* desktop tabs */}
-      <div style={{display:"flex",gap:2,overflowX:"auto",marginBottom:"1rem",background:theme.card,borderRadius:12,border:"1.5px solid #E2E8F0",padding:"4px"}}>
-        {TABS.map(tab=>{const active=activeTab===tab.id;return(
-          <button key={tab.id} onClick={()=>setActiveTab(tab.id)} style={{padding:"7px 10px",fontSize:12,border:"none",borderRadius:8,background:active?theme.primary:"transparent",color:active?"#fff":"#64748B",fontWeight:active?700:400,cursor:"pointer",whiteSpace:"nowrap",display:"flex",alignItems:"center",gap:4,flex:"0 0 auto"}}>
-            <i className={`ti ${tab.icon}`} style={{fontSize:14}}/>{tab.label}
-          </button>
-        );})}
-      </div>
-      {/* content */}
-      <div style={{paddingBottom:80}}>{tabContent[activeTab]}</div>
-      {/* mobile bottom nav */}
-      <div style={{position:"fixed",bottom:0,left:0,right:0,background:theme.card,borderTop:"1.5px solid #E2E8F0",zIndex:100,padding:"4px 0",display:"none"}} id="mobile-nav">
-        <div style={{display:"flex",justifyContent:"space-around",maxWidth:820,margin:"0 auto"}}>
-          {TABS.slice(0,5).map(tab=>{const active=activeTab===tab.id;return(
-            <button key={tab.id} onClick={()=>setActiveTab(tab.id)} style={{display:"flex",flexDirection:"column",alignItems:"center",gap:2,padding:"6px 4px",border:"none",background:"transparent",color:active?theme.primary:"#94A3B8",cursor:"pointer",fontSize:10,fontWeight:active?700:400,minWidth:52}}>
-              <i className={`ti ${tab.icon}`} style={{fontSize:20}}/><span>{tab.label}</span>
-            </button>
-          );})}
-          <button onClick={()=>setMenuOpen(m=>!m)} style={{display:"flex",flexDirection:"column",alignItems:"center",gap:2,padding:"6px 4px",border:"none",background:"transparent",color:["invoice","contract","settings"].includes(activeTab)?theme.primary:"#94A3B8",cursor:"pointer",fontSize:10,minWidth:52}}>
-            <i className="ti ti-dots" style={{fontSize:20}}/><span>その他</span>
-          </button>
-        </div>
-      </div>
-      {menuOpen&&<div style={{position:"fixed",inset:0,zIndex:200,background:"rgba(0,0,0,0.4)"}} onClick={()=>setMenuOpen(false)}>
-        <div style={{position:"absolute",bottom:70,left:16,right:16,background:theme.card,borderRadius:16,border:"1.5px solid #E2E8F0",padding:"8px",boxShadow:"0 -8px 32px rgba(0,0,0,0.15)",maxWidth:820,margin:"0 auto"}} onClick={e=>e.stopPropagation()}>
-          {TABS.slice(5).map(tab=>{const active=activeTab===tab.id;return(
-            <button key={tab.id} onClick={()=>{setActiveTab(tab.id);setMenuOpen(false);}} style={{display:"flex",alignItems:"center",gap:12,padding:"12px 16px",border:"none",borderRadius:10,background:active?theme.primary+"22":"transparent",color:active?theme.primary:"#334155",cursor:"pointer",width:"100%",fontSize:14,fontWeight:active?700:400}}>
-              <i className={`ti ${tab.icon}`} style={{fontSize:20}}/>{tab.label}
-            </button>
-          );})}
-        </div>
-      </div>}
-      <style>{`
-        @media(max-width:600px){
-          #mobile-nav{display:block!important}
-          .hide-mobile{display:none!important}
-        }
-      `}</style>
-    </div>
-  );
+  const navTarget = navMap[id] || id;
+  const navEl = document.getElementById('nl-' + navTarget);
+  if (navEl) navEl.classList.add('active');
+  window.scrollTo(0,0);
+  animate('pg-' + id);
+  if (id === 'sneaky') { fetchYTStats('UCLpvuIawEixyHxASIHDF8rQ','stat-subs','stat-views','stat-videos'); fetchSneakyTopVideos(); }
+  if (id === 'divine') setTimeout(() => fetchYTStats('UClJrS0URFZTp46QamnB9L4A','divine-stat-subs','divine-stat-views','divine-stat-videos'), 200);
+  if (id === 'supreme') fetchYTStats('UCziBAJe9XhwEzJqGD7OG8iw','supreme-stat-subs','supreme-stat-views','supreme-stat-videos');
+  if (id === 'hry')    fetchYTStats('UCW3pC7bBmvMEXCMB0KCQQXQ','hry-stat-subs','hry-stat-views','hry-stat-videos');
+  if (id === 'kpi')    setTimeout(renderKPIDeltas, 50);
+  return false;
 }
-const root=ReactDOM.createRoot(document.getElementById("root"));
-root.render(React.createElement(App));
+
+function goClient(id) { go(id); }
+function goEvent(id)  { go(id); }
+
+function animate(pgId) {
+  setTimeout(() => {
+    document.querySelectorAll('#' + pgId + ' .fi').forEach((el, i) => {
+      el.style.animation = 'none';
+      el.style.opacity   = '0';
+      void el.offsetWidth;
+      el.style.animation = `fu .52s forwards ${i * 0.09}s`;
+    });
+  }, 10);
+}
+
+/* ── LANGUAGE ── */
+let lang = 'en';
+function setLang(l, btn) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('[data-' + l + ']').forEach(el => {
+    el.innerHTML = el.getAttribute('data-' + l);
+  });
+}
+
+/* ── MODAL ── */
+function openModal()  { document.getElementById('modal').classList.add('open'); }
+function closeModal() { document.getElementById('modal').classList.remove('open'); }
+document.getElementById('modal').addEventListener('click', e => { if (e.target === e.currentTarget) closeModal(); });
+document.querySelectorAll('.m-opt').forEach(o => o.addEventListener('click', function() { this.classList.toggle('sel'); }));
+
+/* ── INIT HOME ANIM ── */
+animate('pg-home');
+
+/* ── YOUTUBE LIVE STATS ── */
+const YT_API_KEY = 'AIzaSyDn8GgPaMPzmJgjebHAeqjLnD5w1oSm_Uo';
+
+async function fetchYTStats(channelId, subId, viewId, videoId) {
+  try {
+    const res  = await fetch(`https://www.googleapis.com/youtube/v3/channels?part=statistics&id=${channelId}&key=${YT_API_KEY}`);
+    const data = await res.json();
+    const s    = data.items[0].statistics;
+    const fmt  = n => Number(n).toLocaleString();
+    if(subId)   document.getElementById(subId).textContent   = fmt(s.subscriberCount);
+    if(viewId)  document.getElementById(viewId).textContent  = fmt(s.viewCount);
+    if(videoId) document.getElementById(videoId).textContent = fmt(s.videoCount);
+  } catch(e) {
+    [subId, viewId, videoId].filter(Boolean).forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.textContent = '—';
+    });
+  }
+}
+
+async function fetchSneakyTopVideos() {
+  const CHANNEL = 'UCLpvuIawEixyHxASIHDF8rQ';
+  const fmt = n => Number(n).toLocaleString();
+  try {
+    // fetch up to 50 most popular videos
+    const searchRes = await fetch(`https://www.googleapis.com/youtube/v3/search?part=snippet&channelId=${CHANNEL}&maxResults=50&order=viewCount&type=video&key=${YT_API_KEY}`);
+    const searchData = await searchRes.json();
+    if (!searchData.items) return;
+    const ids = searchData.items.map(i => i.id.videoId).join(',');
+    // get full stats for each
+    const statsRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?part=statistics,contentDetails,snippet&id=${ids}&key=${YT_API_KEY}`);
+    const statsData = await statsRes.json();
+    if (!statsData.items) return;
+    // split long vs shorts by duration (long = 5min+, shorts < 5min)
+    const parseDuration = d => {
+      const m = d.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+      return (parseInt(m[1]||0)*3600)+(parseInt(m[2]||0)*60)+(parseInt(m[3]||0));
+    };
+    const sorted = statsData.items.sort((a,b) => parseInt(b.statistics.viewCount||0) - parseInt(a.statistics.viewCount||0));
+    const longs  = sorted.filter(v => parseDuration(v.contentDetails.duration) >= 300).slice(0,3);
+    const shorts = sorted.filter(v => parseDuration(v.contentDetails.duration) < 300).slice(0,3);
+    const makeCard = (v, featured) => {
+      const vid = v.id;
+      const views = fmt(v.statistics.viewCount||0);
+      const likes = fmt(v.statistics.likeCount||0);
+      const title = v.snippet.title.length > 48 ? v.snippet.title.slice(0,48)+'…' : v.snippet.title;
+      return `<div>
+        <div class="vid-wrap"><iframe src="https://www.youtube.com/embed/${vid}" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div>
+        <p class="vid-lbl" style="line-height:1.5">${title}<br><span style="color:var(--m)">▶ ${views} views · ♥ ${likes}</span></p>
+      </div>`;
+    };
+    const longEl  = document.getElementById('sneaky-long-vids');
+    const shortEl = document.getElementById('sneaky-short-vids');
+    if (longEl)  longEl.innerHTML  = longs.length  ? longs.map(v => makeCard(v)).join('') : '<div class="vid-ph"><span>No long videos found</span></div>';
+    if (shortEl) shortEl.innerHTML = shorts.length ? shorts.map(v => makeCard(v)).join('') : '<div class="vid-ph"><span>No shorts found</span></div>';
+  } catch(e) {
+    ['sneaky-long-vids','sneaky-short-vids'].forEach(id => {
+      const el = document.getElementById(id);
+      if(el) el.innerHTML = '<div class="vid-ph"><span>Could not load videos</span></div>';
+    });
+  }
+}
+
+// fetch SneakyKirby on load since she's most prominent
+fetchYTStats('UCLpvuIawEixyHxASIHDF8rQ','stat-subs','stat-views','stat-videos');
+
+/* ── KPI DELTA (localStorage) ── */
+// KPI values stored as raw numbers for comparison
+// Keys match the kv-* element IDs
+const KPI_VALS = {
+  'impressions': 1300000,
+  'followers':   3324,
+  'growth':      266,
+  'engrate':     0.8,
+  'engagements': 11000,
+  'profile':     4500,
+  'likes':       4600,
+  'reposts':     1500,
+  'bookmarks':   184,
+  'shares':      96
+};
+
+function renderKPIDeltas() {
+  const prev = JSON.parse(localStorage.getItem('kpi_prev') || '{}');
+  const curr = KPI_VALS;
+  // save current as previous for next update
+  localStorage.setItem('kpi_prev', JSON.stringify(curr));
+  Object.keys(curr).forEach(key => {
+    const el = document.getElementById('kd-' + key);
+    if (!el) return;
+    if (!prev[key]) { el.textContent = ''; return; }
+    const diff = curr[key] - prev[key];
+    if (diff === 0) {
+      el.textContent = '±0'; el.className = 'kpi-delta flat';
+    } else if (diff > 0) {
+      el.textContent = '+' + diff.toLocaleString(); el.className = 'kpi-delta up';
+    } else {
+      el.textContent = diff.toLocaleString(); el.className = 'kpi-delta down';
+    }
+  });
+}
+
+// run deltas when KPI page opens — hooked directly into go() below
+function renderKPIOnNav(id) {
+  if (id === 'kpi') renderKPIDeltas();
+}
 </script>
 </body>
 </html>
