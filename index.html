@@ -275,6 +275,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:300;height:58px;display:flex;ali
 .m-go{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;padding:9px 20px;background:var(--w);color:var(--bg);cursor:pointer;border:none;transition:all .2s;}
 .m-go:hover{background:var(--w2);}
 
+.img-real{width:100%;aspect-ratio:16/9;object-fit:cover;border:0.5px solid var(--b);display:block;}
+.img-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-bottom:8px;}
+
 /* FOOTER */
 footer{border-top:0.5px solid var(--b);padding:18px 36px;}
 footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-spacing:.07em;}
@@ -633,16 +636,21 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
     <div class="role-card"><div class="role-ico">📋</div><div class="role-name" data-en="Content Planning" data-jp="コンテンツ計画">Content Planning</div><div class="role-desc" data-en="YouTube strategy, planning, and publishing." data-jp="YouTubeの戦略立案・計画・公開。">YouTube strategy, planning, and publishing.</div></div>
   </div>
   <div class="vid-section">
-    <p class="vid-eye" data-en="Selected work" data-jp="制作サンプル">Selected work</p>
-    <div class="vid-grid">
-      <div class="vid-feat">
-        <div class="vid-wrap"><iframe src="https://www.youtube.com/embed/eFR-Nrn3hSU" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div>
-        <p class="vid-lbl">Featured</p>
-      </div>
-      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/_Cv-XY22_dY" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">02</p></div>
-      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/sFr7yGPaNns" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">03</p></div>
-      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/BggAZiNjE5o" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">04</p></div>
-      <div><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/PjQGJ_qea6Y" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">05</p></div>
+    <p class="vid-eye" data-en="Videos — newest first" data-jp="動画 — 新しい順">Videos — newest first</p>
+    <div id="divine-vids" class="vid-grid">
+      <div class="vid-ph"><span>Loading...</span></div>
+    </div>
+  </div>
+  <div class="vid-section">
+    <p class="vid-eye" data-en="Graphics & visuals" data-jp="グラフィック・ビジュアル">Graphics & visuals</p>
+    <div class="img-grid">
+      <!-- PLACEHOLDER: replace each img-ph with <img class="img-real" src="yourimage.jpg" alt="description"> -->
+      <div class="img-ph"><span>Game Day visual</span><small>add image file</small></div>
+      <div class="img-ph"><span>Roster announcement</span><small>add image file</small></div>
+      <div class="img-ph"><span>Win/Loss graphic</span><small>add image file</small></div>
+      <div class="img-ph"><span>Birthday visual</span><small>add image file</small></div>
+      <div class="img-ph"><span>Welcome graphic</span><small>add image file</small></div>
+      <div class="img-ph"><span>Thank you visual</span><small>add image file</small></div>
     </div>
   </div>
 </div>
@@ -657,19 +665,19 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
   <div class="kpi-section">
     <div class="kpi-header">
       <span class="kpi-platform">𝕏 X (Twitter)</span>
-      <span class="kpi-period">3-month period · updated 2026/05</span>
+      <span class="kpi-period">3-month period · updated 2026/06</span>
     </div>
     <div class="kpi-grid">
-      <div class="kpi-card kpi-primary"><div class="kpi-label">Impressions</div><div class="kpi-num" id="kv-impressions">1.3M</div><div class="kpi-delta" id="kd-impressions"></div><div class="kpi-sub">3-month total</div></div>
-      <div class="kpi-card"><div class="kpi-label">Followers</div><div class="kpi-num" id="kv-followers">3,324</div><div class="kpi-delta" id="kd-followers"></div><div class="kpi-sub">@99divine_</div></div>
-      <div class="kpi-card"><div class="kpi-label">Follower Growth</div><div class="kpi-num" id="kv-growth">+266</div><div class="kpi-delta" id="kd-growth"></div><div class="kpi-sub">in 3 months</div></div>
-      <div class="kpi-card"><div class="kpi-label">Engagement Rate</div><div class="kpi-num" id="kv-engrate">0.8%</div><div class="kpi-delta" id="kd-engrate"></div><div class="kpi-sub">above avg for esports</div></div>
-      <div class="kpi-card"><div class="kpi-label">Total Engagements</div><div class="kpi-num" id="kv-engagements">11K</div><div class="kpi-delta" id="kd-engagements"></div><div class="kpi-sub">3-month total</div></div>
-      <div class="kpi-card"><div class="kpi-label">Profile Visits</div><div class="kpi-num" id="kv-profile">4.5K</div><div class="kpi-delta" id="kd-profile"></div><div class="kpi-sub">3-month total</div></div>
-      <div class="kpi-card"><div class="kpi-label">Likes</div><div class="kpi-num" id="kv-likes">4.6K</div><div class="kpi-delta" id="kd-likes"></div><div class="kpi-sub">3-month total</div></div>
-      <div class="kpi-card"><div class="kpi-label">Reposts</div><div class="kpi-num" id="kv-reposts">1.5K</div><div class="kpi-delta" id="kd-reposts"></div><div class="kpi-sub">3-month total</div></div>
-      <div class="kpi-card"><div class="kpi-label">Bookmarks</div><div class="kpi-num" id="kv-bookmarks">184</div><div class="kpi-delta" id="kd-bookmarks"></div><div class="kpi-sub">3-month total</div></div>
-      <div class="kpi-card"><div class="kpi-label">Shares</div><div class="kpi-num" id="kv-shares">96</div><div class="kpi-delta" id="kd-shares"></div><div class="kpi-sub">3-month total</div></div>
+      <div class="kpi-card kpi-primary"><div class="kpi-label">Impressions</div><div class="kpi-num" id="kv-impressions">1.7M</div><div class="kpi-delta up" id="kd-impressions">+400K</div><div class="kpi-sub">3-month total</div></div>
+      <div class="kpi-card"><div class="kpi-label">Followers</div><div class="kpi-num" id="kv-followers">3,376</div><div class="kpi-delta up" id="kd-followers">+52</div><div class="kpi-sub">@99divine_</div></div>
+      <div class="kpi-card"><div class="kpi-label">Follower Growth</div><div class="kpi-num" id="kv-growth">+266</div><div class="kpi-delta" id="kd-growth"></div><div class="kpi-sub">prev. 3 months</div></div>
+      <div class="kpi-card"><div class="kpi-label">Engagement Rate</div><div class="kpi-num" id="kv-engrate">0.8%</div><div class="kpi-delta flat" id="kd-engrate">±0</div><div class="kpi-sub">above avg for esports</div></div>
+      <div class="kpi-card"><div class="kpi-label">Total Engagements</div><div class="kpi-num" id="kv-engagements">14.3K</div><div class="kpi-delta up" id="kd-engagements">+3.3K</div><div class="kpi-sub">3-month total</div></div>
+      <div class="kpi-card"><div class="kpi-label">Profile Visits</div><div class="kpi-num" id="kv-profile">7.3K</div><div class="kpi-delta up" id="kd-profile">+2.8K</div><div class="kpi-sub">3-month total</div></div>
+      <div class="kpi-card"><div class="kpi-label">Likes</div><div class="kpi-num" id="kv-likes">5.1K</div><div class="kpi-delta up" id="kd-likes">+500</div><div class="kpi-sub">3-month total</div></div>
+      <div class="kpi-card"><div class="kpi-label">Reposts</div><div class="kpi-num" id="kv-reposts">1.5K</div><div class="kpi-delta flat" id="kd-reposts">±0</div><div class="kpi-sub">3-month total</div></div>
+      <div class="kpi-card"><div class="kpi-label">Bookmarks</div><div class="kpi-num" id="kv-bookmarks">198</div><div class="kpi-delta up" id="kd-bookmarks">+14</div><div class="kpi-sub">3-month total</div></div>
+      <div class="kpi-card"><div class="kpi-label">Shares</div><div class="kpi-num" id="kv-shares">93</div><div class="kpi-delta down" id="kd-shares">-3</div><div class="kpi-sub">3-month total</div></div>
     </div>
   </div>
   <div class="kpi-section">
@@ -935,7 +943,7 @@ function go(id) {
   window.scrollTo(0,0);
   if (id === 'sneaky')  { ytStats('UCLpvuIawEixyHxASIHDF8rQ','stat-subs','stat-views','stat-videos'); sneakyVideos(); }
   if (id === 'supreme') ytStats('UCziBAJe9XhwEzJqGD7OG8iw','supreme-stat-subs','supreme-stat-views','supreme-stat-videos');
-  if (id === 'divine')  ytStats('UClJrS0URFZTp46QamnB9L4A','divine-stat-subs','divine-stat-views','divine-stat-videos');
+  if (id === 'divine')  { ytStats('UClJrS0URFZTp46QamnB9L4A','divine-stat-subs','divine-stat-views','divine-stat-videos'); divineVideos(); }
   if (id === 'kpi')     renderDeltas();
 }
 
@@ -998,7 +1006,29 @@ async function sneakyVideos() {
   }
 }
 
-var KPI_VALS = {impressions:1300000,followers:3324,growth:266,engrate:0.8,engagements:11000,profile:4500,likes:4600,reposts:1500,bookmarks:184,shares:96};
+async function divineVideos() {
+  var CH = 'UClJrS0URFZTp46QamnB9L4A';
+  var el = document.getElementById('divine-vids');
+  if (!el) return;
+  try {
+    var sr = await fetch('https://www.googleapis.com/youtube/v3/search?part=snippet&channelId='+CH+'&maxResults=9&order=date&type=video&key='+YT_KEY);
+    var sd = await sr.json();
+    if (!sd.items || !sd.items.length) { el.innerHTML='<div class="vid-ph"><span>No videos found</span></div>'; return; }
+    var ids = sd.items.map(function(i){ return i.id.videoId; }).join(',');
+    var vr = await fetch('https://www.googleapis.com/youtube/v3/videos?part=statistics,snippet&id='+ids+'&key='+YT_KEY);
+    var vd = await vr.json();
+    if (!vd.items) return;
+    var f = function(n){ return Number(n).toLocaleString(); };
+    var html = vd.items.map(function(v, i){
+      var t = v.snippet.title.length>48 ? v.snippet.title.slice(0,48)+'...' : v.snippet.title;
+      var feat = i===0 ? ' vid-feat' : '';
+      return '<div class="'+feat+'"><div class="vid-wrap"><iframe src="https://www.youtube.com/embed/'+v.id+'" allowfullscreen allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture"></iframe></div><p class="vid-lbl">'+t+'<br><span style="color:var(--m)">▶ '+f(v.statistics.viewCount||0)+' · ♥ '+f(v.statistics.likeCount||0)+'</span></p></div>';
+    }).join('');
+    el.innerHTML = html;
+  } catch(e){ el.innerHTML='<div class="vid-ph"><span>Could not load</span></div>'; }
+}
+
+var KPI_VALS = {impressions:1700000,followers:3376,growth:266,engrate:0.8,engagements:14300,profile:7300,likes:5100,reposts:1500,bookmarks:198,shares:93};
 function renderDeltas() {
   try {
     var prev = JSON.parse(localStorage.getItem('kpi_prev') || '{}');
