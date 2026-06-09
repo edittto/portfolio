@@ -295,7 +295,7 @@ footer span{font-family:'DM Mono',monospace;font-size:9px;color:var(--m);letter-
 
 /* ── ANIMATIONS ── */
 @keyframes fu{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.fi{opacity:0;}
+.fi{opacity:0;animation:fu .52s forwards .05s;}
 
 /* ── RESPONSIVE / MOBILE ── */
 @media(max-width:820px){
@@ -1328,23 +1328,24 @@ const KPI_VALS = {
 };
 
 function renderKPIDeltas() {
-  const prev = JSON.parse(localStorage.getItem('kpi_prev') || '{}');
-  const curr = KPI_VALS;
-  // save current as previous for next update
-  localStorage.setItem('kpi_prev', JSON.stringify(curr));
-  Object.keys(curr).forEach(key => {
-    const el = document.getElementById('kd-' + key);
-    if (!el) return;
-    if (!prev[key]) { el.textContent = ''; return; }
-    const diff = curr[key] - prev[key];
-    if (diff === 0) {
-      el.textContent = '±0'; el.className = 'kpi-delta flat';
-    } else if (diff > 0) {
-      el.textContent = '+' + diff.toLocaleString(); el.className = 'kpi-delta up';
-    } else {
-      el.textContent = diff.toLocaleString(); el.className = 'kpi-delta down';
-    }
-  });
+  try {
+    const prev = JSON.parse(localStorage.getItem('kpi_prev') || '{}');
+    const curr = KPI_VALS;
+    localStorage.setItem('kpi_prev', JSON.stringify(curr));
+    Object.keys(curr).forEach(key => {
+      const el = document.getElementById('kd-' + key);
+      if (!el) return;
+      if (!prev[key]) { el.textContent = ''; return; }
+      const diff = curr[key] - prev[key];
+      if (diff === 0) {
+        el.textContent = '±0'; el.className = 'kpi-delta flat';
+      } else if (diff > 0) {
+        el.textContent = '+' + diff.toLocaleString(); el.className = 'kpi-delta up';
+      } else {
+        el.textContent = diff.toLocaleString(); el.className = 'kpi-delta down';
+      }
+    });
+  } catch(e) { console.warn('KPI delta error:', e); }
 }
 
 // run deltas when KPI page opens — hooked directly into go() below
