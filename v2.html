@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>edittto — 動画編集者</title>
+<style>
+:root{--bg:#141414;--fg:#f0ede8;--m:#8a877f;--b:#2a2a2a;--bg2:#1c1c1c}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--fg);font:15px/1.7 system-ui,-apple-system,"Noto Sans JP",sans-serif;max-width:960px;margin:0 auto;padding:0 16px 48px}
+a{color:inherit}
+header{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--b);display:flex;gap:16px;align-items:center;flex-wrap:wrap;padding:12px 0}
+header b{margin-right:auto}
+header nav{display:flex;gap:14px}
+header nav a{text-decoration:none;color:var(--m)}
+header nav a:hover{color:var(--fg)}
+.lang button{background:none;border:1px solid var(--b);color:var(--m);padding:2px 10px;cursor:pointer}
+.lang button.on{background:var(--fg);color:var(--bg)}
+section{padding:48px 0 8px;border-bottom:1px solid var(--b)}
+h2{font-size:13px;letter-spacing:.15em;text-transform:uppercase;color:var(--m);margin-bottom:20px;font-weight:400}
+h1{font-size:clamp(28px,6vw,44px);line-height:1.2;margin-bottom:12px}
+.sub{color:var(--m);margin-bottom:20px}
+.cta a{display:inline-block;border:1px solid var(--fg);padding:8px 18px;margin:0 8px 8px 0;text-decoration:none}
+.strip{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--b);border:1px solid var(--b);margin:24px 0}
+.strip div{background:var(--bg);padding:14px}
+.strip small{display:block;color:var(--m);font-size:11px}
+.strip strong{font-size:22px;font-weight:500}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px;align-items:center}
+.chips span.l{color:var(--m);font-size:12px;width:48px}
+.chips button{background:none;border:1px solid var(--b);color:var(--m);padding:2px 10px;cursor:pointer;font-size:13px}
+.chips button.on{border-color:var(--fg);color:var(--fg)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:12px;margin-top:16px}
+.card img{width:100%;aspect-ratio:16/9;object-fit:cover;background:var(--bg2);display:block}
+.card .t{font-size:12px;color:var(--m);margin-top:4px}
+.card .v{font-size:12px}
+.card .x{font-size:12px}
+.note{color:var(--m);font-size:12px;margin:12px 0}
+.clients{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.cl{border:1px solid var(--b);padding:14px}
+.cl h3{font-size:16px;margin-bottom:6px}
+.cl p{font-size:13px;color:var(--m)}
+.cl p b{color:var(--fg);font-weight:500}
+.about{display:flex;gap:20px;align-items:flex-start;flex-wrap:wrap}
+.about img{width:96px;height:96px;border-radius:50%;object-fit:cover;background:var(--bg2)}
+.about div{flex:1;min-width:240px}
+.tbd{color:var(--m);font-style:italic}
+footer{padding-top:24px;color:var(--m);font-size:12px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+@media(max-width:600px){.strip{grid-template-columns:repeat(2,1fr)}}
+</style>
+</head>
+<body>
+
+<header>
+  <b>edittto</b>
+  <nav>
+    <a href="#work">Work</a>
+    <a href="#numbers">Numbers</a>
+    <a href="#about">About</a>
+    <a href="#contact">Contact</a>
+  </nav>
+  <span class="lang"><button class="on" data-l="jp">JP</button><button data-l="en">EN</button></span>
+</header>
+
+<!-- HOME -->
+<section id="home">
+  <h1 data-jp="動画編集者<br>切り抜きから告知映像まで" data-en="Video editor.<br>From clips to announcement videos.">動画編集者<br>切り抜きから告知映像まで</h1>
+  <p class="sub" data-jp="ゲーム配信の編集、ショーツ、Vlog・企画、サムネイル制作。英日対応。" data-en="Editing for game streams, Shorts, vlogs, projects and thumbnails. EN / JP.">ゲーム配信の編集、ショーツ、Vlog・企画、サムネイル制作。英日対応。</p>
+  <div class="cta">
+    <a href="#work" data-jp="作品を見る" data-en="See my work">作品を見る</a>
+    <a href="#contact" data-jp="依頼・相談" data-en="Contact">依頼・相談</a>
+  </div>
+  <div class="strip">
+    <div><small data-jp="編集した動画" data-en="Videos edited">編集した動画</small><strong id="k-vids">—</strong></div>
+    <div><small data-jp="総再生数(YouTube)" data-en="Total views (YouTube)">総再生数(YouTube)</small><strong id="k-views">—</strong></div>
+    <div><small data-jp="サムネ制作" data-en="Thumbnails">サムネ制作</small><strong id="k-thumbs">—</strong></div>
+    <div><small data-jp="総視聴時間" data-en="Watch hours">総視聴時間</small><strong class="tbd" data-jp="準備中" data-en="in progress">準備中</strong></div>
+  </div>
+</section>
+
+<!-- WORK -->
+<section id="work">
+  <h2>Work</h2>
+  <div class="chips" id="f-kind"></div>
+  <div class="chips" id="f-cat"></div>
+  <div class="chips" id="f-fmt"></div>
+  <div class="chips" id="f-client"></div>
+  <p class="note" id="work-note"></p>
+  <div class="grid" id="grid"></div>
+</section>
+
+<!-- NUMBERS -->
+<section id="numbers">
+  <h2>Numbers</h2>
+  <p class="note" data-jp="再生数はYouTubeの公開値(1時間キャッシュ)。Xの再生数は含みません。" data-en="Views are public YouTube counts (cached 1h). X views are not included.">再生数はYouTubeの公開値(1時間キャッシュ)。Xの再生数は含みません。</p>
+  <div class="clients" id="clients"></div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <h2>About</h2>
+  <div class="about">
+    <img src="https://unavatar.io/twitter/edittto" alt="edittto">
+    <div>
+      <p data-jp="独学の動画編集者。ゲーム配信の切り抜き、ショーツ、Vlog・企画、告知映像、サムネイル制作を担当しています。日本在住、英語はネイティブレベル(カナダ7年)。" data-en="Self-taught video editor. I work on stream clips, Shorts, vlogs and projects, announcement videos and thumbnails. Based in Japan, native-level English (7 years in Canada).">独学の動画編集者。ゲーム配信の切り抜き、ショーツ、Vlog・企画、告知映像、サムネイル制作を担当しています。日本在住、英語はネイティブレベル(カナダ7年)。</p>
+      <p style="margin-top:10px" data-jp="所属: 99DIVINE(Editor)" data-en="Member of 99DIVINE (Editor)">所属: 99DIVINE(Editor)</p>
+      <p data-jp="ツール: Adobe Premiere Pro · Photoshop" data-en="Tools: Adobe Premiere Pro · Photoshop">ツール: Adobe Premiere Pro · Photoshop</p>
+      <p data-jp="料金: 要相談 — DMへ" data-en="Pricing: on request — DM me">料金: 要相談 — DMへ</p>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <h2>Contact</h2>
+  <p>X (DM): <a href="https://x.com/edittto" target="_blank" rel="noopener">@edittto</a></p>
+  <p>Email: <a href="mailto:edittto.editor@gmail.com">edittto.editor@gmail.com</a></p>
+</section>
+
+<footer>
+  <span>© 2026 edittto</span>
+  <a href="https://ko-fi.com/edittto" target="_blank" rel="noopener">☕ Ko-fi</a>
+</footer>
+
+<script>
+/* ===== CONFIG ===== */
+const KEY = 'AIzaSyCwUPRCDgCg19skarsCfAuLXIbkMLwxtSQ';   // リファラー制限: edittto.github.io/* / YouTube Data API v3のみ
+const API = 'https://www.googleapis.com/youtube/v3/';
+const SNEAKY = {ch:'UCLpvuIawEixyHxASIHDF8rQ', up:'UULpvuIawEixyHxASIHDF8rQ'};
+const DIVINE_CH = 'UClJrS0URFZTp46QamnB9L4A';
+const SHORT_SEC = 300; // Sneaky: これ未満はShort扱い
+
+const CATS = {
+  clip:['配信切り抜き','Stream clips'],
+  vlog:['Vlog・企画','Vlog & projects'],
+  ann:['発表・告知','Announcements'],
+  hl:['公式試合ハイライト','Match highlights']
+};
+const KINDS = {all:['すべて','All'], video:['動画','Video'], thumb:['サムネ','Thumbnail'], event:['イベント','Event'], image:['画像','Image']};
+
+/*DATA*/
+function mk(cat, fmt, client, ids){
+  return ids.map(function(id){ return {id:id, cat:[cat], fmt:fmt, client:client, thumb:fmt==='L', x:[]}; });
+}
+const W = [].concat(
+  mk('clip','L','Hry',['BS6-xUJ7-L4','hDoYuwpJvjY','Otes3v-_0Rg','m0lh1NevGqA','dps-cDgMXR0']),
+  mk('clip','L','Romani',['sY3DYa1JxYs','ZKSKzh8omoA','Y7nUBJeEY-w','5wRr9Jw7Ee0']),
+  mk('clip','L','Supreme',['QZNcFD_11go']),
+  mk('vlog','L','99DIVINE',['PjQGJ_qea6Y','sFr7yGPaNns','QVBQdu4uFEY','c63jLsVGg2w','aDVvEPdsPco','TjmpAyIYHmg']),
+  [{id:'yohZxpj3l70', cat:['vlog','ann'], fmt:'L', client:'99DIVINE', thumb:true, x:[]}],
+  mk('ann','L','99DIVINE',['BggAZiNjE5o','ns3iLUGbpxs','HoaM-uxUFqc','pnHanpCEKVE','T-idA-VsUxs','koJIOHj9Duo']),
+  mk('vlog','S','99DIVINE',['G-CePRIE8uE','f74BaLGlLc0','7Ar-o-wAAo4']),
+  mk('hl','S','99DIVINE',['6SCHC8PXy4I','5KaI0Gx87FY','5EGZIso-cJ4','5vJyL9qobL8','zQUjUL6pAfg','icv9hS9SQ7c','tLLRsHOaQ_U','PjGqrmxVd4A','ofVYF_l_qiA','LRAIorGOlWw','gvA4TCg0bhU']),
+  mk('clip','S','99DIVINE',['DhH5GFGKo9I'])
+);
+/*ENDDATA*/
+
+const CLIENTS = ['SneakyKirby','99DIVINE','Supreme','Romani','Hry'];
+
+/* ===== STATE ===== */
+let lang = 'jp';
+const F = {kind:'all', cat:'all', fmt:'all', client:'all'};
+const stats = {};        // id -> {views, sec, title}
+let sneakyVids = [];     // [{id, cat:['other'], fmt, client:'SneakyKirby', thumb:false, x:[]}]
+let chStats = {};        // key -> {subs, views, videos}
+const live = KEY !== 'REPLACE_WITH_NEW_KEY';
+
+/* ===== API (1h cache) ===== */
+function cached(key, url, cb){
+  try{
+    const h = localStorage.getItem(key);
+    if(h){ const o = JSON.parse(h); if(Date.now()-o.t < 3600000){ cb(o.d); return; } }
+  }catch(e){}
+  fetch(url).then(function(r){ return r.json(); }).then(function(d){
+    if(d && d.error){ cb(null); return; }
+    try{ localStorage.setItem(key, JSON.stringify({t:Date.now(), d:d})); }catch(e){}
+    cb(d);
+  }).catch(function(){ cb(null); });
+}
+function chunk(a, n){ const o=[]; for(let i=0;i<a.length;i+=n) o.push(a.slice(i,i+n)); return o; }
+function dur(s){ const m = (s||'').match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/); return m ? (+m[1]||0)*3600 + (+m[2]||0)*60 + (+m[3]||0) : 0; }
+
+function loadVideos(ids, done){
+  const groups = chunk(ids, 50); let left = groups.length;
+  if(!left){ done(); return; }
+  groups.forEach(function(g, i){
+    cached('v_'+g.join(',').slice(0,60)+'_'+g.length+'_'+i,
+      API+'videos?part=statistics,contentDetails,snippet&id='+g.join(',')+'&key='+KEY, function(d){
+      if(d && d.items) d.items.forEach(function(v){
+        stats[v.id] = {views:+(v.statistics.viewCount||0), sec:dur(v.contentDetails.duration), title:v.snippet.title};
+      });
+      if(--left === 0) done();
+    });
+  });
+}
+function loadPlaylist(done, page, acc){
+  acc = acc || [];
+  cached('p_'+SNEAKY.up+'_'+(page||'0'),
+    API+'playlistItems?part=contentDetails&maxResults=50&playlistId='+SNEAKY.up+(page?'&pageToken='+page:'')+'&key='+KEY, function(d){
+    if(!d || !d.items){ done(acc); return; }
+    d.items.forEach(function(i){ acc.push(i.contentDetails.videoId); });
+    if(d.nextPageToken && acc.length < 500) loadPlaylist(done, d.nextPageToken, acc); else done(acc);
+  });
+}
+function loadChannel(key, id, done){
+  cached('c_'+id, API+'channels?part=statistics&id='+id+'&key='+KEY, function(d){
+    if(d && d.items && d.items[0]){
+      const s = d.items[0].statistics;
+      chStats[key] = {subs:+s.subscriberCount, views:+s.viewCount, videos:+s.videoCount};
+    }
+    done();
+  });
+}
+
+/* ===== HELPERS ===== */
+function all(){ return W.concat(sneakyVids); }
+function url(v){ return v.fmt==='S' ? 'https://www.youtube.com/shorts/'+v.id : 'https://youtu.be/'+v.id; }
+function views(v){ return stats[v.id] ? stats[v.id].views : null; }
+function fmtN(n){ return n==null ? '—' : Number(n).toLocaleString(); }
+function T(pair){ return lang==='jp' ? pair[0] : pair[1]; }
+function uniq(a){ const s={}; return a.filter(function(v){ return s[v.id] ? false : (s[v.id]=true); }); }
+
+/* ===== RENDER: FILTERS ===== */
+function chip(box, key, val, label){
+  const b = document.createElement('button');
+  b.textContent = label; if(F[key]===val) b.className = 'on';
+  b.onclick = function(){ F[key] = val; renderWork(); };
+  box.appendChild(b);
+}
+function renderFilters(){
+  const boxes = {kind:document.getElementById('f-kind'), cat:document.getElementById('f-cat'), fmt:document.getElementById('f-fmt'), client:document.getElementById('f-client')};
+  Object.keys(boxes).forEach(function(k){ boxes[k].innerHTML = ''; });
+  const lbl = function(box, t){ const s=document.createElement('span'); s.className='l'; s.textContent=t; box.appendChild(s); };
+  lbl(boxes.kind, lang==='jp'?'区分':'Kind');
+  Object.keys(KINDS).forEach(function(k){ chip(boxes.kind,'kind',k,T(KINDS[k])); });
+  if(F.kind==='all' || F.kind==='video' || F.kind==='thumb'){
+    lbl(boxes.cat, lang==='jp'?'種別':'Type');
+    chip(boxes.cat,'cat','all',T(KINDS.all));
+    Object.keys(CATS).forEach(function(k){ chip(boxes.cat,'cat',k,T(CATS[k])); });
+    lbl(boxes.fmt, lang==='jp'?'形式':'Format');
+    chip(boxes.fmt,'fmt','all',T(KINDS.all)); chip(boxes.fmt,'fmt','S','Short'); chip(boxes.fmt,'fmt','L','Long');
+    lbl(boxes.client, lang==='jp'?'依頼元':'Client');
+    chip(boxes.client,'client','all',T(KINDS.all));
+    CLIENTS.forEach(function(c){ chip(boxes.client,'client',c,c); });
+  }
+}
+
+/* ===== RENDER: WORK ===== */
+function renderWork(){
+  renderFilters();
+  const grid = document.getElementById('grid'), note = document.getElementById('work-note');
+  if(F.kind==='event' || F.kind==='image'){
+    grid.innerHTML = '';
+    note.innerHTML = lang==='jp' ? '準備中 — 掲載希望はDMへ' : 'In progress — DM me for now';
+    return;
+  }
+  let items = uniq(all()).filter(function(v){
+    if(F.kind==='thumb' && !v.thumb) return false;
+    if(F.cat!=='all' && v.cat.indexOf(F.cat)<0) return false;
+    if(F.fmt!=='all' && v.fmt!==F.fmt) return false;
+    if(F.client!=='all' && v.client!==F.client) return false;
+    return true;
+  });
+  items.sort(function(a,b){
+    if(a.fmt!==b.fmt) return a.fmt==='S' ? -1 : 1;           // Shorts first
+    return (views(b)||0) - (views(a)||0);                      // then by views
+  });
+  note.textContent = items.length + (lang==='jp' ? ' 件' : ' items') + (live ? '' : (lang==='jp' ? '(APIキー未設定のため再生数は未表示)' : ' (views hidden: API key not set)'));
+  grid.innerHTML = items.map(function(v){
+    const cats = v.cat.map(function(c){ return T(CATS[c]); }).join(' / ');
+    const xs = v.x.map(function(u,i){ return '<a href="'+u+'" target="_blank" rel="noopener">X'+(v.x.length>1?(i+1):'')+'</a>'; }).join(' ');
+    return '<div class="card"><a href="'+url(v)+'" target="_blank" rel="noopener"><img loading="lazy" src="https://i.ytimg.com/vi/'+v.id+'/mqdefault.jpg" alt=""></a>'
+      + '<div class="t">'+v.client+' · '+cats+' · '+(v.fmt==='S'?'Short':'Long')+'</div>'
+      + '<div class="v">▶ '+fmtN(views(v))+'</div>'
+      + (xs ? '<div class="x">'+xs+'</div>' : '') + '</div>';
+  }).join('');
+}
+
+/* ===== RENDER: NUMBERS ===== */
+function sum(list){ return list.reduce(function(s,v){ return s + (views(v)||0); }, 0); }
+function renderNumbers(){
+  const U = uniq(all());
+  document.getElementById('k-vids').textContent = fmtN(U.length);
+  document.getElementById('k-views').textContent = live ? fmtN(sum(U)) : '—';
+  document.getElementById('k-thumbs').textContent = fmtN(uniq(W).filter(function(v){ return v.thumb; }).length);
+
+  const J = lang==='jp';
+  document.getElementById('clients').innerHTML = CLIENTS.map(function(c){
+    const list = uniq(all()).filter(function(v){ return v.client===c; });
+    const ch = c==='SneakyKirby' ? chStats.sneaky : (c==='99DIVINE' ? chStats.divine : null);
+    let h = '<div class="cl"><h3>'+c+'</h3>';
+    if(c==='SneakyKirby'){
+      h += '<p>'+(J?'チャンネル運営・編集を全面担当':'Full channel management and editing')+'</p>';
+      h += '<p>'+(J?'登録者':'Subscribers')+' <b>'+fmtN(ch&&ch.subs)+'</b> · '+(J?'総再生':'Views')+' <b>'+fmtN(ch&&ch.views)+'</b> · '+(J?'動画':'Videos')+' <b>'+fmtN(ch&&ch.videos)+'</b></p>';
+      h += '<p style="margin-top:6px">'+(J?'成長の記録(本人記録)':'Milestones (her records)')+'<br>'
+        + (J?'登録者':'Subs')+': 500 (2024/4/1) → 1K (4/7) → 2K (5/31) → 5K (8/27) → 10K (2025/2/11)<br>'
+        + (J?'総再生':'Views')+': 10K (2024/5/9) → 100K (8/23) → 200K (9/24) → 400K (2025/5/9)</p>';
+      h += '<p class="tbd">'+(J?'総視聴時間: 準備中':'Watch hours: in progress')+'</p>';
+    } else {
+      h += '<p>'+(J?'編集した動画':'Videos edited')+' <b>'+list.length+'</b> · '+(J?'再生数合計':'Views')+' <b>'+(live?fmtN(sum(list)):'—')+'</b></p>';
+      if(c==='99DIVINE'){
+        h += '<p>'+(J?'公式チャンネル全体(自分以外の制作物を含む)':'Official channel (includes work by others)')+':<br>'
+          + (J?'登録者':'Subs')+' <b>'+fmtN(ch&&ch.subs)+'</b> · '+(J?'総再生':'Views')+' <b>'+fmtN(ch&&ch.views)+'</b></p>';
+      }
+    }
+    return h + '</div>';
+  }).join('');
+}
+
+/* ===== LANG ===== */
+function applyLang(){
+  document.querySelectorAll('[data-jp]').forEach(function(el){ el.innerHTML = el.getAttribute('data-'+lang); });
+  document.querySelectorAll('.lang button').forEach(function(b){ b.className = b.getAttribute('data-l')===lang ? 'on' : ''; });
+  document.documentElement.lang = lang;
+  renderWork(); renderNumbers();
+}
+document.querySelectorAll('.lang button').forEach(function(b){
+  b.onclick = function(){ lang = b.getAttribute('data-l'); applyLang(); };
+});
+
+/* ===== BOOT ===== */
+applyLang();
+if(live){
+  let pending = 4;
+  const fin = function(){ if(--pending === 0){ renderWork(); renderNumbers(); } };
+  loadVideos(uniq(W).map(function(v){ return v.id; }), fin);
+  loadChannel('sneaky', SNEAKY.ch, fin);
+  loadChannel('divine', DIVINE_CH, fin);
+  loadPlaylist(function(ids){
+    loadVideos(ids, function(){
+      sneakyVids = ids.map(function(id){
+        const s = stats[id];
+        return {id:id, cat:['clip'], fmt:(s && s.sec < SHORT_SEC) ? 'S' : 'L', client:'SneakyKirby', thumb:false, x:[]};
+      });
+      fin();
+    });
+  });
+}
+</script>
+</body>
+</html>
